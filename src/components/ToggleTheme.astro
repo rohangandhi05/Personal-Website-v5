@@ -16,7 +16,7 @@ import MoonIcon from '@/components/icons/MoonIcon'
 							e.currentTarget.getAttribute('aria-pressed') === 'true'
 						let themeChangeEvent = new CustomEvent('theme-change', {
 							detail: {
-								theme: isPressed ? 'light' : 'dark'
+								theme: isPressed ? 'dark' : 'light'
 							}
 						})
 						// dispatch event -> ThemeProvider.astro
@@ -53,8 +53,8 @@ import MoonIcon from '@/components/icons/MoonIcon'
 	const button = document.getElementById('toggle-theme')
 
 	function setButtonPresssed() {
-		const bodyThemeIsDark = document.documentElement.classList.contains('dark')
-		button.setAttribute('aria-pressed', String(bodyThemeIsDark))
+		const bodyThemeIsLight = document.documentElement.classList.contains('light')
+		button.setAttribute('aria-pressed', String(bodyThemeIsLight))
 	}
 	setButtonPresssed()
 </script>
