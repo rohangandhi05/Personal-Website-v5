@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://mikehoang.dev//sitemap-index.xml
