@@ -8,6 +8,17 @@ import TableOfContents from '@/components/TableOfContents'
 import { getPosts } from '@/utils'
 import SButton from '@/components/mdx/SButton'
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4R7VBZ6227"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4R7VBZ6227');
+</script>
+
+
 const posts = await getCollection('blog')
 export async function getStaticPaths() {
 	const posts = await getPosts()
