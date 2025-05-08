@@ -16,7 +16,7 @@ import MoonIcon from '@/components/icons/MoonIcon'
 							e.currentTarget.getAttribute('aria-pressed') === 'true'
 						let themeChangeEvent = new CustomEvent('theme-change', {
 							detail: {
-								theme: isPressed ? 'dark' : 'light'
+								theme: isPressed ? 'dark' : 'light' // reverse logic
 							}
 						})
 						// dispatch event -> ThemeProvider.astro
@@ -35,12 +35,14 @@ import MoonIcon from '@/components/icons/MoonIcon'
 
 <theme-toggle class='relative h-6 w-6'>
 	<button id='toggle-theme' class='group'>
+		<!-- Show SunIcon when theme is light (aria-pressed=true) -->
 		<span
 			class='absolute left-0 right-0 top-0 opacity-0 group-aria-pressed:opacity-100'
 		>
 			<SunIcon />
 		</span>
 
+		<!-- Show MoonIcon when theme is dark (aria-pressed=false) -->
 		<span
 			class='absolute left-0 right-0 top-0 opacity-0 group-aria-[pressed=false]:opacity-100'
 		>
@@ -50,11 +52,17 @@ import MoonIcon from '@/components/icons/MoonIcon'
 </theme-toggle>
 
 <script is:inline>
+	// Ensure the initial theme is dark
+	document.documentElement.classList.remove('light')
+	document.documentElement.classList.add('dark')
+
 	const button = document.getElementById('toggle-theme')
 
-	function setButtonPresssed() {
-		const bodyThemeIsLight = document.documentElement.classList.contains('light')
+	function setButtonPressed() {
+		// If current theme is light, button should show SunIcon (pressed = true)
+		const bodyThemeIsLight =
+			document.documentElement.classList.contains('light')
 		button.setAttribute('aria-pressed', String(bodyThemeIsLight))
 	}
-	setButtonPresssed()
+	setButtonPressed()
 </script>
