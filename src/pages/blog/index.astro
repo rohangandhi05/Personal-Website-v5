@@ -1,38 +1,31 @@
 ---
-import ListCategories from '@/components/ListCategories'
 import ListPosts from '@/components/ListPosts'
-import TitlePage from '@/components/TitlePage'
 import BaseLayout from '@/layouts/BaseLayout'
-import { getPosts } from '@/utils'
+import { getPosts, getTags, sluglify } from '@/utils'
 
-const MAX_POSTS = 10 // max number of posts to show on the home page
-const posts = await getPosts(MAX_POSTS)
+const posts = await getPosts()
+const tags = await getTags()
 ---
 
 <BaseLayout title='Blog'>
-	<TitlePage title='Blog posts' />
-	<ListCategories />
-
-	<div>
-		<h2 class='text-lg font-medium tracking-wide text-end'>Latest Posts</h2>
-		<ListPosts FirstBig={true} posts={posts} />
+	<div class='flex flex-wrap gap-2 mb-8'>
+		<a
+			href='/blog'
+			class='px-3 py-1 text-sm font-medium rounded-full bg-fuchsia-500 text-white border border-fuchsia-500'
+		>
+			All
+		</a>
+		{
+			tags.map((tag) => (
+				<a
+					href={`/tags/${sluglify(tag)}`}
+					class='px-3 py-1 text-sm font-medium rounded-full border border-zinc-300 dark:border-zinc-700 hover:border-fuchsia-500 hover:text-fuchsia-500 transition-colors'
+				>
+					{tag}
+				</a>
+			))
+		}
 	</div>
+
+	<ListPosts posts={posts} />
 </BaseLayout>
-
-<script>
-	import { animate } from 'motion'
-	const showAnimations = localStorage.getItem('animations') === 'true'
-
-	if (showAnimations) {
-		animate(
-			'.title',
-			{ y: [80, 0], opacity: [0, 1] },
-			{
-				duration: 2.5,
-				opacity: { duration: 3 },
-
-				offset: [0, 0.55, 0.75]
-			}
-		)
-	}
-</script>

@@ -2,7 +2,7 @@ import { CATEGORIES } from '../data/categories'
 import { defineCollection, z } from 'astro:content'
 
 const blog = defineCollection({
-	// Type-check frontmatter using a schema
+	type: 'content',
 	schema: ({ image }) =>
 		z.object({
 			title: z.string().max(80),
