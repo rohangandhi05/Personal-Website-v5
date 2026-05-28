@@ -14,67 +14,18 @@ const postsWithReadTime = await Promise.all(
 		return { post, readTime: remarkPluginFrontmatter.minutesRead as string }
 	})
 )
-
-const [featured, ...remaining] = postsWithReadTime
-
-type PostWithTime = { post: CollectionEntry<'blog'>; readTime: string }
-const rows: { medium: PostWithTime; smalls: PostWithTime[] }[] = []
-for (let i = 0; i < remaining.length; i += 3) {
-	rows.push({
-		medium: remaining[i],
-		smalls: remaining.slice(i + 1, i + 3)
-	})
-}
 ---
 
-<section>
+<section class='flex flex-col divide-y divide-zinc-200 dark:divide-zinc-800'>
 	{
-		featured && (
+		postsWithReadTime.map(({ post, readTime }, i) => (
 			<PostCard
-				id={featured.post.id}
-				data={featured.post.data}
-				slug={featured.post.slug}
-				readTime={featured.readTime}
-				size='featured'
+				id={post.id}
+				data={post.data}
+				slug={post.slug}
+				readTime={readTime}
+				featured={i === 0}
 			/>
-		)
-	}
-
-	{
-		rows.length > 0 && (
-			<>
-				<hr class='my-8 border-zinc-200 dark:border-zinc-800' />
-				<p class='text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6'>
-					More Stories
-				</p>
-
-				<div class='flex flex-col gap-8'>
-					{rows.map(({ medium, smalls }) => (
-						<div class='grid grid-cols-1 md:grid-cols-2 gap-8 items-start'>
-							<PostCard
-								id={medium.post.id}
-								data={medium.post.data}
-								slug={medium.post.slug}
-								readTime={medium.readTime}
-								size='medium'
-							/>
-							{smalls.length > 0 && (
-								<div class='divide-y divide-zinc-200 dark:divide-zinc-800'>
-									{smalls.map((small) => (
-										<PostCard
-											id={small.post.id}
-											data={small.post.data}
-											slug={small.post.slug}
-											readTime={small.readTime}
-											size='small'
-										/>
-									))}
-								</div>
-							)}
-						</div>
-					))}
-				</div>
-			</>
-		)
+		))
 	}
 </section>
