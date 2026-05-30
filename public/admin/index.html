@@ -7,59 +7,6 @@
     <title>Blog Admin</title>
   </head>
   <body>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    <script>
-      CMS.init({
-        config: {
-          backend: {
-            name: 'github',
-            repo: 'rohangandhi05/Personal-Website-v5',
-            branch: 'astro',
-            base_url: window.location.origin,
-            auth_endpoint: '/api/auth'
-          },
-          media_folder: 'src/assets/images',
-          public_folder: '/src/assets/images',
-          collections: [
-            {
-              name: 'blog',
-              label: 'Blog Posts',
-              folder: 'src/content/blog',
-              create: true,
-              format: 'frontmatter',
-              extension: 'mdx',
-              slug: '{{slug}}',
-              fields: [
-                { label: 'Title', name: 'title', widget: 'string' },
-                { label: 'Description', name: 'description', widget: 'string' },
-                {
-                  label: 'Publish Date',
-                  name: 'pubDate',
-                  widget: 'datetime',
-                  format: 'YYYY-MM-DDTHH:mm:ss.SSSZ',
-                  date_format: 'YYYY-MM-DD',
-                  time_format: 'HH:mm'
-                },
-                {
-                  label: 'Category',
-                  name: 'category',
-                  widget: 'select',
-                  options: ['Software Development', 'Personal Development', 'Bookmark']
-                },
-                { label: 'Tags', name: 'tags', widget: 'list' },
-                {
-                  label: 'Hero Image',
-                  name: 'heroImage',
-                  widget: 'image',
-                  required: true
-                },
-                { label: 'Draft', name: 'draft', widget: 'boolean', default: false },
-                { label: 'Body', name: 'body', widget: 'markdown' }
-              ]
-            }
-          ]
-        }
-      })
-    </script>
+    <script src="https://unpkg.com/decap-cms@3.3.3/dist/decap-cms.js"></script>
   </body>
 </html>
