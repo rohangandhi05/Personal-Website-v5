@@ -1,12 +1,305 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <title>Blog Admin</title>
+    <title>Blog Admin — Rohan Gandhi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --fuchsia: #d946ef;
+        --fuchsia-light: #f0abfc;
+        --fuchsia-dark: #a21caf;
+        --surface: rgba(255, 255, 255, 0.82);
+        --text-primary: #1d1d1f;
+        --text-secondary: #6e6e73;
+        --text-tertiary: #aeaeb2;
+      }
+
+      html,
+      body {
+        height: 100%;
+        font-family:
+          'Manrope',
+          -apple-system,
+          BlinkMacSystemFont,
+          'SF Pro Text',
+          sans-serif;
+        background: #f5f5f7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ─── Splash ─────────────────────────────────────────── */
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        background: radial-gradient(
+            ellipse 80% 60% at 50% -10%,
+            rgba(217, 70, 239, 0.07),
+            transparent
+          ),
+          radial-gradient(
+            ellipse 60% 40% at 100% 100%,
+            rgba(240, 171, 252, 0.06),
+            transparent
+          ),
+          #f5f5f7;
+        transition:
+          opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+          visibility 0.7s;
+      }
+
+      #splash.out {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      /* glass card */
+      .splash-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 52px 64px 48px;
+        background: var(--surface);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 28px;
+        box-shadow:
+          0 2px 1px rgba(255, 255, 255, 0.8) inset,
+          0 32px 80px rgba(0, 0, 0, 0.07),
+          0 8px 24px rgba(0, 0, 0, 0.04);
+        backdrop-filter: blur(48px) saturate(200%);
+        -webkit-backdrop-filter: blur(48px) saturate(200%);
+        animation: card-in 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+      }
+
+      @keyframes card-in {
+        from {
+          opacity: 0;
+          transform: translateY(24px) scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* icon */
+      .splash-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 22px;
+        background: linear-gradient(145deg, #f0abfc 0%, #d946ef 50%, #a21caf 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 32px;
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.4) inset,
+          0 12px 36px rgba(217, 70, 239, 0.3),
+          0 4px 12px rgba(0, 0, 0, 0.1);
+        animation: icon-in 0.9s 0.1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      }
+
+      @keyframes icon-in {
+        from {
+          opacity: 0;
+          transform: scale(0.7) rotate(-8deg);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
+      }
+
+      .splash-icon svg {
+        width: 38px;
+        height: 38px;
+        fill: white;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+      }
+
+      .splash-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--fuchsia);
+        margin-bottom: 10px;
+        animation: fade-up 0.7s 0.2s both;
+      }
+
+      .splash-title {
+        font-size: 30px;
+        font-weight: 300;
+        letter-spacing: -0.6px;
+        color: var(--text-primary);
+        margin-bottom: 6px;
+        animation: fade-up 0.7s 0.28s both;
+      }
+
+      .splash-title strong {
+        font-weight: 600;
+      }
+
+      .splash-sub {
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin-bottom: 44px;
+        animation: fade-up 0.7s 0.36s both;
+      }
+
+      /* progress */
+      .splash-track {
+        width: 200px;
+        height: 2px;
+        background: rgba(0, 0, 0, 0.06);
+        border-radius: 99px;
+        overflow: hidden;
+        animation: fade-up 0.7s 0.44s both;
+      }
+
+      .splash-fill {
+        height: 100%;
+        width: 0;
+        border-radius: 99px;
+        background: linear-gradient(90deg, var(--fuchsia-dark), var(--fuchsia), var(--fuchsia-light));
+        animation: fill 3s 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      @keyframes fill {
+        0% { width: 0%; }
+        40% { width: 55%; }
+        75% { width: 82%; }
+        100% { width: 100%; }
+      }
+
+      @keyframes fade-up {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ─── Decap CMS overrides ────────────────────────────── */
+      /* Applied globally once CMS mounts — targets semantic HTML
+         since styled-components hashes class names */
+
+      /* Typography */
+      #nc-root,
+      [class^='css-'],
+      [class*=' css-'] {
+        font-family:
+          'Manrope',
+          -apple-system,
+          BlinkMacSystemFont,
+          'SF Pro Text',
+          sans-serif !important;
+      }
+
+      /* Swap every blue/teal hue with fuchsia */
+      [style*='color: rgb(70, 130, 180)'],
+      [style*='color:#4681B2'],
+      [style*='background-color: rgb(70, 130, 180)'] {
+        color: var(--fuchsia) !important;
+        background-color: var(--fuchsia) !important;
+      }
+
+      /* Buttons — primary */
+      button[class] {
+        border-radius: 10px !important;
+        font-family:
+          'Manrope',
+          -apple-system,
+          sans-serif !important;
+        font-weight: 500 !important;
+        letter-spacing: -0.1px !important;
+      }
+
+      /* Inputs */
+      input[class],
+      textarea[class],
+      select[class] {
+        border-radius: 10px !important;
+        font-family:
+          'Manrope',
+          -apple-system,
+          sans-serif !important;
+      }
+
+      /* Login button (Decap renders a styled <button> for GitHub) */
+      a[href*='github'],
+      button[class*='Button'][class*='primary'],
+      button[data-testid*='login'] {
+        background: linear-gradient(135deg, #d946ef, #a21caf) !important;
+        border: none !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 16px rgba(217, 70, 239, 0.3) !important;
+        color: white !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.1px !important;
+        transition: box-shadow 0.2s !important;
+      }
+
+      a[href*='github']:hover,
+      button[class*='Button'][class*='primary']:hover {
+        box-shadow: 0 6px 24px rgba(217, 70, 239, 0.45) !important;
+      }
+    </style>
   </head>
   <body>
+    <!-- Splash -->
+    <div id="splash">
+      <div class="splash-card">
+        <div class="splash-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+            />
+          </svg>
+        </div>
+        <span class="splash-label">Content Studio</span>
+        <h1 class="splash-title">Rohan <strong>Gandhi</strong></h1>
+        <p class="splash-sub">Personal Blog Admin</p>
+        <div class="splash-track">
+          <div class="splash-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decap CMS -->
     <script src="https://unpkg.com/decap-cms@3.3.3/dist/decap-cms.js"></script>
+
+    <script>
+      const splash = document.getElementById('splash')
+
+      // Dismiss splash once CMS has rendered something meaningful
+      const observer = new MutationObserver(() => {
+        if (document.querySelector('[class]')) {
+          observer.disconnect()
+          setTimeout(() => splash.classList.add('out'), 500)
+        }
+      })
+      observer.observe(document.body, { childList: true, subtree: false })
+
+      // Hard fallback
+      setTimeout(() => splash.classList.add('out'), 5000)
+    </script>
   </body>
 </html>
