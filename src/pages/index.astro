@@ -1,91 +1,82 @@
 ---
-import Card from '@/components/Card'
-import Intro from '@/components/Intro'
-import Learning from '@/components/Learning'
-import MyLinks from '@/components/MyLinks'
-import Projects from '@/components/Projects'
-import Quote from '@/components/Quote'
 import BaseLayout from '@/layouts/BaseLayout'
-import { Image } from 'astro:assets'
-import avatar from '../assets/images/avatar.png'
-import FunFacts from '@/components/FunFacts'
-import YearlyGoals from '@/components/YearlyGoals'
+import { getPosts } from '@/utils'
+
+const posts = await getPosts()
+const latest = posts[0]
+
+const fmt = (date: Date) =>
+	date.toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric'
+	})
 ---
 
 <BaseLayout title='Home'>
-	<div
-		class='text-black dark:text-white m-auto grid gap-2 max-w-6xl overflow-hidden relative w-full p-4 sm:gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-3 lg:max-h-[1000px] pt-0'
-	>
-		<Card
-			class='col-span-1 md:col-span-3 md:row-span-2 flex flex-col md:space-y-0 md:space-x-4 md:flex-row hover:border-purple-600'
-		>
-			<Intro />
-		</Card>
+	<div class='home-content'>
+		<h1 class='page-title'>Welcome to my garden.</h1>
 
-		<Card
-			class='col-span-1 md:col-span-1 md:row-span-3 hover:border-green-600 dark:hover:border-green-600'
-		>
-			<MyLinks />
-		</Card>
-		<Card
-			class='col-span-1 md:col-span-1 md:row-span-2 hover:border-blue-600 dark:hover:border-blue-600'
-		>
-			<Projects />
-		</Card>
-		<Card class='hidden md:block md:col-span-1 md:row-span-2 lg:hidden'>
-			<Image
-				src={avatar}
-				quality={100}
-				format='png'
-				loading='eager'
-				class='bg-blue-400 dark:bg-slate-300 rounded-md w-auto max-h-[200px] md:max-h-[150px] object-contain'
-				alt={`Mike Hoang avatar`}
-			/>
-		</Card>
+		<div class='featured-image'>
+			<img src='/hero.gif' alt='pond' />
+		</div>
 
-		<Card
-			class='col-span-1 md:col-span-2 md:row-span-1 hover:border-orange-600 dark:hover:border-orange-600'
-		>
-			<Quote />
-		</Card>
+		<p class='page-description'>
+			Hi, I'm Rohan Gandhi, currently studying at Simon Fraser University in
+			Vancouver, Canada. I'm in my third year of Computer Science specializing
+			in AI and cybersecurity, while hoping to get more exposure to the software
+			systems within mechatronics. Reach out at gandhirohan05[at]gmail[dot]com.
+		</p>
 
-		<Card
-			class='col-span-1 md:col-span-1 md:row-span-1 hover:border-pink-600 dark:hover:border-pink-600'
-		>
-			<Learning />
-		</Card>
-		<Card
-			class='col-span-1 md:col-span-1 md:row-span-1 hover:border-green-600 dark:hover:border-green-600'
-		>
-			<YearlyGoals />
-		</Card>
-		<Card
-			class='col-span-1 md:col-span-1 md:row-span-1 hover:border-yellow-600 dark:hover:border-yellow-600'
-		>
-			<FunFacts />
-		</Card>
-		<!-- <Card
-			class='col-span-2 md:col-span-2 md:row-span-2 hover:border-slate-600 dark:hover:border-slate-600'
-		>
-			<SoftwareStack />
-		</Card> -->
+		<div class='social-icons'>
+			<a
+				href='https://github.com/rohangandhi05'
+				target='_blank'
+				rel='noopener noreferrer'
+				aria-label='GitHub'
+			>
+				<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+					<path
+						d='M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.05-.02-2.06-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.39 1.24-3.23-.13-.31-.54-1.53.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.05.14 3 .4 2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.23 0 4.63-2.81 5.65-5.49 5.95.43.37.82 1.1.82 2.22 0 1.6-.02 2.9-.02 3.29 0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z'
+					></path>
+				</svg>
+			</a>
+			<a
+				href='https://www.linkedin.com/in/rohan-g05/'
+				target='_blank'
+				rel='noopener noreferrer'
+				aria-label='LinkedIn'
+			>
+				<svg viewBox='0 0 448 512' xmlns='http://www.w3.org/2000/svg'>
+					<path
+						d='M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z'
+					></path>
+				</svg>
+			</a>
+			<a href='mailto:gandhirohan05@gmail.com' aria-label='Email'>
+				<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+					<path
+						d='M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z'
+					></path>
+				</svg>
+			</a>
+		</div>
 
-		<script>
-			import { animate } from 'motion'
-			const showAnimations = localStorage.getItem('animations') === 'true'
-
-			if (showAnimations) {
-				animate(
-					'.title',
-					{ y: [80, 0], opacity: [0, 1] },
-					{
-						duration: 2.5,
-						opacity: { duration: 3 },
-
-						offset: [0, 0.55, 0.75]
-					}
-				)
-			}
-		</script>
-	</div></BaseLayout
->
+		{
+			latest && (
+				<>
+					<h2>Latest Post</h2>
+					<ul class='post-list'>
+						<li>
+							<h3>
+								<a href={`/post/${latest.slug}/`}>{latest.data.title}</a>
+							</h3>
+							<span class='post-meta'>{fmt(latest.data.pubDate)}</span>
+							<p>{latest.data.description}</p>
+						</li>
+					</ul>
+				</>
+			)
+		}
+	</div>
+</BaseLayout>

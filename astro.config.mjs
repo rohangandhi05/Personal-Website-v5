@@ -4,8 +4,6 @@ import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import { remarkReadingTime } from './src/utils/readTime.ts'
 
-import react from '@astrojs/react';
-
 // https://astro.build/config
 export default defineConfig({
     vite: {
@@ -14,7 +12,7 @@ export default defineConfig({
         }
     },
 
-    site: 'https://mikehoang.dev/',
+    site: 'https://rohanxg.vercel.app/',
     // Write here your website url
     markdown: {
         remarkPlugins: [remarkReadingTime],
@@ -31,5 +29,5 @@ export default defineConfig({
             wrap: true
         },
         drafts: true
-    }), sitemap(), tailwind(), react({ experimentalReactChildren: true, })]
+    }), sitemap(), tailwind({ applyBaseStyles: false })]
 })

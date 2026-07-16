@@ -10,9 +10,9 @@ interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
 	author: 'Rohan Gandhi',
-	title: 'Rohan Gandhi - Software Developer',
+	title: 'Rohan Gandhi',
 	description:
-		'Rohan Gandhi is a software developer with a passion for creating innovative web applications, who always strive to make the complex seem effortless.',
+		"Rohan Gandhi's digital garden — a Computer Science student at Simon Fraser University focused on machine learning and cyber security.",
 	lang: 'en-GB',
 	ogLocale: 'en_GB',
 	shareMessage: 'Share this post', // Message to share a post on social media

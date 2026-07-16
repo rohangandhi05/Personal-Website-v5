@@ -5,8 +5,9 @@ backend:
   base_url: https://rohanxg.vercel.app
   auth_endpoint: /api/auth
 
-media_folder: src/assets/images
-public_folder: /src/assets/images
+# Body images are stored in public/ so they resolve as static URLs in the build
+media_folder: public/assets/uploads
+public_folder: /assets/uploads
 
 collections:
   - name: blog
@@ -25,14 +26,5 @@ collections:
         format: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
         date_format: 'YYYY-MM-DD'
         time_format: 'HH:mm'
-      - label: Category
-        name: category
-        widget: select
-        options:
-          - Software Development
-          - Personal Development
-          - Bookmark
-      - { label: Tags, name: tags, widget: list }
-      - { label: Hero Image, name: heroImage, widget: image, required: true }
       - { label: Draft, name: draft, widget: boolean, default: false }
       - { label: Body, name: body, widget: markdown }

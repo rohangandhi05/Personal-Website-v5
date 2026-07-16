@@ -1,31 +1,31 @@
 ---
-import ListPosts from '@/components/ListPosts'
 import BaseLayout from '@/layouts/BaseLayout'
-import { getPosts, getTags, sluglify } from '@/utils'
+import { getPosts } from '@/utils'
 
 const posts = await getPosts()
-const tags = await getTags()
+
+const fmt = (date: Date) =>
+	date.toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric'
+	})
 ---
 
 <BaseLayout title='Blog'>
-	<div class='flex flex-wrap gap-2 mb-8'>
-		<a
-			href='/blog'
-			class='px-3 py-1 text-sm font-medium rounded-full bg-fuchsia-500 text-white border border-fuchsia-500'
-		>
-			All
-		</a>
-		{
-			tags.map((tag) => (
-				<a
-					href={`/tags/${sluglify(tag)}`}
-					class='px-3 py-1 text-sm font-medium rounded-full border border-zinc-300 dark:border-zinc-700 hover:border-fuchsia-500 hover:text-fuchsia-500 transition-colors'
-				>
-					{tag}
-				</a>
-			))
-		}
-	</div>
+	<h1 class='page-title' style='text-align: left;'>Blog Posts</h1>
 
-	<ListPosts posts={posts} />
+	{
+		posts.map((post) => (
+			<>
+				<article class='post-preview'>
+					<h2>
+						<a href={`/post/${post.slug}/`}>{post.data.title}</a>
+					</h2>
+					<p class='post-meta'>{fmt(post.data.pubDate)}</p>
+				</article>
+				<hr />
+			</>
+		))
+	}
 </BaseLayout>

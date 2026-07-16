@@ -1,0 +1,40 @@
+---
+import BaseLayout from '@/layouts/BaseLayout'
+
+const projects = [
+	{
+		name: 'Magic Mirror',
+		url: 'https://github.com/rohangandhi05/MagicMirror',
+		description: 'A smart mirror built on Raspberry Pi OS.'
+	},
+	{
+		name: 'Premier League Data Scraper',
+		url: 'https://github.com/rohangandhi05/DataScraping',
+		description: 'Scrapes and organizes Premier League match data.'
+	},
+	{
+		name: 'U-Park',
+		url: 'https://github.com/rohangandhi05/U-Park',
+		description: 'A parking availability application.'
+	}
+]
+---
+
+<BaseLayout title='Projects'>
+	<h1 class='page-title' style='text-align: left;'>Projects</h1>
+
+	<ul class='project-list'>
+		{
+			projects.map((project) => (
+				<li>
+					<h3>
+						<a href={project.url} target='_blank' rel='noopener noreferrer'>
+							{project.name}
+						</a>
+					</h3>
+					<p>{project.description}</p>
+				</li>
+			))
+		}
+	</ul>
+</BaseLayout>

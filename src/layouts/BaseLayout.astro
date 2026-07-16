@@ -1,16 +1,13 @@
 ---
 import BaseHead from '@/components/BaseHead'
-import EditBlog from '@/components/editBlog'
-import Footer from '@/components/Footer'
-import GoogleAnalytics from '@/components/GoogleAnalytics'
-import Header from '@/components/Header'
-import ProviderAnimations from '@/components/ProviderAnimations'
-import ProviderTheme from '@/components/ProviderTheme'
-import TwSizeIndicator from '@/components/TwSizeIndicator'
+import { siteConfig } from '@/site-config'
+
 const { title, description, image, articleDate } = Astro.props
+const currentYear = new Date().getFullYear()
 ---
 
-<html lang='en' class='scroll-smooth'>
+<!doctype html>
+<html lang='en'>
 	<head>
 		<BaseHead
 			title={title}
@@ -18,41 +15,98 @@ const { title, description, image, articleDate } = Astro.props
 			ogImage={image}
 			articleDate={articleDate}
 		/>
-		<ProviderTheme />
-		<ProviderAnimations />
+
+		<!-- Set theme before paint to avoid flash -->
+		<script is:inline>
+			const saved = localStorage.getItem('theme')
+			const prefersDark = window.matchMedia(
+				'(prefers-color-scheme: dark)'
+			).matches
+			if (saved === 'dark' || (!saved && prefersDark)) {
+				document.documentElement.setAttribute('data-theme', 'dark')
+			}
+		</script>
+
+		<!-- MathJax -->
+		<script is:inline>
+			window.MathJax = {
+				tex: {
+					inlineMath: [
+						['$', '$'],
+						['\\(', '\\)']
+					],
+					displayMath: [
+						['$$', '$$'],
+						['\\[', '\\]']
+					],
+					processEscapes: true
+				}
+			}
+		</script>
+		<script
+			is:inline
+			id='MathJax-script'
+			async
+			src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+		></script>
 	</head>
 
-	<body
-		class='bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white w-full h-full'
-	>
-		<!-- <div
-			class='block dark:hidden absolute top-0 z-[-2] h-screen w-screen rotate-180 transform bg-white bg-[radial-gradient(60%_120%_at_50%_50%,hsla(0,0%,100%,0)_0,rgba(252,205,238,.5)_100%)]'
-		>
-		</div> -->
+	<body>
+		<header>
+			<h1><a href='/'>{siteConfig.author}</a></h1>
+		</header>
 
-		<div
-			class='flex dark:hidden absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]'
-		>
-			<div
-				class='absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-fuchsia-400 opacity-20 blur-[100px]'
-			>
-			</div>
-		</div>
+		<nav>
+			<ul>
+				<li><a href='/'>Home</a></li>
+				<li><a href='/blog'>Blog</a></li>
+				<li><a href='/projects'>Projects</a></li>
+			</ul>
+		</nav>
 
-		<div
-			class='hidden dark:flex absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]'
-		>
-		</div>
-
-		<main
-			class='relative px-5 sm:mx-auto sm:max-w-2xl sm:px-8 lg:px-4 antialiased md:max-w-6xl grid gap-12 mt-4 overflow-hidden md:overflow-visible'
-		>
-			<Header />
+		<main>
 			<slot />
-			<Footer />
 		</main>
-		<GoogleAnalytics id='G-ERKX6RT5L3' />
-		<TwSizeIndicator />
-		<EditBlog />
+
+		<footer>
+			<p>&copy; {currentYear} {siteConfig.author}</p>
+		</footer>
+
+		<button id='theme-toggle' aria-label='Toggle dark mode'></button>
+
+		<script is:inline>
+			const themeToggle = document.getElementById('theme-toggle')
+
+			// Crescent moon (shown in light mode → click for dark)
+			const crescent =
+				'<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+			// Full moon (shown in dark mode → click for light)
+			const fullMoon =
+				'<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/></svg>'
+
+			function renderIcon() {
+				const isDark =
+					document.documentElement.getAttribute('data-theme') === 'dark'
+				themeToggle.innerHTML = isDark ? fullMoon : crescent
+			}
+
+			function setTheme(theme) {
+				if (theme === 'dark') {
+					document.documentElement.setAttribute('data-theme', 'dark')
+					localStorage.setItem('theme', 'dark')
+				} else {
+					document.documentElement.removeAttribute('data-theme')
+					localStorage.setItem('theme', 'light')
+				}
+				renderIcon()
+			}
+
+			renderIcon()
+
+			themeToggle.addEventListener('click', () => {
+				const current = document.documentElement.getAttribute('data-theme')
+				setTheme(current === 'dark' ? 'light' : 'dark')
+			})
+		</script>
 	</body>
 </html>
