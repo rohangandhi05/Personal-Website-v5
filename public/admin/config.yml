@@ -2,7 +2,7 @@ backend:
   name: github
   repo: rohangandhi05/Personal-Website-v5
   branch: astro
-  base_url: https://rohanxg.vercel.app
+  base_url: https://rohanxg.com
   auth_endpoint: /api/auth
 
 # Body images are stored in public/ so they resolve as static URLs in the build

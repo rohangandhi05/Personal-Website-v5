@@ -14,7 +14,7 @@ export default defineConfig({
         }
     },
 
-    site: 'https://rohanxg.vercel.app/',
+    site: 'https://rohanxg.com/',
     // Write here your website url
     markdown: {
         remarkPlugins: [remarkReadingTime, remarkMath],
