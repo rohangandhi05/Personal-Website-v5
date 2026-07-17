@@ -4,11 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <title>Blog Admin — Rohan Gandhi</title>
+    <title>Writing Desk — Rohan Gandhi</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"
       rel="stylesheet"
     />
+
     <style>
       *,
       *::before,
@@ -18,27 +22,38 @@
         padding: 0;
       }
 
+      /* ─── Theme tokens (mirror the public site) ──────────── */
       :root {
-        --fuchsia: #d946ef;
-        --fuchsia-light: #f0abfc;
-        --fuchsia-dark: #a21caf;
-        --surface: rgba(255, 255, 255, 0.82);
-        --text-primary: #1d1d1f;
-        --text-secondary: #6e6e73;
-        --text-tertiary: #aeaeb2;
+        --bg: #ffffff;
+        --text: #222222;
+        --muted: #8a8a8f;
+        --accent: #111111;
+        --accent-contrast: #ffffff;
+        --border: #e9e9e9;
+        --hairline: rgba(0, 0, 0, 0.08);
+        --serif: 'EB Garamond', Georgia, serif;
+        --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+        --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Helvetica, Arial, sans-serif;
+      }
+
+      [data-theme='dark'] {
+        --bg: #1a1a1a;
+        --text: #ffffff;
+        --muted: #9a9a9a;
+        --accent: #ffffff;
+        --accent-contrast: #1a1a1a;
+        --border: #333333;
+        --hairline: rgba(255, 255, 255, 0.12);
       }
 
       html,
       body {
         height: 100%;
-        font-family:
-          'Manrope',
-          -apple-system,
-          BlinkMacSystemFont,
-          'SF Pro Text',
-          sans-serif;
-        background: #f5f5f7;
+        background: var(--bg);
+        color: var(--text);
         -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
       }
 
       /* ─── Splash ─────────────────────────────────────────── */
@@ -50,21 +65,16 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 0;
-        background: radial-gradient(
-            ellipse 80% 60% at 50% -10%,
-            rgba(217, 70, 239, 0.07),
-            transparent
-          ),
+        background:
           radial-gradient(
-            ellipse 60% 40% at 100% 100%,
-            rgba(240, 171, 252, 0.06),
-            transparent
+            60% 55% at 50% 38%,
+            var(--hairline),
+            transparent 70%
           ),
-          #f5f5f7;
+          var(--bg);
         transition:
-          opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-          visibility 0.7s;
+          opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+          visibility 0.6s;
       }
 
       #splash.out {
@@ -73,233 +83,227 @@
         pointer-events: none;
       }
 
-      /* glass card */
-      .splash-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 52px 64px 48px;
-        background: var(--surface);
-        border: 1px solid rgba(255, 255, 255, 0.9);
-        border-radius: 28px;
-        box-shadow:
-          0 2px 1px rgba(255, 255, 255, 0.8) inset,
-          0 32px 80px rgba(0, 0, 0, 0.07),
-          0 8px 24px rgba(0, 0, 0, 0.04);
-        backdrop-filter: blur(48px) saturate(200%);
-        -webkit-backdrop-filter: blur(48px) saturate(200%);
-        animation: card-in 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+      .mark {
+        color: var(--text);
+        opacity: 0;
+        animation: rise 0.9s 0.05s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+      }
+      .mark svg {
+        width: 34px;
+        height: 34px;
+        display: block;
       }
 
-      @keyframes card-in {
-        from {
-          opacity: 0;
-          transform: translateY(24px) scale(0.96);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
+      .wordmark {
+        font-family: var(--serif);
+        font-weight: 500;
+        font-size: 2.5rem;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+        margin-top: 1.4rem;
+        opacity: 0;
+        animation: rise 0.9s 0.16s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
       }
 
-      /* icon */
-      .splash-icon {
-        width: 80px;
-        height: 80px;
-        border-radius: 22px;
-        background: linear-gradient(145deg, #f0abfc 0%, #d946ef 50%, #a21caf 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 32px;
-        box-shadow:
-          0 1px 0 rgba(255, 255, 255, 0.4) inset,
-          0 12px 36px rgba(217, 70, 239, 0.3),
-          0 4px 12px rgba(0, 0, 0, 0.1);
-        animation: icon-in 0.9s 0.1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-      }
-
-      @keyframes icon-in {
-        from {
-          opacity: 0;
-          transform: scale(0.7) rotate(-8deg);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1) rotate(0deg);
-        }
-      }
-
-      .splash-icon svg {
-        width: 38px;
-        height: 38px;
-        fill: white;
-        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
-      }
-
-      .splash-label {
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 0.12em;
+      .label {
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.28em;
         text-transform: uppercase;
-        color: var(--fuchsia);
-        margin-bottom: 10px;
-        animation: fade-up 0.7s 0.2s both;
+        color: var(--muted);
+        margin-top: 0.85rem;
+        opacity: 0;
+        animation: rise 0.9s 0.26s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
       }
 
-      .splash-title {
-        font-size: 30px;
-        font-weight: 300;
-        letter-spacing: -0.6px;
-        color: var(--text-primary);
-        margin-bottom: 6px;
-        animation: fade-up 0.7s 0.28s both;
-      }
-
-      .splash-title strong {
-        font-weight: 600;
-      }
-
-      .splash-sub {
-        font-size: 14px;
-        color: var(--text-secondary);
-        margin-bottom: 44px;
-        animation: fade-up 0.7s 0.36s both;
-      }
-
-      /* progress */
-      .splash-track {
-        width: 200px;
-        height: 2px;
-        background: rgba(0, 0, 0, 0.06);
-        border-radius: 99px;
+      .track {
+        position: relative;
+        width: 168px;
+        height: 1px;
+        margin-top: 2.6rem;
+        background: var(--hairline);
         overflow: hidden;
-        animation: fade-up 0.7s 0.44s both;
+        opacity: 0;
+        animation: rise 0.9s 0.36s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+      }
+      .track::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        width: 40%;
+        background: var(--accent);
+        animation: sweep 1.5s 0.8s cubic-bezier(0.5, 0, 0.2, 1) infinite;
       }
 
-      .splash-fill {
-        height: 100%;
-        width: 0;
-        border-radius: 99px;
-        background: linear-gradient(90deg, var(--fuchsia-dark), var(--fuchsia), var(--fuchsia-light));
-        animation: fill 3s 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(9px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes sweep {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(350%);
+        }
       }
 
-      @keyframes fill {
-        0% { width: 0%; }
-        40% { width: 55%; }
-        75% { width: 82%; }
-        100% { width: 100%; }
+      @media (prefers-reduced-motion: reduce) {
+        .mark,
+        .wordmark,
+        .label,
+        .track {
+          animation: none;
+          opacity: 1;
+        }
+        .track::after {
+          animation: none;
+        }
       }
 
-      @keyframes fade-up {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
+      /* ═══════════════════════════════════════════════════════
+         Decap CMS overrides — cohesive type, mono-accent, calm
+         chrome. Targets semantic elements + Decap's inline
+         steel-blue brand color (styled-components hash names).
+         ═══════════════════════════════════════════════════════ */
 
-      /* ─── Decap CMS overrides ────────────────────────────── */
-      /* Applied globally once CMS mounts — targets semantic HTML
-         since styled-components hashes class names */
-
-      /* Typography */
+      /* Base UI font */
       #nc-root,
-      [class^='css-'],
-      [class*=' css-'] {
-        font-family:
-          'Manrope',
-          -apple-system,
-          BlinkMacSystemFont,
-          'SF Pro Text',
-          sans-serif !important;
+      #nc-root [class^='css-'],
+      #nc-root [class*=' css-'],
+      #nc-root input,
+      #nc-root textarea,
+      #nc-root button,
+      #nc-root select {
+        font-family: var(--sans);
+        letter-spacing: -0.005em;
       }
 
-      /* Swap every blue/teal hue with fuchsia */
-      [style*='color: rgb(70, 130, 180)'],
-      [style*='color:#4681B2'],
-      [style*='background-color: rgb(70, 130, 180)'] {
-        color: var(--fuchsia) !important;
-        background-color: var(--fuchsia) !important;
-      }
-
-      /* Buttons — primary */
-      button[class] {
-        border-radius: 10px !important;
-        font-family:
-          'Manrope',
-          -apple-system,
-          sans-serif !important;
+      /* Editorial serif for page/collection titles + headings */
+      #nc-root h1,
+      #nc-root h2,
+      #nc-root [class*='CollectionTop'] h1,
+      #nc-root [class*='CardHeading'],
+      #nc-root [class*='EditorControl'] h2 {
+        font-family: var(--serif) !important;
         font-weight: 500 !important;
-        letter-spacing: -0.1px !important;
+        letter-spacing: -0.01em !important;
+      }
+
+      /* Recolor Decap's steel-blue (rgb 70 130 180 / #4681B2) accent */
+      [style*='rgb(70, 130, 180)'],
+      [style*='#4681B2'],
+      [style*='#4682b4'] {
+        color: var(--accent) !important;
+      }
+      [style*='background-color: rgb(70, 130, 180)'],
+      [style*='background: rgb(70, 130, 180)'] {
+        background-color: var(--accent) !important;
+        color: var(--accent-contrast) !important;
+      }
+
+      /* Buttons — softened, consistent */
+      #nc-root button[class] {
+        border-radius: 9px !important;
+        font-weight: 500 !important;
       }
 
       /* Inputs */
-      input[class],
-      textarea[class],
-      select[class] {
-        border-radius: 10px !important;
-        font-family:
-          'Manrope',
-          -apple-system,
-          sans-serif !important;
+      #nc-root input[class],
+      #nc-root textarea[class],
+      #nc-root select[class] {
+        border-radius: 9px !important;
       }
 
-      /* Login button (Decap renders a styled <button> for GitHub) */
-      a[href*='github'],
-      button[class*='Button'][class*='primary'],
-      button[data-testid*='login'] {
-        background: linear-gradient(135deg, #d946ef, #a21caf) !important;
+      /* Primary / publish / login buttons → solid accent pill */
+      #nc-root a[href*='github'],
+      #nc-root button[class*='primary'],
+      #nc-root button[data-testid*='login'],
+      #nc-root [class*='PublishButton'] {
+        background: var(--accent) !important;
+        color: var(--accent-contrast) !important;
         border: none !important;
-        border-radius: 12px !important;
-        box-shadow: 0 4px 16px rgba(217, 70, 239, 0.3) !important;
-        color: white !important;
+        border-radius: 10px !important;
         font-weight: 600 !important;
-        letter-spacing: -0.1px !important;
-        transition: box-shadow 0.2s !important;
+        letter-spacing: 0 !important;
+        box-shadow: none !important;
+        transition:
+          transform 0.15s ease,
+          opacity 0.15s ease !important;
       }
-
-      a[href*='github']:hover,
-      button[class*='Button'][class*='primary']:hover {
-        box-shadow: 0 6px 24px rgba(217, 70, 239, 0.45) !important;
+      #nc-root a[href*='github']:hover,
+      #nc-root button[class*='primary']:hover,
+      #nc-root [class*='PublishButton']:hover {
+        opacity: 0.88 !important;
+        transform: translateY(-1px) !important;
       }
     </style>
   </head>
+
   <body>
     <!-- Splash -->
-    <div id="splash">
-      <div class="splash-card">
-        <div class="splash-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
-            />
-          </svg>
-        </div>
-        <span class="splash-label">Content Studio</span>
-        <h1 class="splash-title">Rohan <strong>Gandhi</strong></h1>
-        <p class="splash-sub">Personal Blog Admin</p>
-        <div class="splash-track">
-          <div class="splash-fill"></div>
-        </div>
+    <div id="splash" role="status" aria-label="Loading the writing desk">
+      <div class="mark">
+        <!-- pen -->
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M4 20h4" />
+          <path
+            d="M16.7 3.3a1.9 1.9 0 0 1 2.7 2.7L7.5 17.9 3.5 19l1.1-4L16.7 3.3z"
+          />
+        </svg>
       </div>
+      <h1 class="wordmark">Rohan Gandhi</h1>
+      <p class="label">The Writing Desk</p>
+      <div class="track" aria-hidden="true"></div>
     </div>
 
     <!-- Decap CMS -->
     <script src="https://unpkg.com/decap-cms@3.3.3/dist/decap-cms.js"></script>
 
     <script>
-      const splash = document.getElementById('splash')
-
-      // Dismiss splash once CMS has rendered something meaningful
-      const observer = new MutationObserver(() => {
-        if (document.querySelector('[class]')) {
-          observer.disconnect()
-          setTimeout(() => splash.classList.add('out'), 500)
+      // Match the theme the visitor last chose on the public site
+      // (same origin → shared localStorage), else system preference.
+      ;(function () {
+        const saved = localStorage.getItem('theme')
+        const prefersDark = window.matchMedia(
+          '(prefers-color-scheme: dark)'
+        ).matches
+        if (saved === 'dark' || (!saved && prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'dark')
         }
-      })
-      observer.observe(document.body, { childList: true, subtree: false })
+      })()
 
-      // Hard fallback
-      setTimeout(() => splash.classList.add('out'), 5000)
+      // Dismiss splash once the CMS has painted something meaningful
+      ;(function () {
+        const splash = document.getElementById('splash')
+        const done = () => splash && splash.classList.add('out')
+
+        const observer = new MutationObserver(() => {
+          if (document.querySelector('#nc-root [class]')) {
+            observer.disconnect()
+            setTimeout(done, 450)
+          }
+        })
+        observer.observe(document.body, { childList: true, subtree: true })
+
+        // Hard fallback
+        setTimeout(done, 5000)
+      })()
     </script>
   </body>
 </html>
