@@ -22,29 +22,22 @@
         padding: 0;
       }
 
-      /* ─── Theme tokens (mirror the public site) ──────────── */
+      /* ─── Dark-only theme tokens ─────────────────────────── */
       :root {
-        --bg: #ffffff;
-        --text: #222222;
-        --muted: #8a8a8f;
-        --accent: #111111;
-        --accent-contrast: #ffffff;
-        --border: #e9e9e9;
-        --hairline: rgba(0, 0, 0, 0.08);
+        --bg: #161616; /* app canvas */
+        --surface: #1f1f1f; /* cards, inputs */
+        --surface-2: #262626; /* raised: menus, dialogs */
+        --text: #ececec;
+        --muted: #9a9a9a;
+        --accent: #ffffff;
+        --accent-contrast: #161616;
+        --border: #333333;
+        --hairline: rgba(255, 255, 255, 0.12);
         --serif: 'EB Garamond', Georgia, serif;
         --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
         --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
           Helvetica, Arial, sans-serif;
-      }
-
-      [data-theme='dark'] {
-        --bg: #1a1a1a;
-        --text: #ffffff;
-        --muted: #9a9a9a;
-        --accent: #ffffff;
-        --accent-contrast: #1a1a1a;
-        --border: #333333;
-        --hairline: rgba(255, 255, 255, 0.12);
+        color-scheme: dark;
       }
 
       html,
@@ -169,15 +162,32 @@
       }
 
       /* ═══════════════════════════════════════════════════════
-         Decap CMS overrides — cohesive type, mono-accent, calm
-         chrome. Targets semantic elements + Decap's inline
-         steel-blue brand color (styled-components hash names).
+         Decap CMS — full dark theme.
+         Strategy: blank every emotion surface to transparent so
+         the dark canvas shows through, force light text, then
+         re-introduce dark surfaces only where contrast is needed
+         (inputs, menus, dialogs). Emotion class names are hashed,
+         so we lean on [class*='css-'], element, role + inline-
+         style selectors rather than readable class names.
          ═══════════════════════════════════════════════════════ */
+
+      /* App canvas */
+      #nc-root {
+        background: var(--bg) !important;
+        color: var(--text);
+      }
+
+      /* Blanket: dissolve light surfaces, force light text */
+      #nc-root [class*='css-'] {
+        background-color: transparent !important;
+        background-image: none !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+      }
 
       /* Base UI font */
       #nc-root,
-      #nc-root [class^='css-'],
-      #nc-root [class*=' css-'],
+      #nc-root [class*='css-'],
       #nc-root input,
       #nc-root textarea,
       #nc-root button,
@@ -186,15 +196,43 @@
         letter-spacing: -0.005em;
       }
 
-      /* Editorial serif for page/collection titles + headings */
+      /* Editorial serif for titles + headings */
       #nc-root h1,
-      #nc-root h2,
-      #nc-root [class*='CollectionTop'] h1,
-      #nc-root [class*='CardHeading'],
-      #nc-root [class*='EditorControl'] h2 {
+      #nc-root h2 {
         font-family: var(--serif) !important;
         font-weight: 500 !important;
         letter-spacing: -0.01em !important;
+      }
+      #nc-root [class*='css-'] {
+        text-shadow: none !important;
+      }
+
+      /* Editable fields need a readable dark surface */
+      #nc-root input,
+      #nc-root textarea,
+      #nc-root select,
+      #nc-root [contenteditable='true'],
+      #nc-root [class*='css-'] input,
+      #nc-root [class*='css-'] textarea {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 9px !important;
+      }
+      #nc-root input::placeholder,
+      #nc-root textarea::placeholder {
+        color: var(--muted) !important;
+      }
+
+      /* Raised surfaces: menus, dialogs, listboxes, tooltips, cards */
+      #nc-root [role='menu'],
+      #nc-root [role='dialog'],
+      #nc-root [role='listbox'],
+      #nc-root [role='tooltip'],
+      #nc-root [class*='css-'] ul[class] {
+        background-color: var(--surface-2) !important;
+        border: 1px solid var(--border) !important;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55) !important;
       }
 
       /* Recolor Decap's steel-blue (rgb 70 130 180 / #4681B2) accent */
@@ -209,23 +247,19 @@
         color: var(--accent-contrast) !important;
       }
 
-      /* Buttons — softened, consistent */
+      /* Secondary buttons — subtle dark surface */
       #nc-root button[class] {
+        background-color: var(--surface) !important;
+        border: 1px solid var(--border) !important;
         border-radius: 9px !important;
         font-weight: 500 !important;
-      }
-
-      /* Inputs */
-      #nc-root input[class],
-      #nc-root textarea[class],
-      #nc-root select[class] {
-        border-radius: 9px !important;
       }
 
       /* Primary / publish / login buttons → solid accent pill */
       #nc-root a[href*='github'],
       #nc-root button[class*='primary'],
       #nc-root button[data-testid*='login'],
+      #nc-root [class*='PublishButton'] button,
       #nc-root [class*='PublishButton'] {
         background: var(--accent) !important;
         color: var(--accent-contrast) !important;
@@ -243,6 +277,19 @@
       #nc-root [class*='PublishButton']:hover {
         opacity: 0.88 !important;
         transform: translateY(-1px) !important;
+      }
+
+      /* Dark scrollbars */
+      #nc-root ::-webkit-scrollbar {
+        width: 11px;
+        height: 11px;
+      }
+      #nc-root ::-webkit-scrollbar-thumb {
+        background: #3a3a3a;
+        border-radius: 8px;
+      }
+      #nc-root ::-webkit-scrollbar-track {
+        background: transparent;
       }
     </style>
   </head>
@@ -276,18 +323,6 @@
     <script src="https://unpkg.com/decap-cms@3.3.3/dist/decap-cms.js"></script>
 
     <script>
-      // Match the theme the visitor last chose on the public site
-      // (same origin → shared localStorage), else system preference.
-      ;(function () {
-        const saved = localStorage.getItem('theme')
-        const prefersDark = window.matchMedia(
-          '(prefers-color-scheme: dark)'
-        ).matches
-        if (saved === 'dark' || (!saved && prefersDark)) {
-          document.documentElement.setAttribute('data-theme', 'dark')
-        }
-      })()
-
       // Dismiss splash once the CMS has painted something meaningful
       ;(function () {
         const splash = document.getElementById('splash')
