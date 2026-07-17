@@ -252,6 +252,23 @@
         box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55) !important;
       }
 
+      /* Dropdown menus must size to their widest item, not the trigger,
+         and never clip their labels */
+      #nc-root [role='menu'][class] {
+        width: max-content !important;
+        min-width: 100% !important;
+        max-width: 92vw !important;
+        overflow: visible !important;
+      }
+      #nc-root [role='menu'][class] button,
+      #nc-root [role='menu'][class] a,
+      #nc-root [role='menu'][class] li,
+      #nc-root [role='menu'][class] span {
+        white-space: nowrap !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+      }
+
       /* Recolor Decap's steel-blue accent (inline styles) to the
          accent pill — #nc-root prefix + placed after blanket so the
          (1,1,0) tie resolves here */
