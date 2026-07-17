@@ -253,17 +253,24 @@
       }
 
       /* Dropdown menus must size to their widest item, not the trigger,
-         and never clip their labels */
-      #nc-root [role='menu'][class] {
+         and never clip their labels. Decap's emotion labels are stable
+         (pinned to decap-cms@3.3.3): DropdownList, StyledMenuItem,
+         ToolbarDropdown. */
+      #nc-root [role='menu'][class],
+      #nc-root [class*='DropdownList'] {
         width: max-content !important;
-        min-width: 100% !important;
+        min-width: 160px !important;
         max-width: 92vw !important;
         overflow: visible !important;
       }
-      #nc-root [role='menu'][class] button,
-      #nc-root [role='menu'][class] a,
-      #nc-root [role='menu'][class] li,
-      #nc-root [role='menu'][class] span {
+      #nc-root [class*='ToolbarDropdown'],
+      #nc-root [class*='Dropdown'] {
+        overflow: visible !important;
+      }
+      #nc-root [class*='StyledMenuItem'],
+      #nc-root [class*='dropdownItem'],
+      #nc-root [role='menuitem'],
+      #nc-root [role='menuitem'] span {
         white-space: nowrap !important;
         overflow: visible !important;
         text-overflow: clip !important;
