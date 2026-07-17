@@ -1,0 +1,70 @@
+---
+title: Probably Overthinking It
+description: Success can require a lot of attempts, but calculating the
+  probability might not be that helpful
+pubDate: 2026-07-16T23:36:00.000-07:00
+tags:
+  - Math
+draft: false
+---
+A recent [post on X](https://x.com/LeilaHormozi/status/2045498332928209202) has been getting a lot of attention, including in some snarky screengrabbed archiving as it has made its way onto various other platforms.
+
+The reason for its popularity came down to a mathematical claim about success:
+
+![](/assets/uploads/e2d74e0b-184b-4a2b-bdca-651c2b40fb6f_1162x294.jpg)
+
+As hundreds of commentators pointed out, the maths here is wide of the mark. To give a simple example, your probability of getting heads with a fair coin toss is 1/2. If you try twice, you don’t have a 100% chance of getting at least one head. You have a 3/4 chance (i.e. you need to avoid failure twice).
+
+Similarly, if we want to know chance of at least one success if each attempt has a 1/100 probability, we need to calculate the chance that you don’t fail at all 100 attempts, given there’s a 99/100 probability of failure each time:
+
+$$
+
+\text{P(at least one success)} = 1 - \text{P(all fail)} = 1 - \left(\frac{99}{100}\right)^{100} \approx 63\%
+
+$$
+
+And 63% is not 100%.
+
+Even so, the above calculation assumes that each attempt is independent and equally likely to succeed, which will rarely hold in practice. In reality, your probability of success should change as you learn; the goal isn’t just to try more, but to improve your chances with each attempt.
+
+As some people also pointed out, the directional sentiment was correct, even if 100% isn’t the same as 63%. Pushing through lots of failures is generally important if you want to eventually achieve some success. After all, I’ve lost count of how many book rejections, grant rejections, and investor rejections I’ve had over the years.
+
+And ultimately, if you’re spending time telling people they’re wrong on the internet, you’re probably not out there doing hard things.
+
+Now, you might respond that mathematical errors matter in life, and correcting them is worthwhile. Often that can be true. But in this instance, does the correction shed much more light on the probability of success?
+
+Mathematician Stanislaw Ulam once said that ‘Knowing what is big and what is small is more important than being able to solve partial differential equations’.
+
+This distinction is important, because, in reality, you’ll rarely know your exact chance of success on a given attempt. It might be 1%, it might be 20%, it might be 0.1%.
+
+Even having some data doesn’t alway help. If you apply for a grant with a 5% success rate, for example, it doesn’t mean your personal chance of success is 5%. Having reviewed a lot of proposals over the years, there’s often consensus about the outstanding applications and extremely weak ones. Neither of these groups ever had a 5% chance.
+
+This means it’s not only about attempt tallies. If your probability of success is 0.1% and you try 100 times, your overall chance of success is 9.5% according to the correct mathematical approach above. And if your probability is 1% and you try 10 times, your overall chance is also 9.5%.
+
+In other words, for situations where the probability of success is small, and your number of attempts is small relative to that probability, Hormozi’s simple calculation can actually provide useful rough intuition. If probabilities are small and attempts are limited, either you need more attempts, or a better probability per attempt. Both have the same impact.
+
+(For maths fans, this approximation works because:
+
+$1 - \left(\frac{1}{x}\right)^{n} \approx nx$
+
+when x is small relative to n.)
+
+It is of course misleading to suggest that 100 attempts would guarantee success given a 1% probability on each effort. But a better critique would be that trying to put numbers on these things in the first place isn’t that informative when it comes to the deep uncertainty of success.
+
+As J.M. Keynes wrote [in 1937](https://www.acsu.buffalo.edu/~zarembka/Keynes37.htm):
+
+*By ‘uncertain’ knowledge, let me explain, I do not mean merely to distinguish what is known for certain from what is only probable. The game of roulette is not subject, in this sense, to uncertainty; nor is the prospect of a Victory bond being drawn. Or, again, the expectation of life is only slightly uncertain. Even the weather is only moderately uncertain.*
+
+*The sense in which I am using the term is that in which the prospect of a European war is uncertain, or the price of copper and the rate of interest twenty years hence, or the obsolescence of a new invention, or the position of private wealth-owners in the social system in 1970. About these matters there is no scientific basis on which to form any calculable probability whatever. We simply do not know.*
+
+This idea would later become known as ‘radical uncertainty’, where the concepts honed on dice games and roulette would break down. But this wasn’t the main concern about the post on X. Instead, here are some of the comments below the post’s flawed calculation:
+
+*“that’s girl math”*
+
+*“With your understanding of math, your probability of success is near zero”*
+
+*“Your math ain’t mathing ”*
+
+What is the benefit of such comments? What, even is the benefit, of posting, or quoting, or snarkiving something that has been corrected hundreds of times already?
+
+To inform? To persuade? Or to signal merely that you know some high school probability – but perhaps not enough to realise that it’s not really a problem that probability can solve.
