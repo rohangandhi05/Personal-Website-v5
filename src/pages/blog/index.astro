@@ -4,6 +4,10 @@ import { getPosts } from '@/utils'
 
 const posts = await getPosts()
 
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))].sort(
+	(a, b) => a.localeCompare(b)
+)
+
 const fmt = (date: Date) =>
 	date.toLocaleDateString('en-US', {
 		year: 'numeric',
@@ -16,16 +20,68 @@ const fmt = (date: Date) =>
 	<h1 class='page-title' style='text-align: left;'>Blog Posts</h1>
 
 	{
-		posts.map((post) => (
-			<>
-				<article class='post-preview'>
-					<h2>
-						<a href={`/post/${post.slug}/`}>{post.data.title}</a>
-					</h2>
-					<p class='post-meta'>{fmt(post.data.pubDate)}</p>
-				</article>
-				<hr />
-			</>
-		))
+		allTags.length > 0 && (
+			<div class='tag-filter' id='tag-filter'>
+				<button class='tag-chip is-active' data-tag='*'>
+					All
+				</button>
+				{allTags.map((tag) => (
+					<button class='tag-chip' data-tag={tag}>
+						{tag}
+					</button>
+				))}
+			</div>
+		)
 	}
+
+	<div id='post-list'>
+		{
+			posts.map((post) => (
+				<>
+					<article
+						class='post-preview'
+						data-tags={(post.data.tags ?? []).join('|')}
+					>
+						<h2>
+							<a href={`/post/${post.slug}/`}>{post.data.title}</a>
+						</h2>
+						<p class='post-meta'>{fmt(post.data.pubDate)}</p>
+					</article>
+					<hr />
+				</>
+			))
+		}
+	</div>
+
+	<p id='no-results' class='no-results' hidden>No posts with this tag yet.</p>
+
+	<script is:inline>
+		const filter = document.getElementById('tag-filter')
+		if (filter) {
+			const noResults = document.getElementById('no-results')
+			filter.addEventListener('click', (e) => {
+				const btn = e.target.closest('.tag-chip')
+				if (!btn) return
+				const tag = btn.dataset.tag
+
+				filter
+					.querySelectorAll('.tag-chip')
+					.forEach((c) => c.classList.toggle('is-active', c === btn))
+
+				let visible = 0
+				document
+					.querySelectorAll('#post-list .post-preview')
+					.forEach((article) => {
+						const tags = (article.dataset.tags || '').split('|').filter(Boolean)
+						const show = tag === '*' || tags.includes(tag)
+						article.style.display = show ? '' : 'none'
+						const hr = article.nextElementSibling
+						if (hr && hr.tagName === 'HR') hr.style.display = show ? '' : 'none'
+						if (show) visible++
+					})
+
+				if (noResults) noResults.hidden = visible !== 0
+			})
+		}
+	</script>
 </BaseLayout>

@@ -42,11 +42,18 @@
 
       html,
       body {
-        height: 100%;
-        background: var(--bg);
+        min-height: 100%;
+        background: var(--bg) !important;
         color: var(--text);
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
+      }
+
+      /* App shell must fill the viewport so no white shows below */
+      #nc-root,
+      #nc-root > div {
+        min-height: 100vh !important;
+        background: var(--bg) !important;
       }
 
       /* ─── Splash ─────────────────────────────────────────── */
@@ -338,6 +345,25 @@
 
         // Hard fallback
         setTimeout(done, 5000)
+      })()
+
+      // Hide Decap's top "Media" tab — images are added inside the post body,
+      // so the separate media library isn't needed. Class names are hashed,
+      // so we match by the tab's text content and keep it hidden as the app
+      // re-renders.
+      ;(function () {
+        const hideMedia = () => {
+          document
+            .querySelectorAll('#nc-root a, #nc-root button')
+            .forEach((el) => {
+              if ((el.textContent || '').trim() === 'Media') {
+                el.style.display = 'none'
+              }
+            })
+        }
+        const mo = new MutationObserver(hideMedia)
+        mo.observe(document.body, { childList: true, subtree: true })
+        hideMedia()
       })()
     </script>
   </body>
