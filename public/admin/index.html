@@ -169,12 +169,13 @@
 
       /* ═══════════════════════════════════════════════════════
          Decap CMS — full dark theme.
-         Strategy: blank every emotion surface to transparent so
-         the dark canvas shows through, force light text, then
-         re-introduce dark surfaces only where contrast is needed
-         (inputs, menus, dialogs). Emotion class names are hashed,
-         so we lean on [class*='css-'], element, role + inline-
-         style selectors rather than readable class names.
+         Strategy: paint every emotion surface OPAQUE dark (never
+         transparent — transparent fixed/sticky bars let scrolled
+         content show through and collide). Then raise contrast only
+         where needed (inputs, menus, dialogs) and keep icons + the
+         accent pill intact. Emotion class names are hashed, so we
+         rely on [class*='css-'], element, role, and inline-style
+         selectors with deterministic specificity.
          ═══════════════════════════════════════════════════════ */
 
       /* App canvas */
@@ -183,12 +184,22 @@
         color: var(--text);
       }
 
-      /* Blanket: dissolve light surfaces, force light text */
+      /* Blanket: opaque dark surface + light text (specificity 1,1,0) */
       #nc-root [class*='css-'] {
-        background-color: transparent !important;
+        background-color: var(--bg) !important;
         background-image: none !important;
         color: var(--text) !important;
         border-color: var(--border) !important;
+        text-shadow: none !important;
+      }
+
+      /* Icons never paint a box, and inherit their parent's color
+         (so they stay visible inside the light accent pill) */
+      #nc-root svg,
+      #nc-root [class*='css-'] svg,
+      #nc-root [class*='css-'] svg * {
+        background-color: transparent !important;
+        color: inherit !important;
       }
 
       /* Base UI font */
@@ -209,14 +220,11 @@
         font-weight: 500 !important;
         letter-spacing: -0.01em !important;
       }
-      #nc-root [class*='css-'] {
-        text-shadow: none !important;
-      }
 
-      /* Editable fields need a readable dark surface */
-      #nc-root input,
-      #nc-root textarea,
-      #nc-root select,
+      /* Editable fields — readable raised surface (specificity 1,1,1) */
+      #nc-root input[class],
+      #nc-root textarea[class],
+      #nc-root select[class],
       #nc-root [contenteditable='true'],
       #nc-root [class*='css-'] input,
       #nc-root [class*='css-'] textarea {
@@ -225,62 +233,61 @@
         border: 1px solid var(--border) !important;
         border-radius: 9px !important;
       }
+      /* Keep the rich-text body one uniform surface */
+      #nc-root [contenteditable='true'] [class*='css-'] {
+        background-color: transparent !important;
+      }
       #nc-root input::placeholder,
       #nc-root textarea::placeholder {
         color: var(--muted) !important;
       }
 
-      /* Raised surfaces: menus, dialogs, listboxes, tooltips, cards */
-      #nc-root [role='menu'],
-      #nc-root [role='dialog'],
-      #nc-root [role='listbox'],
-      #nc-root [role='tooltip'],
-      #nc-root [class*='css-'] ul[class] {
+      /* Raised surfaces: menus, dialogs, listboxes, tooltips (1,1,1) */
+      #nc-root [role='menu'][class],
+      #nc-root [role='dialog'][class],
+      #nc-root [role='listbox'][class],
+      #nc-root [role='tooltip'][class] {
         background-color: var(--surface-2) !important;
         border: 1px solid var(--border) !important;
         box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55) !important;
       }
 
-      /* Recolor Decap's steel-blue (rgb 70 130 180 / #4681B2) accent */
-      [style*='rgb(70, 130, 180)'],
-      [style*='#4681B2'],
-      [style*='#4682b4'] {
+      /* Recolor Decap's steel-blue accent (inline styles) to the
+         accent pill — #nc-root prefix + placed after blanket so the
+         (1,1,0) tie resolves here */
+      #nc-root [style*='rgb(70, 130, 180)'],
+      #nc-root [style*='#4681B2'],
+      #nc-root [style*='#4682b4'] {
         color: var(--accent) !important;
       }
-      [style*='background-color: rgb(70, 130, 180)'],
-      [style*='background: rgb(70, 130, 180)'] {
+      #nc-root [style*='background-color: rgb(70, 130, 180)'],
+      #nc-root [style*='background: rgb(70, 130, 180)'] {
         background-color: var(--accent) !important;
         color: var(--accent-contrast) !important;
+        border: none !important;
       }
 
-      /* Secondary buttons — subtle dark surface */
+      /* Consistent button shape */
       #nc-root button[class] {
-        background-color: var(--surface) !important;
-        border: 1px solid var(--border) !important;
         border-radius: 9px !important;
         font-weight: 500 !important;
       }
 
-      /* Primary / publish / login buttons → solid accent pill */
+      /* Login (GitHub) button → accent pill */
       #nc-root a[href*='github'],
-      #nc-root button[class*='primary'],
-      #nc-root button[data-testid*='login'],
-      #nc-root [class*='PublishButton'] button,
-      #nc-root [class*='PublishButton'] {
+      #nc-root button[data-testid*='login'] {
         background: var(--accent) !important;
         color: var(--accent-contrast) !important;
         border: none !important;
         border-radius: 10px !important;
         font-weight: 600 !important;
-        letter-spacing: 0 !important;
         box-shadow: none !important;
         transition:
           transform 0.15s ease,
           opacity 0.15s ease !important;
       }
       #nc-root a[href*='github']:hover,
-      #nc-root button[class*='primary']:hover,
-      #nc-root [class*='PublishButton']:hover {
+      #nc-root button[data-testid*='login']:hover {
         opacity: 0.88 !important;
         transform: translateY(-1px) !important;
       }
