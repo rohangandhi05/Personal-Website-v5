@@ -19,7 +19,7 @@ Similarly, if we want to know chance of at least one success if each attempt has
 
 $$
 
-\text{P(at least one success)} = 1 - \text{P(all fail)} = 1 - \left(\frac{99}{100}\right)^{100} \approx 63\%
+\text{P(at least one success)} = 1 - \text{P(all fail)} = 1 - \left(\frac{99}{100}\right)^{100} \approx 63%
 
 $$
 
@@ -45,7 +45,11 @@ In other words, for situations where the probability of success is small, and yo
 
 (For maths fans, this approximation works because:
 
-$1 - \left(\frac{1}{x}\right)^{n} \approx nx$
+$$
+
+1 - \left(1 - \frac{1}{x}\right)^{n} \approx \frac{n}{x}
+
+$$
 
 when x is small relative to n.)
 
