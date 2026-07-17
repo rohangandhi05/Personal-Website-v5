@@ -26,29 +26,6 @@ const currentYear = new Date().getFullYear()
 				document.documentElement.setAttribute('data-theme', 'dark')
 			}
 		</script>
-
-		<!-- MathJax -->
-		<script is:inline>
-			window.MathJax = {
-				tex: {
-					inlineMath: [
-						['$', '$'],
-						['\\(', '\\)']
-					],
-					displayMath: [
-						['$$', '$$'],
-						['\\[', '\\]']
-					],
-					processEscapes: true
-				}
-			}
-		</script>
-		<script
-			is:inline
-			id='MathJax-script'
-			async
-			src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
-		></script>
 	</head>
 
 	<body>

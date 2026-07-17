@@ -33,4 +33,9 @@ collections:
         default: []
         hint: Used to filter posts on the Blog page.
       - { label: Draft, name: draft, widget: boolean, default: false }
-      - { label: Body, name: body, widget: markdown }
+      - label: Body
+        name: body
+        widget: markdown
+        hint: >-
+          Math (LaTeX/KaTeX): $...$ inline, $$...$$ block. Switch the editor
+          to Markdown mode when writing equations.
