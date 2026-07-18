@@ -5,22 +5,26 @@ const projects = [
 	{
 		name: 'In-Game Chess Analyzer',
 		url: 'https://github.com/rohangandhi05/In-Game-Chess-Analyzer',
-		description: 'Analyzes chess positions and moves during play.'
+		summary:
+			'A tool that evaluates chess positions and moves in real time during a game, surfacing analysis to help you understand the current position and find stronger continuations.'
 	},
 	{
 		name: '3D Tic Tac Toe',
 		url: 'https://github.com/rohangandhi05/3DTicTacToe',
-		description: 'A three-dimensional take on classic tic-tac-toe.'
+		summary:
+			'A three-dimensional spin on classic tic-tac-toe, played across a 3D grid that adds an extra layer of spatial strategy to the game.'
 	},
 	{
 		name: 'Magic Mirror',
 		url: 'https://github.com/rohangandhi05/MagicMirror',
-		description: 'A smart mirror built on Raspberry Pi OS.'
+		summary:
+			'A smart mirror built on Raspberry Pi OS that displays useful information — like the time, weather, and daily updates — behind a reflective surface.'
 	},
 	{
 		name: 'Premier League Data Scraper',
 		url: 'https://github.com/rohangandhi05/DataScraping',
-		description: 'Scrapes and organizes Premier League match data.'
+		summary:
+			'Scrapes and organizes Premier League match data into a structured, analysis-ready format for exploring stats and trends across the season.'
 	}
 ]
 ---
@@ -32,12 +36,19 @@ const projects = [
 		{
 			projects.map((project) => (
 				<li>
-					<h3>
-						<a href={project.url} target='_blank' rel='noopener noreferrer'>
+					<span class='project-trigger'>
+						<a
+							class='project-link'
+							href={project.url}
+							target='_blank'
+							rel='noopener noreferrer'
+						>
 							{project.name}
 						</a>
-					</h3>
-					<p>{project.description}</p>
+						<span class='project-popup' role='tooltip'>
+							{project.summary}
+						</span>
+					</span>
 				</li>
 			))
 		}
