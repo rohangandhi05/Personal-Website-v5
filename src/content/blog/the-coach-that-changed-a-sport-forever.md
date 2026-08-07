@@ -2,7 +2,8 @@
 title: The Coach That Birthed a Era
 description: Abdulmanap Nurmagomedov
 pubDate: 2026-04-22T17:15:00.000-07:00
-tags: []
+tags:
+  - Sports
 draft: false
 ---
 
