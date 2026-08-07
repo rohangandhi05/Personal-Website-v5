@@ -1,7 +1,7 @@
 ---
 title: Outgrowing Idealisms
 description: Some "big boy" shi
-pubDate: 2026-07-25T18:01:00.000-07:00
+pubDate: 2026-07-19T18:01:00.000-07:00
 tags: []
 draft: false
 ---
