@@ -2,7 +2,8 @@
 title: The Pleasures of Drowning
 description: n/a
 pubDate: 2026-07-25T18:58:00.000-07:00
-tags: []
+tags:
+  - Sports
 draft: false
 ---
 ![](/assets/uploads/1845df2d3beb37f3bde1151a468a2f6b-2-.jpg)
