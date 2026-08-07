@@ -5,7 +5,7 @@ pubDate: 2026-07-25T18:58:00.000-07:00
 tags: []
 draft: false
 ---
-![](/assets/uploads/1845df2d3beb37f3bde1151a468a2f6b.jpg)
+![](/assets/uploads/1845df2d3beb37f3bde1151a468a2f6b-2-.jpg)
 
 Martial artists are often slow to see how their own beliefs about violence get warped, by tradition, and by a natural desire to avoid getting hurt in training. You can spend a lifetime mastering an ancient fighting system, and build a following of students who spend years trying to copy you, without ever finding out you can't actually defend yourself. Delusions of martial prowess work a lot like religious faith. But there's one big difference: a person of faith can always explain away a contradiction between belief and reality. An inability to fight can't be explained away. It's easy to spot, and once it's exposed, there's no talking your way out of it.
 
@@ -25,8 +25,6 @@ It doesn't matter if you're a lifelong boxer, a karate black belt, or just a gen
 
 ### Why BJJ Won the Question Everyone Was Asking
 
-
-
 Most people who've followed martial arts have known about BJJ since 1993, when the UFC put it on the map. The UFC was the first big mixed martial arts event to pit different styles against each other directly: boxing, wrestling, karate, Muay Thai, judo, sambo, kung fu, and more, matched up one-on-one with almost no rules. No weight classes, no rounds, barely any judges. Fights ended by knockout, submission, or a towel thrown in.
 
 A lot of people found it brutal to watch. But to martial artists, it was a science experiment two thousand years in the making, finally answering the one question fighters had always argued about: what actually works? The answer surprised almost everyone. It wasn't boxing, wrestling, or karate. A comparatively small Brazilian jiu-jitsu fighter named Royce Gracie kept beating bigger, stronger, more decorated opponents, over and over.
@@ -44,8 +42,6 @@ In the clinch, you want wrestling: controlling posture, throwing your opponent, 
 And on the ground, BJJ is still the answer. The one update is that since everyone now grapples, the ability to strike effectively from the ground has become more important too. You don't have to call it "BJJ" specifically (sambo and submission wrestling teach a lot of the same skills), but no art has mapped out ground fighting as thoroughly.
 
 ### Where BJJ Falls Short for Self-Defense
-
-
 
 There's one habit BJJ can teach you that works against you outside the gym: because it's so effective on the ground, it's easy to start treating the ground as the goal. When you're used to drilling armbars and chokes, it's easy to forget that in an actual altercation, your opponent might be punching you the whole time, might have a weapon, or might have friends ready to kick you in the head while you're down there. Years of ground-fighting practice can quietly erase the more basic truth: if a fight breaks out, the ground is the last place you want to be.
 
