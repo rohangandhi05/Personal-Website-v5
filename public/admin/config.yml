@@ -15,7 +15,7 @@ collections:
     folder: src/content/blog
     create: true
     format: frontmatter
-    extension: mdx
+    extension: md
     slug: '{{slug}}'
     fields:
       - { label: Title, name: title, widget: string }

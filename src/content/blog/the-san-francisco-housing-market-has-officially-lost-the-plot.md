@@ -7,6 +7,7 @@ tags:
   - News
 draft: false
 ---
+
 ![](/assets/uploads/23da6bf9606f49f3946bd5765d5d35df_opt-1-.webp)
 
 The AI story that feels most like a fever dream to me isn't happening in a lab. It's happening in the San Francisco housing market, where people are so intoxicated with AI money that they're buying houses with stock they can't technically sell yet.

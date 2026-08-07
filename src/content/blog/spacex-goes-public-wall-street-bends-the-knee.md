@@ -9,6 +9,7 @@ tags:
   - News
 draft: false
 ---
+
 ![](/assets/uploads/9c2c67931c2fb25d8e43da11f0f3846d.jpg)
 
 Today we got the SpaceX IPO, and if you somehow missed it, congratulations on being mentally well. We got the world's first trillionaire, the biggest IPO in history, and the world's biggest banks doing free work just to stay close to Elon Musk. Times Square's New Year's Eve ball rose and glowed Mars red. SpaceX employees are eating logo-branded steaks tonight on the 57th floor of JPMorgan's building, and Musk orchestrated the whole thing not from Wall Street, but from the city he built himself: Starbase, Texas, the Disney World of Tesla, branded as the gateway to Mars.

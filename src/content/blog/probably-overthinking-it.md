@@ -7,6 +7,7 @@ tags:
   - Math
 draft: false
 ---
+
 A recent [post on X](https://x.com/LeilaHormozi/status/2045498332928209202) has been getting a lot of attention, getting snarky comments as it has made its way onto various other platforms.
 
 The reason for its popularity came down to a mathematical claim about success:
@@ -19,7 +20,8 @@ Similarly, if we want to know chance of at least one success if each attempt has
 
 $$
 
-\text{P(at least one success)} = 1 - \text{P(all fail)} = 1 - \left(\frac{99}{100}\right)^{100} \approx 63%
+\text{P(at least one success)} = 1 - \text{P(all fail)} = 1 - \left(\frac{99}{100}\right)^{100} \approx 63\%
+
 
 $$
 
@@ -49,6 +51,7 @@ $$
 
 1 - \left(1 - \frac{1}{x}\right)^{n} \approx \frac{n}{x}
 
+
 $$
 
 when x is small relative to n.)
@@ -57,18 +60,18 @@ It is of course misleading to suggest that 100 attempts would guarantee success 
 
 As J.M. Keynes wrote [in 1937](https://www.acsu.buffalo.edu/~zarembka/Keynes37.htm):
 
-*By ‘uncertain’ knowledge, let me explain, I do not mean merely to distinguish what is known for certain from what is only probable. The game of roulette is not subject, in this sense, to uncertainty; nor is the prospect of a Victory bond being drawn. Or, again, the expectation of life is only slightly uncertain. Even the weather is only moderately uncertain.*
+_By ‘uncertain’ knowledge, let me explain, I do not mean merely to distinguish what is known for certain from what is only probable. The game of roulette is not subject, in this sense, to uncertainty; nor is the prospect of a Victory bond being drawn. Or, again, the expectation of life is only slightly uncertain. Even the weather is only moderately uncertain._
 
-*The sense in which I am using the term is that in which the prospect of a European war is uncertain, or the price of copper and the rate of interest twenty years hence, or the obsolescence of a new invention, or the position of private wealth-owners in the social system in 1970. About these matters there is no scientific basis on which to form any calculable probability whatever. We simply do not know.*
+_The sense in which I am using the term is that in which the prospect of a European war is uncertain, or the price of copper and the rate of interest twenty years hence, or the obsolescence of a new invention, or the position of private wealth-owners in the social system in 1970. About these matters there is no scientific basis on which to form any calculable probability whatever. We simply do not know._
 
 This idea would later become known as ‘radical uncertainty’, where the concepts honed on dice games and roulette would break down. But this wasn’t the main concern about the post on X. Instead, here are some of the comments below the post’s flawed calculation:
 
-*“that’s girl math”*
+_“that’s girl math”_
 
-*“With your understanding of math, your probability of success is near zero”*
+_“With your understanding of math, your probability of success is near zero”_
 
-*“Your math ain’t mathing ”*
+_“Your math ain’t mathing ”_
 
-What is the benefit of such comments? 
+What is the benefit of such comments?
 
 To inform? To persuade? Or to signal merely that you know some high school probability – but perhaps not enough to realise that it’s not really a problem that probability can solve.

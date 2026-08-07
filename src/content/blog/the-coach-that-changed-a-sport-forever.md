@@ -5,6 +5,7 @@ pubDate: 2026-07-17T17:15:00.000-07:00
 tags: []
 draft: false
 ---
+
 ![](/assets/uploads/images.jpeg)
 
 There's a certain look you start to recognize if you watch enough UFC. It arrives on a fighter's face somewhere around the third round, right as he understands that the man pinning him to the canvas is never, ever going to let him up. It isn't quite panic. It's arithmetic. He's run the numbers, and the numbers say he lost this a long time ago.
@@ -15,11 +16,11 @@ Abdulmanap Nurmagomedov.
 
 This is the story of how a man who never fought a single professional fight built the most feared fighting style on Earth, then quietly took over the UFC without ever setting foot in the cage.
 
-He came from Sildi, a village so small and so high up that "hard" isn't a lifestyle choice there, it's just the temperature. Born in 1962, Abdulmanap did what the mountains asked of him. Serving in the Russian army, he wrestled, masted judo, and then sambo, the most brutal grappling art built for soldiers. Abdulmanap wasn't in the business of building fighters. He was in the business of building *men*, and fighting was just the tool he happened to have on hand.
+He came from Sildi, a village so small and so high up that "hard" isn't a lifestyle choice there, it's just the temperature. Born in 1962, Abdulmanap did what the mountains asked of him. Serving in the Russian army, he wrestled, masted judo, and then sambo, the most brutal grappling art built for soldiers. Abdulmanap wasn't in the business of building fighters. He was in the business of building _men_, and fighting was just the tool he happened to have on hand.
 
 His rule, the one everybody still repeats, had nothing to do with wrestling at all: if you came to his gym and you didn't pray, you started praying. Faith first. Respect first. And that respect wasn't a soft, greeting-card kind of thing. It was the load-bearing wall of the entire operation. Respect for elders. Respect for the room. Respect for the man across from you, even as you took him apart. Discipline was rule number one, and everyone who trained under him will tell you the same. This is what set him apart from the deep funded college programs in America and ultimately what I believe led him to drive the grappling era in the UFC.
 
-That's why the thing Khabib says he's proudest of isn't a single title. It's the hundreds of young men who walked into his father's gym with nothing to steer by and walked out with a spine. Lost kids came in; hungry champions came out. 
+That's why the thing Khabib says he's proudest of isn't a single title. It's the hundreds of young men who walked into his father's gym with nothing to steer by and walked out with a spine. Lost kids came in; hungry champions came out.
 
 Russia eventually gave Abdulmanap an official title: Honored Coach. In 2019 it named him the most successful combat sambo coach in the country's history. Here's where it stops being one man's story. Because Abdulmanap didn't raise a fighter. He raised a \*bloodline\* of them, and he pressed the same character into every single one, like a stamp into wax.
 
