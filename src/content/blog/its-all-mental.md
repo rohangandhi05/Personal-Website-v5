@@ -1,7 +1,7 @@
 ---
 title: Its All Mental
 description: mental
-pubDate: 2026-09-03T23:11:00.000-07:00
+pubDate: 2026-09-05T12:45:00.000-07:00
 tags: []
 draft: false
 ---
