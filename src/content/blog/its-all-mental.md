@@ -1,23 +1,17 @@
 ---
 title: Its All Mental
 description: mental
-pubDate: 2026-09-05T12:45:00.000-07:00
+pubDate: 2026-09-22T16:02:00.000-07:00
 tags: []
 draft: false
 ---
 ![](/assets/uploads/5e1c3038b41adde7840e1d62b3e1ed5f-f02574b5.jpeg)
 
-
-
 There is a distance at which the body's contribution to performance asymptotes toward zero.
 
-
-
-Most people don't register this until they've either run something absurdly long themselves or watched someone else do it up close. Training, gear, VO2 max: all of that matters early. But somewhere past the halfway point of a real ultramarathon, the physical side quietly runs out of explanatory power, and something else takes over the job of moving the person forward. Call it will, call it identity, call it a narrower kind of stubbornness.
+Most people don't register this until they've either run something absurdly long themselves or watched someone else do it up close. Training, gear, VO2 max: all of that matters early. But somewhere past the halfway point of a real ultramarathon, the physical side quietly runs out of explanatory power, and something else takes over the job of moving the person forward. Call it will, identity, or some narrower kind of stubbornness.
 
 This is the pattern I keep coming back to with ultramarathons, and with endurance sports more broadly: the further a discipline pushes past its ordinary duration, the less the outcome is decided by the body. Physiology carries you through the opening hours. After that you're negotiating with your own mind, and the sport turns into an extended philosophical argument you're having with yourself, in the dark, at altitude, on very little sleep.
-
-
 
 Take Badwater 135, which runs through Death Valley in July, where the asphalt gets hot enough to soften the soles of running shoes and the air temperature sits somewhere north of 48 degrees. There is no version of that race where the body is the primary actor. The body is just the vehicle being argued with for 40+ hours while the mind decides whether your will to finish the race is greater than your will to survive.
 
@@ -27,7 +21,7 @@ There's a fairly precise way to locate the moment the body stops accounting for 
 
 Courtney Dauwalter has become something like a folk theorist of suffering, mostly because of how candidly she talks about wanting it. She describes deliberately entering what she calls the "pain cave," the point where the body can no longer sustain effort and the mind takes over, and trying to expand that threshold a little more each time. This reframes the whole proposition. Suffering isn't an obstacle standing between the athlete and the goal. In ultra-distance events, it's closer to the raw material the goal is built from. You don't train to avoid the wall, you train to have a more useful conversation with it once it shows up.
 
-David Goggins runs on a different psychological fuel than Dauwalter's curiosity about the cave. His version is closer to grievance converted into propulsion, pain treated as proof he's outworking some earlier, weaker version of himself. Same threshold, different reason for walking into it.
+David Goggins runs on a different psychological fuel than Dauwalter's curiosity about the cave. His version is closer to grievance thats converted into fuel, pain treated as proof he's outworking some earlier, weaker version of himself. Same threshold, different reason for walking into it.
 
 Some formats push the absurdity further by removing the finish line entirely. The last one standing style of race, the "backyard ultra" format, has runners complete a loop of a fixed distance every hour, on the hour, forever, until only one person is left who can still start the next lap. There is no course record to chase and no distance to plan around. The race ends when everyone else's mind gives out before yours does. It's less a test of endurance than a test of how long you can keep re-volunteering for the next hour of discomfort, which in my opinion is the purest version of the whole mental argument, stripped of every other variable. 
 
