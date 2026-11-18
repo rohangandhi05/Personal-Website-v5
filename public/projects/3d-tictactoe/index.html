@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en" data-type="software" data-radius="soft" data-buttons="arrow" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3D Tic-Tac-Toe: a Rust game by Rohan Gandhi</title>
+<meta name="description" content="Play Rohan Gandhi's 3D tic-tac-toe in the browser: a 3×3×3 board with 49 winning lines against a Monte Carlo AI, ported from the original Rust and Bevy game.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="3D Tic-Tac-Toe: a Rust game by Rohan Gandhi">
+<meta property="og:description" content="27 cubes, 49 ways to win, and an AI that plays out 2,000 games before every move. Playable in the page.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0e1116">
+<meta name="site-kind" content="gaming">
+<meta name="page-type" content="software">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&family=Inter:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/system.css">
+<link rel="stylesheet" href="../assets/ui/cards.css">
+<link rel="stylesheet" href="../assets/motion/motion.css">
+<style>
+:root {
+  --p-bg: #0e1116; --p-surface: #171b22; --p-ink: #e8ebf0; --p-muted: #8b93a1;
+  --p-accent: #3ccf5a; --p-accent-ink: #07130a; --p-action: #3ccf5a; --p-action-ink: #07130a;
+  --p-inv-bg: #eef1f4; --p-inv-surface: #e1e6ec; --p-inv-ink: #11151b; --p-inv-muted: #5a6270;
+  --p-inv-accent: #1f8a37; --p-inv-accent-ink: #ffffff; --p-inv-action: #11151b; --p-inv-action-ink: #ffffff;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-text: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+}
+</style>
+<link rel="stylesheet" href="../shared/case.css?v=2">
+<link rel="stylesheet" href="page.css?v=1">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+<!-- type: gaming (a project case study for interviewers; the game itself is the hero)
+     look: the original's dark scene, its green (you) and red (AI) cubes, a mono face for the engine talk.
+     The demo is a JavaScript port of the Rust rules and AI drawn with three.js (game.js); #lines draws the
+     49 winning lines; #arch plays the Bevy systems a move passes through. -->
+
+<header class="nav nav--split">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#top">Play</a></div>
+      <div class="nav__item"><a class="nav__link" href="#how">The AI</a></div>
+      <div class="nav__item"><a class="nav__link" href="#arch">Architecture</a></div>
+      <div class="nav__item"><a class="nav__link" href="#details">Problems</a></div>
+    </nav>
+    <a class="nav__logo" href="#top">3D Tic-Tac-Toe</a>
+    <div class="nav__actions">
+      <a class="btn btn--secondary" href="https://github.com/rohangandhi05/3DTicTacToe">View the code</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero ttt-hero" data-enter aria-labelledby="hero-h">
+    <div class="ttt-stage" data-game>
+      <p class="ttt-hint" data-hint>Drag to turn · <span class="ttt-hint__click">click</span><span class="ttt-hint__tap">tap</span> an empty cube</p>
+    </div>
+    <div class="wrap ttt-ui">
+      <div class="ttt-copy">
+        <h1 id="hero-h">3D tic&#8209;tac&#8209;toe against a Monte Carlo AI</h1>
+        <p class="t-lead">A game I built in Rust with the Bevy engine: 27 cubes, 49 ways to win. This is the same game in your browser, with the AI ported line for line. You're green. Get three in a row in any direction.</p>
+        <ul class="hero__facts" aria-label="Project facts">
+          <li>Rust</li><li>Bevy</li><li>Monte Carlo AI</li><li>49 winning lines</li>
+        </ul>
+      </div>
+      <aside class="ttt-side" aria-label="Game controls">
+        <div class="ttt-status">
+          <span class="ttt-status__dot" aria-hidden="true"></span>
+          <span class="ttt-status__text" data-status data-tone="human" aria-live="polite">Loading the board…</span>
+          <small data-moves>0 of 27 cubes placed</small>
+        </div>
+        <div class="ttt-btns">
+          <button class="btn btn--primary" type="button" data-new>New game</button>
+          <button class="btn btn--secondary" type="button" data-ai-first>Let the AI start</button>
+        </div>
+        <div class="ai" data-analysis aria-live="polite"></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="section-head how__head">
+        <h2 id="how-h">How the AI picks a move: three checks, in order</h2>
+        <p>Every turn it runs the same three steps from <code>ai.rs</code>. The panel beside the board shows which one decided its last move.</p>
+      </div>
+      <ol class="how__steps">
+        <li>
+          <span class="how__n">01</span>
+          <h3>Win if it can</h3>
+          <p>If one empty cube completes an AI line, it plays there. No search needed.</p>
+<pre><code>if let Some(m) = self.find_winning_move(state, Player::AI) {
+    return Some(m);
+}</code></pre>
+        </li>
+        <li>
+          <span class="how__n">02</span>
+          <h3>Block if it must</h3>
+          <p>If you have two in a line and the third cube is empty, it takes that cube.</p>
+<pre><code>if let Some(m) = self.find_winning_move(state, Player::Human) {
+    return Some(m);
+}</code></pre>
+        </li>
+        <li>
+          <span class="how__n">03</span>
+          <h3>Play it out 2,000 times</h3>
+          <p>Otherwise it splits 2,000 playouts across the empty cubes. Each playout finishes the game with 70% sensible moves and 30% random ones. The best average result, plus a small bonus for central, corner and open-line cubes, wins.</p>
+<pre><code>let sims_per_move = self.simulations / empty.len() as u32;
+let final_score = avg_score + position_value;</code></pre>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="lines" aria-labelledby="lines-h">
+    <div class="wrap">
+      <div class="grid lines__grid">
+        <div class="span-5 section-head">
+          <h2 id="lines-h">49 ways to win on a 3×3×3 board</h2>
+          <p>Flat tic-tac-toe has 8 lines. Stack three boards and you get 27 straight lines along the axes, 18 diagonals across the faces, and 4 diagonals from corner to corner through the center cube.</p>
+          <p>The center sits on 13 of them, which is why both players want it first. <code>check_winner</code> tests all 49 after every move.</p>
+          <div class="lines__btns" role="group" aria-label="Which lines to show">
+            <button type="button" data-kind="all" aria-pressed="true">All 49</button>
+            <button type="button" data-kind="axis" aria-pressed="false">Straight 27</button>
+            <button type="button" data-kind="face" aria-pressed="false">Face diagonals 18</button>
+            <button type="button" data-kind="space" aria-pressed="false">Space diagonals 4</button>
+          </div>
+        </div>
+        <div class="span-6 start-7 lines__fig">
+          <svg data-lines viewBox="-150 -130 300 260" role="img" aria-label="The 27 cells of the cube in isometric view with the selected winning lines drawn between them"></svg>
+          <p class="lines__count" aria-live="polite"><b data-count>49</b> lines shown</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="arch" aria-labelledby="arch-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-5 section-head">
+          <h2 id="arch-h">Architecture: Bevy systems that run every frame</h2>
+          <p>Bevy is an entity-component-system engine. Each of the 27 cubes is an entity tagged with its x, y and z, and the game itself is one <code>GameState</code> resource. <code>main.rs</code> registers eleven systems that run every frame; these are the ones a move passes through.</p>
+          <a class="link" href="https://github.com/rohangandhi05/3DTicTacToe">Read the source on GitHub</a>
+        </div>
+        <div class="span-6 start-7 flow-panel">
+          <ol class="flow" data-flow aria-label="A move passes from handle_hover to handle_input to ai_move_system to the animation systems, and check_game_over updates the status">
+            <li class="flow__node" data-flow-step="0"><span class="flow__file">handle_hover</span><span class="flow__role">input</span><p>Casts a ray from the cursor and tags the nearest empty cube it hits.</p></li>
+            <li class="flow__msg" data-flow-step="1"><code>commands.entity(cube).insert(HoveredCube)</code></li>
+            <li class="flow__node" data-flow-step="1"><span class="flow__file">handle_input</span><span class="flow__role">input</span><p>On a left click, plays the hovered cube for you.</p></li>
+            <li class="flow__msg" data-flow-step="2"><code>game_state.make_move(x, y, z)</code></li>
+            <li class="flow__node" data-flow-step="2"><span class="flow__file">ai_move_system</span><span class="flow__role">AI</span><p>Waits 1.5 s, asks the AI for a move, and plays it.</p></li>
+            <li class="flow__msg" data-flow-step="3"><code>last_move = Some((x, y, z))</code></li>
+            <li class="flow__node" data-flow-step="3"><span class="flow__file">animate_moves</span><span class="flow__role">rendering</span><p>Grows the new cube from 0.1 to full size while it spins twice.</p></li>
+            <li class="flow__msg flow__msg--back" data-flow-step="4"><code>check_game_over → "Your turn!" or "AI wins!"</code><span>the status text and colour update</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="details" aria-labelledby="details-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="details-h">3 problems I solved to make it playable</h2>
+      </div>
+      <div class="grid">
+        <article class="card card--row card--open span-4">
+          <h3>Clicking a cube you can barely see</h3>
+          <p>The center cube is boxed in on every side, and from any angle most cubes sit behind others. The click has to land on the one you mean.</p>
+          <div class="panel det__panel">
+            <svg class="mini-ray" viewBox="0 0 240 160" role="img" aria-label="A ray from the cursor passing through the gap between front cubes to an inner cube">
+              <g fill="none" stroke="#5b6472" stroke-width="2"><rect x="40" y="30" width="34" height="34" rx="4"/><rect x="40" y="96" width="34" height="34" rx="4"/><rect x="104" y="30" width="34" height="34" rx="4" stroke="#33b333" fill="rgba(51,179,51,.25)"/><rect x="168" y="30" width="34" height="34" rx="4"/><rect x="168" y="96" width="34" height="34" rx="4"/></g>
+              <rect x="104" y="96" width="34" height="34" rx="4" fill="rgba(217,222,231,.55)" stroke="#d9dee7" stroke-width="2"/>
+              <path d="M8 150 L121 113" stroke="#f2c94c" stroke-width="2" stroke-dasharray="5 5"/>
+              <circle cx="8" cy="150" r="5" fill="#f2c94c"/>
+            </svg>
+          </div>
+          <button class="det__toggle" type="button" aria-expanded="false" aria-controls="det-1">How I solved it <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="det__more" id="det-1">
+            <div class="det__drop">
+              <p class="det__k">The problem</p>
+              <p>In a 3×3×3 grid most cubes are behind other cubes from any angle. Picking by screen position would grab the front cube, and a filled cube in front would make an empty one behind it unreachable.</p>
+              <p class="det__k">How I solved it</p>
+              <ul>
+                <li>Every frame, the cursor becomes a ray through the camera, and the ray is tested against each cube's box with a slab test I wrote for it.</li>
+                <li>Only empty cubes are tested, so filled cubes never block the one you're aiming for, and the nearest hit wins.</li>
+                <li>Cubes are 0.8 wide on a 2.0 grid, so there are gaps to aim through to the inner ones, and the camera orbits to any angle.</li>
+                <li>A click only plays the cube that's lit, so what you see highlighted is what you get.</li>
+              </ul>
+<pre><code>let mut tmin = (box_min.x - ray_origin.x) / ray_dir.x;
+let mut tmax = (box_max.x - ray_origin.x) / ray_dir.x;
+// same for y and z, then keep the overlap</code></pre>
+              <p class="det__k">The result</p>
+              <p>Every one of the 27 cubes can be picked, including the center.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card card--row card--open span-4">
+          <h3>Random playouts miss the obvious</h3>
+          <p>Pure random games treat a one-move win like any other move. With 27 options there are only 74 playouts per cube.</p>
+          <div class="panel det__panel">
+            <ol class="mini-steps" aria-label="The order the AI checks: win, block, then search">
+              <li><b>1</b>Can I win now?<i>play it</i></li>
+              <li><b>2</b>Can they win now?<i>block it</i></li>
+              <li><b>3</b>Otherwise<i>2,000 playouts</i></li>
+            </ol>
+          </div>
+          <button class="det__toggle" type="button" aria-expanded="false" aria-controls="det-2">How I solved it <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="det__more" id="det-2">
+            <div class="det__drop">
+              <p class="det__k">The problem</p>
+              <p>A Monte Carlo AI is only as good as its playouts. With fully random games, a cube that wins on the spot and a cube that loses next turn can average out the same, and the AI would let you finish a line.</p>
+              <p class="det__k">How I solved it</p>
+              <ul>
+                <li>Before any search, it checks every empty cube for an immediate win, then for a cube that blocks yours.</li>
+                <li>Inside playouts, 70% of moves use the same win-then-block rule and then pick among the three most central or corner cubes; 30% stay random so games vary.</li>
+                <li>Each candidate's average result gets a small position bonus: closeness to the center, corners, and how many lines through it you haven't blocked.</li>
+              </ul>
+<pre><code>let chosen = if rng.gen_bool(0.7) {
+    self.choose_smart_move(&amp;state, player, &amp;moves)
+} else {
+    /* 30%: any empty cube, picked at random */
+};</code></pre>
+              <p class="det__k">The result</p>
+              <p>It never misses a one-move win or block, and it answers in milliseconds.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card card--row card--open span-4">
+          <h3>Seeing where the AI just played</h3>
+          <p>A new cube among 26 others is easy to miss, and an instant reply feels like nothing happened.</p>
+          <div class="panel det__panel">
+            <div class="mini-pop" aria-hidden="true"><i></i><i></i><i class="is-new"></i><i></i></div>
+          </div>
+          <button class="det__toggle" type="button" aria-expanded="false" aria-controls="det-3">How I solved it <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="det__more" id="det-3">
+            <div class="det__drop">
+              <p class="det__k">The problem</p>
+              <p>The AI decides in a few milliseconds, so its cube would appear the same frame you clicked. In 3D, a cube changing colour somewhere in the grid doesn't catch the eye.</p>
+              <p class="det__k">How I solved it</p>
+              <ul>
+                <li>The AI system waits 1.5 s, while the status reads "Smart AI calculating…".</li>
+                <li>Each placed cube starts at 0.1 scale and grows back over half a second with an ease-out curve, spinning twice and landing square.</li>
+                <li>Hover highlights only show on your turn, and every new game gets a randomly placed, slightly tinted light so the board doesn't look the same twice.</li>
+              </ul>
+<pre><code>let eased = 1.0 - (1.0 - progress).powi(3);
+let spin = progress * 2.0 * TAU * (1.0 - eased);
+transform.rotation = Quat::from_rotation_y(spin);</code></pre>
+              <p class="det__k">The result</p>
+              <p>You can see every move land, from any angle.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="run" aria-labelledby="run-h">
+    <div class="wrap">
+      <div class="grid run__grid">
+        <div class="span-5 section-head">
+          <h2 id="run-h">Run the original on your machine</h2>
+          <p>The Rust version runs natively on macOS, Windows and Linux with Rust installed.</p>
+<pre class="run__code"><code>git clone https://github.com/rohangandhi05/3DTicTacToe
+cd 3DTicTacToe
+cargo run --release</code></pre>
+          <p class="run__note">This page's demo is a JavaScript and three.js port of the same rules and AI. It turns by dragging instead of WASD, and adds the gold winning line and the AI-first option.</p>
+        </div>
+        <dl class="span-6 start-7 spec">
+          <div><dt>Role</dt><dd>Built solo: game logic, AI, rendering and input</dd></div>
+          <div><dt>Stack</dt><dd class="spec__stack">
+            <span><img class="ic-inv" src="icons/rust.svg" alt="" width="18" height="18">Rust</span>
+            <span>Bevy 0.14</span>
+            <span>rand</span>
+          </dd></div>
+          <div><dt>AI</dt><dd>Win and block checks, then 2,000 Monte Carlo playouts per move</dd></div>
+          <div><dt>Controls</dt><dd>Left click to place · WASD or right-drag to orbit · R to reset</dd></div>
+          <div><dt>Demo</dt><dd class="spec__stack"><span><img class="ic-inv" src="icons/threejs.svg" alt="" width="18" height="18">three.js</span><span>JavaScript port</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--word">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Read the code behind the game</h2><p class="t-lead">The rules, the AI and the Bevy rendering are on GitHub.</p></div>
+        <a class="btn btn--primary" href="https://github.com/rohangandhi05/3DTicTacToe">View on GitHub<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <p class="close__word" aria-hidden="true">Tic-Tac-Toe³</p>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top">3D Tic-Tac-Toe</a>
+          <p class="footer__lede">A personal project by Rohan Gandhi.</p>
+        </div>
+        <div class="span-2 start-7 footer__col"><h3>Page</h3><ul><li><a href="#top">Play</a></li><li><a href="#how">The AI</a></li><li><a href="#arch">Architecture</a></li><li><a href="#details">Problems</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Project</h3><ul><li><a href="https://github.com/rohangandhi05/3DTicTacToe">Source code</a></li><li><a href="https://github.com/rohangandhi05/3DTicTacToe#readme">README</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Rohan</h3><ul><li><a href="/">Home</a></li><li><a href="/projects">Projects</a></li><li><a href="/blog">Blog</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Rohan Gandhi</span>
+        <div class="socials"></div>
+        <span class="credits">The demo uses three.js (MIT). The original game uses Bevy (MIT / Apache-2.0). Product names are trademarks of their owners.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="actionbar" aria-label="Quick actions">
+  <a class="btn btn--primary" href="https://github.com/rohangandhi05/3DTicTacToe">View the code</a>
+</nav>
+
+<script type="module" src="../assets/system.js"></script>
+<script type="module" src="../assets/motion/motion.js"></script>
+<script src="../shared/case.js?v=1"></script>
+<script type="module" src="game.js?v=1"></script>
+</body>
+</html>
