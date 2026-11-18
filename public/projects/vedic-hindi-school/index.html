@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en" data-type="software" data-radius="soft" data-buttons="arrow" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vedic Hindi School app: a project by Rohan Gandhi</title>
+<meta name="description" content="How Rohan Gandhi rebuilt the way a Sunday Hindi school runs: a React Native app for families and teachers, a web dashboard for the office, and one Firebase backend. 300+ installs, 270+ live users.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vedic Hindi School app: a project by Rohan Gandhi">
+<meta property="og:description" content="A phone app for families and teachers and a dashboard for the office, on one Firebase backend, built for the Hindi school I went to as a kid.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#fbf6f0">
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Instrument+Sans:wght@400..600&family=DM+Mono:wght@400;500&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/system.css">
+<link rel="stylesheet" href="../assets/ui/cards.css">
+<link rel="stylesheet" href="../assets/motion/motion.css">
+<style>
+:root {
+  --p-bg: #fbf6f0; --p-surface: #f3e8dc; --p-ink: #2a1a12; --p-muted: #7a6458;
+  --p-accent: #b5441c; --p-accent-ink: #ffffff; --p-action: #b5441c; --p-action-ink: #ffffff;
+  --p-inv-bg: #2a1610; --p-inv-surface: #3a2118; --p-inv-ink: #fbf1e7; --p-inv-muted: #c7ab9b;
+  --p-inv-accent: #f08a5d; --p-inv-accent-ink: #2a1610; --p-inv-action: #f08a5d; --p-inv-action-ink: #2a1610;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-text: "Instrument Sans", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-deva: "Tiro Devanagari Hindi", "Noto Serif Devanagari", serif;
+  --display-weight: 500;
+  --display-tracking: -0.02em;
+  --display-tracking-xl: -0.03em;
+}
+</style>
+<link rel="stylesheet" href="../shared/case.css?v=1">
+<link rel="stylesheet" href="page.css?v=1">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="../assets/moments/moments.js">
+<link rel="modulepreload" href="../assets/moments/lib.js">
+<link rel="modulepreload" href="../assets/moments/counter-rolls/moment.js">
+</head>
+<body>
+<!-- type: software (a project case study for interviewers)
+     look: the app's own terracotta and cream, a serif display (Fraunces) for a school that teaches
+     reading, and Devanagari set large as the one type moment.
+     moments: counter-rolls (#numbers, the real install and user counts). Motion explains the system:
+     #week lights each day of the school week as you reach it, #notify plays the push-notification path. -->
+
+<header class="nav nav--split">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#story">Story</a></div>
+      <div class="nav__item"><a class="nav__link" href="#week">How it works</a></div>
+      <div class="nav__item"><a class="nav__link" href="#notify">Architecture</a></div>
+      <div class="nav__item"><a class="nav__link" href="#details">Problems</a></div>
+    </nav>
+    <a class="nav__logo" href="#top">Vedic Hindi School</a>
+    <div class="nav__actions">
+      <a class="btn btn--secondary" href="https://github.com/rohangandhi05/SchoolApp">View the code</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--school" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="grid hero-text hero-split">
+      <div class="hero-copy span-5">
+        <h1 id="hero-h">An app that runs the Hindi school I went to as a kid</h1>
+        <p class="hero__lead t-lead">A phone app for families and teachers, a web dashboard for the office, and one Firebase backend behind both. It replaced systems more than 20 years old, and the school's families use it every week.</p>
+        <div class="btn-row"><a class="btn btn--primary" href="#week">See how a week runs<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="https://github.com/rohangandhi05/SchoolApp">View the code</a></div>
+        <ul class="hero__facts" aria-label="Project facts">
+          <li>React Native</li><li>Firebase</li><li>iOS + Android</li><li>300+ installs</li>
+        </ul>
+      </div>
+      <div class="hero-visual hero__art span-7 start-6" role="img" aria-label="Three screens from the app: a teacher's home screen in the middle, the school calendar and the attendance history behind it, and a notification saying this week's attendance was published">
+        <span class="hero__deva" aria-hidden="true">हिंदी</span>
+        <div class="hero__phones" aria-hidden="true">
+          <div class="phone hero__phone hero__phone--l"><img src="shots/calendar.png" alt="" width="600" height="1298"></div>
+          <div class="phone hero__phone hero__phone--r"><img src="shots/teacher-attendance.png" alt="" width="600" height="1298"></div>
+          <div class="phone hero__phone hero__phone--c"><img src="shots/teacher-home.png" alt="" width="600" height="1298"></div>
+        </div>
+        <div class="push hero__push" aria-hidden="true">
+          <span class="push__icon">VH</span>
+          <span class="push__body"><b>Attendance published</b><span>Level 2 · Matras: 7 of 8 present</span></span>
+          <span class="push__time">now</span>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section" id="story" aria-labelledby="story-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-5 section-head story__head">
+          <h2 id="story-h">Why I built it: going back to my old school</h2>
+          <p>As a kid I learned to read and speak Hindi at a school that meets on Sundays. Years later I went back to volunteer, and the way it ran hadn't changed: its admin setup and digital systems were more than 20 years old.</p>
+          <p>So I rebuilt them. Families follow their child's class from their phone, teachers take attendance and post updates in the app, and the office runs enrolment, classes and the calendar from one dashboard.</p>
+        </div>
+        <dl class="span-6 start-7 spec">
+          <div><dt>Role</dt><dd>Designed and built the phone app, the admin site and the backend</dd></div>
+          <div><dt>Users</dt><dd>Families, teachers and the school office</dd></div>
+          <div><dt>Platforms</dt><dd>iOS and Android app; web dashboard for admins</dd></div>
+          <div><dt>Stack</dt><dd class="spec__stack">
+            <span><img src="icons/react.svg" alt="" width="18" height="18">React Native</span>
+            <span><img src="icons/expo-icon.svg" alt="" width="18" height="18">Expo</span>
+            <span><img src="icons/typescript-icon.svg" alt="" width="18" height="18">TypeScript</span>
+            <span><img src="icons/firebase-icon.svg" alt="" width="18" height="18">Firebase</span>
+            <span><img src="icons/google-cloud-functions.svg" alt="" width="18" height="18">Cloud Functions</span>
+            <span><img src="icons/tailwindcss-icon.svg" alt="" width="18" height="18">Tailwind</span>
+          </dd></div>
+          <div><dt>Backend</dt><dd>Firebase Auth, Firestore, Cloud Storage and Cloud Functions, shared by both apps</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="numbers" aria-labelledby="numbers-h">
+    <div class="wrap">
+      <div class="section-head numbers__head">
+        <h2 id="numbers-h">Live at the school, used every Sunday</h2>
+      </div>
+      <div class="numbers" data-moment="counter-rolls">
+        <div><p class="t-stat numbers__fig">300+</p><p class="numbers__label">installs across iOS and Android</p></div>
+        <div><p class="t-stat numbers__fig">270+</p><p class="numbers__label">live users: families, teachers and the office</p></div>
+        <div><p class="t-stat numbers__fig">3</p><p class="numbers__label">roles, each with its own view and its own permissions</p></div>
+        <div><p class="t-stat numbers__fig">1</p><p class="numbers__label">Firebase backend behind the app and the dashboard</p></div>
+      </div>
+      <p class="numbers__deva" aria-hidden="true">पढ़ना · लिखना · बोलना</p>
+    </div>
+  </section>
+
+  <section class="section" id="week" aria-labelledby="week-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-4 week__rail">
+          <div class="section-head">
+            <h2 id="week-h">How it works: one week at the school</h2>
+            <p>Four moments in a school week, and the screen each one happens on.</p>
+          </div>
+          <ol class="week__steps" aria-label="The four steps">
+            <li><a href="#week-1" data-week-link="1"><span>01</span>Before term: the office hands out IDs</a></li>
+            <li><a href="#week-2" data-week-link="2"><span>02</span>A family signs up</a></li>
+            <li><a href="#week-3" data-week-link="3"><span>03</span>Sunday morning: attendance</a></li>
+            <li><a href="#week-4" data-week-link="4"><span>04</span>During the week: updates</a></li>
+          </ol>
+        </div>
+        <div class="span-7 start-6 week__body">
+          <article class="week__step" id="week-1" data-week="1">
+            <p class="week__when">Before term</p>
+            <h3>The office uploads the class list and gets back an ID for everyone</h3>
+            <p>There's no open sign-up. The admin uploads the roster as a spreadsheet. The dashboard checks every row, sets aside the ones it can't use (a blank name, a role that isn't student or teacher), and returns a CSV with an 8-digit ID for each person, checked so no two repeat.</p>
+            <div class="week__shots week__shots--admin">
+              <div class="shot-browser"><div class="shot-browser__bar"><i></i><i></i><i></i><span>admin · Bulk Import</span></div><img src="shots/admin-bulk-review.png" alt="Bulk import review: four rows ready, a missing name and an invalid role flagged and skipped" width="1400" height="850" loading="lazy"></div>
+              <div class="shot-browser week__shot-over"><div class="shot-browser__bar"><i></i><i></i><i></i><span>admin · IDs generated</span></div><img src="shots/admin-bulk-ids.png" alt="The generated IDs, ready to download as a CSV" width="1400" height="850" loading="lazy"></div>
+            </div>
+          </article>
+          <article class="week__step" id="week-2" data-week="2">
+            <p class="week__when">Sign-up</p>
+            <h3>A parent enters the ID, and the app knows who they are</h3>
+            <p>The app checks the ID exists and hasn't been used, works out whether it belongs to a student or a teacher, and shows the matching form. A student's account takes the parent's email and phone, so the family shares one login. Each ID works once, and nobody can sign up as an admin.</p>
+            <div class="week__shots week__shots--phones">
+              <div class="phone"><img src="shots/register-id.png" alt="Enter your school ID screen with an 8-digit code typed in" width="600" height="1298" loading="lazy"></div>
+              <div class="phone"><img src="shots/register-form.png" alt="Student registration form asking for the parent's contact details" width="600" height="1298" loading="lazy"></div>
+            </div>
+          </article>
+          <article class="week__step" id="week-3" data-week="3">
+            <p class="week__when">Sunday, 10:00</p>
+            <h3>The teacher marks the roster, and families see it right away</h3>
+            <p>Present or absent for each student, or everyone at once. Publish stays locked until every student has a mark, so a half-taken register never goes out. The teacher can still fix a mark later that day, and past weeks stay in the history.</p>
+            <div class="week__shots week__shots--one">
+              <div class="phone"><img src="shots/teacher-take-attendance.png" alt="Taking attendance: 5 of 8 marked, Publish Attendance disabled until all 8 are marked" width="600" height="1298" loading="lazy"></div>
+              <ul class="week__notes" aria-label="What the screen enforces">
+                <li><b>5 of 8 marked</b> A progress bar shows who's left.</li>
+                <li><b>Publish locked</b> Every student needs a mark first.</li>
+                <li><b>Same-day fixes</b> A wrong tap can be corrected after publishing.</li>
+              </ul>
+            </div>
+          </article>
+          <article class="week__step" id="week-4" data-week="4">
+            <p class="week__when">Monday to Saturday</p>
+            <h3>Posts, events and worksheets reach the right families</h3>
+            <p>Teachers post to the whole school or only their class. Every new post, calendar event and uploaded worksheet sends a push notification, and a class post only reaches that class's families.</p>
+            <div class="week__shots week__shots--one">
+              <div class="phone"><img src="shots/teacher-post.png" alt="Writing an announcement addressed to one class, Level 2 Matras" width="600" height="1298" loading="lazy"></div>
+              <div class="week__pushes" aria-label="The notifications it sends">
+                <div class="push"><span class="push__icon">VH</span><span class="push__body"><b>Bring your workbook on Sunday</b><span>Level 2 · Matras</span></span><span class="push__time">now</span></div>
+                <div class="push"><span class="push__icon">VH</span><span class="push__body"><b>New event: Hindi spelling bee</b><span>Dec 6 · 11:00 AM · Main hall</span></span><span class="push__time">2h</span></div>
+                <div class="push"><span class="push__icon">VH</span><span class="push__body"><b>New worksheet uploaded</b><span>Unit 3 matras practice (PDF)</span></span><span class="push__time">1d</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="access" aria-labelledby="access-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-4 section-head">
+          <h2 id="access-h">Who can see what, enforced on the server</h2>
+          <p>Every permission lives in <code>firestore.rules</code>, which Firebase checks on its servers for every read and write. A modified app can't read another class's attendance or make itself an admin.</p>
+          <p class="access__hint">Pick a role to see its column.</p>
+          <div class="access__roles" role="group" aria-label="Highlight a role">
+            <button type="button" data-role="1" aria-pressed="true">Family</button>
+            <button type="button" data-role="2" aria-pressed="false">Teacher</button>
+            <button type="button" data-role="3" aria-pressed="false">Admin</button>
+          </div>
+        </div>
+        <div class="span-7 start-6 access__wrap">
+          <table class="access" data-role="1">
+            <caption class="visually-hidden">Read and write permissions for families, teachers and admins, from firestore.rules</caption>
+            <thead><tr><th scope="col">Data</th><th scope="col">Family</th><th scope="col">Teacher</th><th scope="col">Admin</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">School-wide announcements</th><td>read</td><td>read + post</td><td class="is-all">everything</td></tr>
+              <tr><th scope="row">Class announcements</th><td>read, own class</td><td>post, own class</td><td class="is-all">everything</td></tr>
+              <tr><th scope="row">Attendance</th><td>read, own class</td><td>take, own class</td><td class="is-all">everything</td></tr>
+              <tr><th scope="row">Classes, calendar, PDFs</th><td>read</td><td>read</td><td class="is-all">everything</td></tr>
+              <tr><th scope="row">User profiles</th><td>own only</td><td>read everyone</td><td class="is-all">everything</td></tr>
+              <tr><th scope="row">Own role, ID, enrolment</th><td class="is-lock">locked</td><td class="is-lock">locked</td><td>can change</td></tr>
+              <tr><th scope="row">Registration IDs</th><td>claim their own</td><td>claim their own</td><td>issue + revoke</td></tr>
+              <tr><th scope="row">Push notification jobs</th><td class="is-none">none</td><td>queue</td><td class="is-all">everything</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="notify" aria-labelledby="notify-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-5 section-head">
+          <h2 id="notify-h">Architecture: how a notification gets sent</h2>
+          <p>The apps never talk to the push service. They write a job into Firestore, and a Cloud Function does the sending: it works out who should hear about it, looks up their Expo push tokens and sends in batches.</p>
+          <p>Decoupling it this way means the admin site and the phone app send notifications the same way, and every send leaves a record of how many went out or why it failed.</p>
+          <a class="link" href="https://github.com/rohangandhi05/SchoolApp">Read the functions on GitHub</a>
+        </div>
+        <div class="span-6 start-7 flow-panel notify__panel">
+          <ol class="flow" data-flow aria-label="A teacher's post becomes an announcement document, a Cloud Function queues a notification job, a second function finds the class's families 30 at a time and sends through Expo, then records the count on the job">
+            <li class="flow__node" data-flow-step="0"><span class="flow__file">Phone app</span><span class="flow__role">A teacher posts to Level 2</span><p>The post is saved as an announcement with its scope and class.</p></li>
+            <li class="flow__msg" data-flow-step="1"><code>announcements.add({ title, body, scope: 'class', classId })</code></li>
+            <li class="flow__node" data-flow-step="1"><span class="flow__file">onCreate trigger</span><span class="flow__role">Cloud Function</span><p>Turns the new post into a job. The admin site writes jobs the same way for events and PDFs.</p></li>
+            <li class="flow__msg" data-flow-step="2"><code>notificationJobs.add({ type, targetType: 'class', classId, processed: false })</code></li>
+            <li class="flow__node" data-flow-step="2"><span class="flow__file">sendPushNotification</span><span class="flow__role">Cloud Function</span><p>Finds the class's students 30 at a time, the most one Firestore <code>in</code> query allows, and reads their Expo tokens.</p></li>
+            <li class="flow__msg" data-flow-step="3"><code>expo.chunkPushNotifications(messages)</code></li>
+            <li class="flow__node" data-flow-step="3"><span class="flow__file">Expo push service</span><span class="flow__role">iOS and Android</span><p>Delivers to each family's phone.</p></li>
+            <li class="flow__msg flow__msg--back" data-flow-step="4"><code>job.update({ processed: true, sentCount })</code><span>written back to the job, or the error if the send failed</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="details" aria-labelledby="details-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="details-h">3 problems I solved to keep a school's data safe</h2>
+      </div>
+      <div class="grid">
+        <article class="card card--row card--open span-4">
+          <h3>Sign-up had to stay closed</h3>
+          <p>Only enrolled families and staff should get in, and students are children. One-time IDs from the office decide who can register and as what.</p>
+          <div class="panel det__panel">
+            <div class="mini-id" role="img" aria-label="An ID being checked: 30495817, a student ID, not yet used">
+              <span class="mini-id__label">8-digit ID</span>
+              <span class="mini-id__field">30495817</span>
+              <span class="mini-id__ok"><i></i>Student ID · not yet used</span>
+            </div>
+          </div>
+          <button class="det__toggle" type="button" aria-expanded="false" aria-controls="det-1">How I solved it <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="det__more" id="det-1">
+            <div class="det__drop">
+              <p class="det__k">The problem</p>
+              <p>An open sign-up page would let anyone create an account and read class announcements. The school also needed every account tied to a real student or teacher on its roster, and a child's account reachable through a parent.</p>
+              <p class="det__k">How I solved it</p>
+              <ul>
+                <li>The office issues every ID: a random 8-digit number, checked against existing IDs so none repeat, stored in <code>pendingRegistrations</code> with its role.</li>
+                <li>The app reads that record to check the ID and pick the form: a student form asks for the parent's email and phone, a teacher form for their own.</li>
+                <li>Claiming is a rule, not app logic: an ID can only flip from unclaimed to claimed, and only by the user whose new profile carries the same ID and role.</li>
+                <li>Profiles can only be created as student or teacher, so no client can register an admin.</li>
+              </ul>
+<pre><code>allow update: if resource.data.claimed == false
+  &amp;&amp; request.resource.data.claimed == true
+  &amp;&amp; callerUser().data.uniqueId == resource.data.uniqueId
+  &amp;&amp; callerUser().data.role == resource.data.role;</code></pre>
+              <p class="det__k">The result</p>
+              <p>Every account maps to someone on the roster, each ID works once, and admins are only ever made by hand.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card card--row card--open span-4">
+          <h3>A modified app can't promote itself</h3>
+          <p>Users can edit their own profile, so the fields that carry access had to be locked on the server, not hidden in the app.</p>
+          <div class="panel det__panel">
+            <div class="mini-deny" role="img" aria-label="A write that tries to change a user's role to admin, rejected with permission denied">
+              <code>users/{uid}.update({ role: 'admin' })</code>
+              <span class="mini-deny__err"><i></i>PERMISSION_DENIED</span>
+              <code class="mini-deny__ok">users/{uid}.update({ phone })</code>
+              <span class="mini-deny__pass"><i></i>allowed</span>
+            </div>
+          </div>
+          <button class="det__toggle" type="button" aria-expanded="false" aria-controls="det-2">How I solved it <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="det__more" id="det-2">
+            <div class="det__drop">
+              <p class="det__k">The problem</p>
+              <p>Anything the app hides, a modified client can still send. If a profile update were trusted as-is, a family could change their role to teacher or admin, or add themselves to another class and read its attendance.</p>
+              <p class="det__k">How I solved it</p>
+              <ul>
+                <li>A user can update their own profile, but the rule compares the new document with the stored one and rejects any change to role, uid, school ID, email or creation date.</li>
+                <li>Class enrolment (<code>classIds</code>) and teaching assignments are locked the same way, so only an admin can move someone between classes.</li>
+                <li>Reads are scoped too: attendance and class posts check that the caller is in that class, or teaches it.</li>
+              </ul>
+<pre><code>isAuthUser(userId)
+  &amp;&amp; request.resource.data.role == resource.data.role
+  &amp;&amp; request.resource.data.classIds == resource.data.classIds</code></pre>
+              <p class="det__k">The result</p>
+              <p>Families can fix their phone number, but nothing that grants access moves without an admin.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card card--row card--open span-4">
+          <h3>Notifications had to reach exactly one class</h3>
+          <p>A class post should buzz that class's families and nobody else, and Firestore caps how many IDs one query can match.</p>
+          <div class="panel det__panel">
+            <div class="mini-batch" role="img" aria-label="A class's student IDs split into batches of 30 for Firestore queries">
+              <span class="mini-batch__row"><b>in</b><i style="--n:30"></i><em>30</em></span>
+              <span class="mini-batch__row"><b>in</b><i style="--n:30"></i><em>30</em></span>
+              <span class="mini-batch__row"><b>in</b><i style="--n:12"></i><em>12</em></span>
+              <span class="mini-batch__sum">72 students → 3 queries → 1 send</span>
+            </div>
+          </div>
+          <button class="det__toggle" type="button" aria-expanded="false" aria-controls="det-3">How I solved it <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="det__more" id="det-3">
+            <div class="det__drop">
+              <p class="det__k">The problem</p>
+              <p>Sending from the phone would put push logic, and the list of every family's token, inside the app. A class's families are found by matching its student IDs, and one Firestore <code>in</code> query accepts at most 30 values.</p>
+              <p class="det__k">How I solved it</p>
+              <ul>
+                <li>Apps only write a job to <code>notificationJobs</code>; a Cloud Function triggered on each new job does the sending.</li>
+                <li>For a class, the function splits the student IDs into batches of 30 and runs one query per batch, then keeps only valid Expo tokens.</li>
+                <li>Messages go through Expo's chunking helper, and the function writes back <code>processed</code>, the time and <code>sentCount</code>, or the error.</li>
+              </ul>
+<pre><code>for (let i = 0; i &lt; studentIds.length; i += 30) {
+  batches.push(studentIds.slice(i, i + 30))
+}</code></pre>
+              <p class="det__k">The result</p>
+              <p>One code path for every notification, any class size, and a record of each send.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="admin" aria-labelledby="admin-h">
+    <div class="wrap">
+      <div class="grid admin__grid">
+        <div class="span-4 section-head">
+          <h2 id="admin-h">The office's dashboard</h2>
+          <p>A separate React and Vite site on the same Firebase project. Besides the bulk import, the office can:</p>
+          <ul class="admin__list">
+            <li>issue single IDs and revoke unused ones</li>
+            <li>create classes and assign teachers and students</li>
+            <li>run the school calendar</li>
+            <li>upload worksheets as PDFs, up to 20 MB</li>
+            <li>review attendance for every class</li>
+            <li>copy a ready-to-paste list of family emails</li>
+          </ul>
+        </div>
+        <div class="span-8 start-5 admin__shots">
+          <div class="shot-browser"><div class="shot-browser__bar"><i></i><i></i><i></i><span>admin · Users</span></div><img src="shots/admin-users.png" alt="The Users page: counts by role, an email export and the user table" width="1400" height="850" loading="lazy"></div>
+          <div class="shot-browser admin__over"><div class="shot-browser__bar"><i></i><i></i><i></i><span>admin · Classes</span></div><img src="shots/admin-classes.png" alt="The Classes page with each class's teacher, time slot and students" width="1400" height="850" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--word">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Read the code behind the school app</h2><p class="t-lead">The phone app, the admin site, the security rules and the Cloud Functions are on GitHub.</p></div>
+        <a class="btn btn--primary" href="https://github.com/rohangandhi05/SchoolApp">View on GitHub<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <p class="close__word" aria-hidden="true">Vedic Hindi School</p>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top">Vedic Hindi School</a>
+          <p class="footer__lede">A personal project by Rohan Gandhi.</p>
+        </div>
+        <div class="span-2 start-7 footer__col"><h3>Page</h3><ul><li><a href="#story">Story</a></li><li><a href="#week">How it works</a></li><li><a href="#notify">Architecture</a></li><li><a href="#details">Problems</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Project</h3><ul><li><a href="https://github.com/rohangandhi05/SchoolApp">Source code</a></li><li><a href="https://github.com/rohangandhi05/SchoolApp#readme">README</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Rohan</h3><ul><li><a href="/">Home</a></li><li><a href="/projects">Projects</a></li><li><a href="/blog">Blog</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Rohan Gandhi</span>
+        <div class="socials"></div>
+        <span class="credits">Screenshots are from the real app on a local Firebase emulator; the names and data in them are made up. Product names and logos are trademarks of their owners.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="actionbar" aria-label="Quick actions">
+  <a class="btn btn--primary" href="https://github.com/rohangandhi05/SchoolApp">View the code</a>
+</nav>
+
+<script type="module" src="../assets/system.js"></script>
+<script type="module" src="../assets/motion/motion.js"></script>
+<script src="../shared/case.js?v=1"></script>
+<script src="page.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7A818C"/>
+    </marker>
+  </defs>
+  <style>
+    .t   { font-size: 16px; font-weight: 700; fill: #1D232B; }
+    .s   { font-size: 13px; fill: #4A525E; }
+    .m   { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; fill: #2F3742; }
+    .k   { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; fill: #7A818C; }
+    .api { font-size: 13px; font-weight: 600; fill: #1D232B; text-anchor: middle; }
+    .note{ font-size: 12px; fill: #7A818C; }
+  </style>
+  <rect width="900" height="500" rx="16" fill="#FAFAF8"/>
+
+  <!-- layer 1 -->
+  <rect x="30" y="28" width="610" height="88" rx="10" fill="#E8EEF7" stroke="#C5D3E8"/>
+  <text class="k" x="48" y="50">PRESENTATION</text>
+  <text class="t" x="48" y="74">MagicMirror.ConsoleApp</text>
+  <text class="s" x="48" y="98">Wires everything into a DI container, builds the view model, falls back to offline data</text>
+
+  <path d="M335,118 L335,140" stroke="#7A818C" stroke-width="1.6" marker-end="url(#ah)"/>
+
+  <!-- layer 2 -->
+  <rect x="30" y="144" width="610" height="100" rx="10" fill="#EAF3EC" stroke="#C4DDC9"/>
+  <text class="k" x="48" y="166">BUSINESS</text>
+  <text class="m" x="48" y="190">WeatherService · MapQuestTrafficService · GoogleMapsTrafficService</text>
+  <text class="s" x="48" y="214">All three extend MappableService&lt;TEntity, TModel&gt;. The models turn raw API</text>
+  <text class="s" x="48" y="232">values into display values: Kelvin → °C, miles → km, seconds → arrival time.</text>
+
+  <path d="M335,246 L335,268" stroke="#7A818C" stroke-width="1.6" marker-end="url(#ah)"/>
+
+  <!-- layer 3 -->
+  <rect x="30" y="272" width="610" height="100" rx="10" fill="#F6EEE3" stroke="#E4D2BA"/>
+  <text class="k" x="48" y="294">DATA ACCESS</text>
+  <text class="m" x="48" y="318">WeatherRepo · MapQuestTrafficRepo · GoogleMapsTrafficRepo</text>
+  <text class="s" x="48" y="342">One generic Repository&lt;T&gt;: validate input, GET with HttpClient,</text>
+  <text class="s" x="48" y="360">deserialize with Json.NET, throw a clear error on a bad status.</text>
+
+  <path d="M335,374 L335,396" stroke="#7A818C" stroke-width="1.6" marker-end="url(#ah)"/>
+
+  <!-- APIs -->
+  <rect x="30"  y="400" width="190" height="40" rx="20" fill="#FFFFFF" stroke="#D3D7DD"/><text class="api" x="125" y="425">OpenWeatherMap</text>
+  <rect x="240" y="400" width="190" height="40" rx="20" fill="#FFFFFF" stroke="#D3D7DD"/><text class="api" x="335" y="425">MapQuest Directions</text>
+  <rect x="450" y="400" width="190" height="40" rx="20" fill="#FFFFFF" stroke="#D3D7DD"/><text class="api" x="545" y="425">Google Distance Matrix</text>
+  <text class="note" x="30" y="470">Traffic provider is chosen in one line of Program.cs, e.g. AddTransient&lt;ITrafficService, MapQuestTrafficService&gt;()</text>
+
+  <!-- side: helpers -->
+  <rect x="664" y="28" width="206" height="216" rx="10" fill="#FFFFFF" stroke="#D3D7DD"/>
+  <text class="k" x="682" y="50">SHARED</text>
+  <text class="t" x="682" y="74">Acme.Generic</text>
+  <text class="s" x="682" y="102">Temperature conversion</text>
+  <text class="s" x="682" y="124">Miles, km, metres</text>
+  <text class="s" x="682" y="146">Unix time → DateTime</text>
+  <text class="s" x="682" y="168">Time of day, arrival time</text>
+  <text class="note" x="682" y="208">Used by every layer,</text>
+  <text class="note" x="682" y="226">depends on none of them</text>
+  <path d="M662,194 L644,194" stroke="#7A818C" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ah)"/>
+
+  <!-- side: tests -->
+  <rect x="664" y="272" width="206" height="168" rx="10" fill="#FFF6F6" stroke="#EDCACA"/>
+  <text class="k" x="682" y="294">TESTS</text>
+  <text class="t" x="682" y="318">xUnit + Moq</text>
+  <text class="s" x="682" y="346">Repos replaced by mocks</text>
+  <text class="s" x="682" y="368">Real AutoMapper profiles</text>
+  <text class="s" x="682" y="390">Unit and date maths</text>
+  <text class="note" x="682" y="424">No network in business tests</text>
+  <path d="M662,322 C630,322 630,258 644,258" fill="none" stroke="#C46A6A" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+  <text class="note" x="540" y="262" style="fill:#C46A6A">mocked here</text>
+</svg>

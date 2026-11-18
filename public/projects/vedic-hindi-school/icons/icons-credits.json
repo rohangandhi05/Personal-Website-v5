@@ -1,0 +1,110 @@
+[
+	{
+		"file": "expo-icon.svg",
+		"icon": "logos:expo-icon",
+		"name": "Expo",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://expo.io/"
+	},
+	{
+		"file": "expo.svg",
+		"icon": "logos:expo",
+		"name": "Expo",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://expo.io/"
+	},
+	{
+		"file": "firebase-icon.svg",
+		"icon": "logos:firebase-icon",
+		"name": "Firebase",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://www.firebase.com/"
+	},
+	{
+		"file": "firebase.svg",
+		"icon": "logos:firebase",
+		"name": "Firebase",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://www.firebase.com/"
+	},
+	{
+		"file": "google-cloud-functions.svg",
+		"icon": "logos:google-cloud-functions",
+		"name": "Google Cloud Functions",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://cloud.google.com/functions/"
+	},
+	{
+		"file": "react.svg",
+		"icon": "logos:react",
+		"name": "React",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://facebook.github.io/react/"
+	},
+	{
+		"file": "tailwindcss-icon.svg",
+		"icon": "logos:tailwindcss-icon",
+		"name": "Tailwindcss",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://tailwindcss.com/"
+	},
+	{
+		"file": "typescript-icon.svg",
+		"icon": "logos:typescript-icon",
+		"name": "Typescript",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://www.typescriptlang.org/"
+	},
+	{
+		"file": "vite.svg",
+		"icon": "logos:vite",
+		"name": "Vite",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://vitejs.dev/"
+	}
+]

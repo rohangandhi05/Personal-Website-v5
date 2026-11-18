@@ -1,0 +1,120 @@
+/* Case-study parts shared by the project pages (the chess page keeps its own copy): the hero's fact
+   tags, the spec sheet, the lit message flow (case.js), and the problem cards with their deep dives.
+   Colours come from the page's tokens; a page tunes the dark parts with --case-* below. */
+:root {
+  --case-dark: #0f0f14;           /* the deep-dive panel and the flow panel */
+  --case-key: #8ab4ff;            /* labels and message text on dark */
+  --case-hot: #4287f5;            /* the part that is lit right now */
+  --case-back: #9be29f;           /* a reply travelling back */
+}
+
+/* ---------- hero: the project's facts as a quiet row of tags ---------- */
+.hero__facts { list-style: none; margin: var(--s-6) 0 0; padding: 0; border-top: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.hero__facts li { padding: 5px 12px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+                  font: 500 13px/1.3 var(--font-mono); color: var(--ink); }
+
+/* ---------- the project's spec sheet beside the brief ---------- */
+.spec { margin: 0; display: grid; align-content: start; border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+.spec > div { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: var(--s-4); padding: clamp(14px, 3svh, 30px) 0;
+              border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+.spec dt { font: 500 13px/1.6 var(--font-mono); color: var(--muted); }
+.spec dd { margin: 0; font-size: 18px; line-height: 1.5; }
+.spec__stack { display: flex; flex-wrap: wrap; gap: 8px; }
+.spec__stack span { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: 8px; background: var(--surface); font-size: 14px; }
+.spec__stack img { width: 18px; height: 18px; object-fit: contain; }
+@media (max-width: 639px) { .spec > div { grid-template-columns: minmax(0, 1fr); gap: var(--s-1); padding: var(--s-4) 0; } }
+
+/* ---------- a message flow, lit step by step (case.js) ---------- */
+.flow-panel { display: grid; align-content: center; padding: var(--s-6); border-radius: var(--r-lg); background: var(--case-dark);
+              border: 1px solid rgba(255,255,255,.08); color: #fff; }
+.flow { list-style: none; margin: 0; padding: 0; display: grid; align-content: center; gap: 0; width: 100%; }
+.flow__node { position: relative; display: grid; grid-template-columns: auto 1fr; column-gap: 12px; row-gap: 4px; align-items: baseline;
+              padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+              transition: opacity .35s var(--ease, ease), border-color .35s var(--ease, ease), background-color .35s var(--ease, ease); }
+.flow__file { font: 500 15px var(--font-mono); color: #fff; }
+.flow__role { font: 500 13px var(--font-text); color: rgba(255,255,255,.55); }
+.flow__node p { grid-column: 1 / -1; margin: 0; font-size: 14px; line-height: 1.45; color: rgba(255,255,255,.75); max-width: none; }
+.flow__msg { position: relative; display: grid; gap: 2px; padding: 12px 0 12px 36px; transition: opacity .35s var(--ease, ease); }
+.flow__msg::before { content: ""; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,.14); }
+.flow__msg::after { content: ""; position: absolute; left: 16px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%;
+                    background: var(--case-hot); box-shadow: 0 0 10px color-mix(in srgb, var(--case-hot) 70%, transparent); opacity: 0; }
+.flow__msg code { font: 400 13px/1.45 var(--font-mono); color: var(--case-key); overflow-wrap: anywhere; }
+.flow__msg span { font-size: 13px; color: rgba(255,255,255,.55); }
+.flow__msg--back code { color: var(--case-back); }
+.flow__msg--back::after { background: var(--case-back); box-shadow: 0 0 10px color-mix(in srgb, var(--case-back) 70%, transparent); }
+[data-flow].is-live [data-flow-step] { opacity: .35; transition: opacity .35s var(--ease, ease); }
+[data-flow].is-live .is-on { opacity: 1; }
+.flow.is-live .flow__node.is-now { border-color: var(--case-hot); background: color-mix(in srgb, var(--case-hot) 14%, transparent); }
+.flow.is-live .flow__msg.is-now::after { opacity: 1; animation: flow-run .7s var(--ease, ease) both; }
+@keyframes flow-run { from { top: 0; } to { top: 100%; } }
+@media (max-width: 639px) { .flow-panel { padding: var(--s-4); } .flow__node { padding: 12px; } .flow__msg { padding-left: 28px; } .flow__msg::before { left: 14px; } .flow__msg::after { left: 10px; } }
+
+/* ---------- problem cards: a summary and a picture, the deep dive on hover or click (case.js) ---------- */
+#details .grid > article { display: flex; flex-direction: column; gap: var(--s-3); }
+#details .grid > article > p { margin-bottom: var(--s-3); }
+#details .det__panel { --p-h: 260px; height: var(--p-h); margin-top: auto; display: grid; place-items: center; padding: var(--s-5);
+                       background: var(--surface); border-radius: var(--r-md); overflow: hidden; }
+@media (max-width: 639px) { #details .det__panel { --p-h: 190px; } }
+
+/* the deep dive: one wide panel hung below the row of cards, over the next section, so the three
+   panels keep their shared baseline; under 1024px it opens in the flow under its own card */
+#details { position: relative; z-index: 2; }
+#details .grid { position: relative; }
+#details .grid > article { position: static; }   /* the kit's .card is relative: the panel measures from the grid */
+#details .grid > article.is-open { z-index: 5; }
+.det__toggle { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; padding: 6px 0; border: 0; background: none;
+               font: 500 15px var(--font-text); color: var(--ink); cursor: pointer; }
+.det__toggle svg { width: 12px; height: 12px; transition: rotate .2s ease; }
+.det__toggle:hover, .is-open > .det__toggle { color: var(--action); }
+.is-open > .det__toggle svg { rotate: 180deg; }
+.det__more { position: absolute; top: 100%; left: 0; right: 0; padding-top: 8px;
+             visibility: hidden; opacity: 0; translate: 0 -6px; pointer-events: none; }
+.is-open > .det__more { visibility: visible; opacity: 1; translate: 0 0; pointer-events: auto; }
+.det__drop { position: relative; display: grid; gap: 10px; padding: var(--s-5); border-radius: var(--r-md); background: var(--case-dark); color: rgba(255,255,255,.8);
+             box-shadow: 0 24px 60px -20px rgba(10,10,10,.6); border: 1px solid rgba(255,255,255,.06); }
+.det__drop::before { content: ""; position: absolute; top: -6px; left: var(--caret, 40px); width: 12px; height: 12px; rotate: 45deg;
+                     background: var(--case-dark); border-left: 1px solid rgba(255,255,255,.06); border-top: 1px solid rgba(255,255,255,.06); }
+#details .grid > article:nth-child(2) .det__drop { --caret: calc(100% / 3 + 40px); }
+#details .grid > article:nth-child(3) .det__drop { --caret: calc(200% / 3 + 40px); }
+@media (min-width: 1024px) {
+  .det__drop { grid-template-columns: 1fr 1.25fr 1.15fr; grid-template-rows: auto auto auto 1fr; column-gap: var(--s-6); padding: var(--s-6); }
+  .det__drop > :nth-child(1) { grid-area: 1 / 1; }
+  .det__drop > :nth-child(2) { grid-area: 2 / 1 / span 3; }
+  .det__drop > :nth-child(3) { grid-area: 1 / 2; }
+  .det__drop > :nth-child(4) { grid-area: 2 / 2 / span 3; }
+  .det__drop > :nth-child(6) { grid-area: 1 / 3; }
+  .det__drop > :nth-child(7) { grid-area: 2 / 3; }
+  .det__drop > :nth-child(5) { grid-area: 3 / 3; margin-top: 6px; }
+  .det__drop > p.det__k { margin-top: 0; }
+}
+.det__drop p, .det__drop li { max-width: none; margin: 0; color: inherit; font-size: 14px; line-height: 1.55; }
+.det__drop .det__k { margin-top: 4px; font: 600 11px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--case-key); }
+.det__drop .det__k:first-child { margin-top: 0; }
+.det__drop ul { display: grid; gap: 6px; margin: 0; padding-left: 18px; }
+.det__drop li::marker { color: rgba(255,255,255,.35); }
+.det__drop code { padding: 1px 5px; border-radius: 4px; background: rgba(255,255,255,.08); color: #fff; font: 400 12.5px var(--font-mono); }
+.det__drop pre { margin: 0; padding: 10px 12px; overflow-x: auto; border-radius: 8px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); }
+.det__drop pre code { padding: 0; background: none; font-size: 11.5px; line-height: 1.6; color: #c9d4e3; white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: no-preference) {
+  .det__more { transition: opacity .2s ease, translate .2s ease, visibility 0s linear .2s; }
+  .is-open > .det__more { transition: opacity .2s ease, translate .2s ease, visibility 0s; }
+}
+@media (max-width: 1023px) {
+  .det__more { position: static; display: none; padding-top: 0; }
+  .is-open > .det__more { display: block; }
+  .det__drop::before { display: none; }
+  #details .grid:has(.is-open) > article { align-self: start; }
+}
+
+/* ---------- a browser window and a phone around a real screenshot ---------- */
+.shot-browser { border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+                box-shadow: 0 30px 70px -30px rgba(40,20,10,.45); }
+.shot-browser__bar { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; background: #f1ede8; border-bottom: 1px solid rgba(0,0,0,.06); }
+.shot-browser__bar i { width: 10px; height: 10px; border-radius: 50%; background: #d9d2ca; }
+.shot-browser__bar span { margin-left: 8px; font: 400 12px var(--font-mono); color: #8a7f75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.shot-browser img { display: block; width: 100%; height: auto; }
+/* the screen sits in the bezel by insets of the frame itself (padding % would follow the parent's width):
+   3.2% each side and 1.5% top and bottom keep the screenshot at its own 600:1298 */
+.phone { position: relative; aspect-ratio: 479 / 1000; border-radius: 13% / 6%; background: #1b1512;
+         box-shadow: 0 30px 60px -24px rgba(40,20,10,.55), inset 0 0 0 1.5px rgba(255,255,255,.08); }
+.phone img { position: absolute; top: 1.5%; left: 3.2%; width: 93.6%; height: 97%; object-fit: cover; border-radius: 10.5% / 4.9%; }

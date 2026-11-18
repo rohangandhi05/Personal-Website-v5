@@ -1,0 +1,74 @@
+[
+	{
+		"file": "c-sharp.svg",
+		"icon": "logos:c-sharp",
+		"name": "C Sharp",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://csharp.net/"
+	},
+	{
+		"file": "dotnet.svg",
+		"icon": "logos:dotnet",
+		"name": "Dotnet",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://www.microsoft.com/net"
+	},
+	{
+		"file": "electron.svg",
+		"icon": "logos:electron",
+		"name": "Electron",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://electron.atom.io/"
+	},
+	{
+		"file": "nodejs-icon.svg",
+		"icon": "logos:nodejs-icon",
+		"name": "Nodejs",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://nodejs.org/"
+	},
+	{
+		"file": "raspberry-pi.svg",
+		"icon": "logos:raspberry-pi",
+		"name": "Raspberry Pi",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://www.raspberrypi.org/"
+	},
+	{
+		"file": "youtube-icon.svg",
+		"icon": "logos:youtube-icon",
+		"name": "Youtube",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://www.youtube.com/"
+	}
+]

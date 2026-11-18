@@ -1,0 +1,95 @@
+[
+	{
+		"file": "chessdotcom.svg",
+		"icon": "si:chessdotcom",
+		"name": "Chess.com",
+		"kind": "mono",
+		"source": "simple-icons@16.30.0",
+		"author": "Simple Icons Collaborators",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/simple-icons/simple-icons",
+		"trademark": true,
+		"colour": "one-colour fallback in the brand hex"
+	},
+	{
+		"file": "chrome-web-store.svg",
+		"icon": "logos:chrome-web-store",
+		"name": "Chrome Web Store",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://chrome.google.com/webstore"
+	},
+	{
+		"file": "chrome.svg",
+		"icon": "logos:chrome",
+		"name": "Chrome",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://www.google.com/chrome/"
+	},
+	{
+		"file": "javascript.svg",
+		"icon": "logos:javascript",
+		"name": "Javascript (JS)",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+	},
+	{
+		"file": "ui-chess-knight.svg",
+		"icon": "ui:chess-knight",
+		"name": "Chess Knight",
+		"kind": "line",
+		"source": "@iconify-json/lucide@1.2.100",
+		"author": "Lucide Contributors",
+		"licence": "ISC",
+		"url": "https://github.com/lucide-icons/lucide",
+		"trademark": false
+	},
+	{
+		"file": "ui-chess-pawn.svg",
+		"icon": "ui:chess-pawn",
+		"name": "Chess Pawn",
+		"kind": "line",
+		"source": "@iconify-json/lucide@1.2.100",
+		"author": "Lucide Contributors",
+		"licence": "ISC",
+		"url": "https://github.com/lucide-icons/lucide",
+		"trademark": false
+	},
+	{
+		"file": "ui-cpu.svg",
+		"icon": "ui:cpu",
+		"name": "Cpu",
+		"kind": "line",
+		"source": "@iconify-json/lucide@1.2.100",
+		"author": "Lucide Contributors",
+		"licence": "ISC",
+		"url": "https://github.com/lucide-icons/lucide",
+		"trademark": false
+	},
+	{
+		"file": "webassembly.svg",
+		"icon": "logos:webassembly",
+		"name": "WebAssembly",
+		"kind": "colour",
+		"source": "gilbarbara/logos@d6960edc1b7309d392c76e40d3a320df7f9ff85c",
+		"author": "Gil Barbara",
+		"licence": "CC0-1.0",
+		"url": "https://github.com/gilbarbara/logos",
+		"trademark": true,
+		"markUrl": "https://webassembly.org/"
+	}
+]

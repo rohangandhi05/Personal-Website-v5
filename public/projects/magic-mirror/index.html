@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en" data-type="product" data-radius="soft" data-buttons="arrow" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MagicMirror: a smart mirror project by Rohan Gandhi</title>
+<meta name="description" content="A smart mirror built from two-way glass, a monitor and a Raspberry Pi, with a C# backend that writes a morning weather and commute briefing and a module that casts YouTube from a phone.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MagicMirror: a smart mirror project by Rohan Gandhi">
+<meta property="og:description" content="Two-way glass, a monitor and a Raspberry Pi: a morning briefing from three web APIs, and YouTube cast from a phone like a TV.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0b0c0e">
+<meta name="site-kind" content="tech">
+<meta name="page-type" content="product">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200..600&family=Inter:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/system.css">
+<link rel="stylesheet" href="../assets/ui/cards.css">
+<link rel="stylesheet" href="../assets/motion/motion.css">
+<style>
+:root {
+  --p-bg: #0b0c0e; --p-surface: #16181c; --p-ink: #eceef1; --p-muted: #8f959d;
+  --p-accent: #e9b872; --p-accent-ink: #17120a; --p-action: #e9b872; --p-action-ink: #17120a;
+  --p-inv-bg: #efece6; --p-inv-surface: #e3dfd7; --p-inv-ink: #15161a; --p-inv-muted: #5f6168;
+  --p-inv-accent: #8a5a1c; --p-inv-accent-ink: #ffffff; --p-inv-action: #15161a; --p-inv-action-ink: #ffffff;
+  --font-display: "Outfit", system-ui, sans-serif;
+  --font-text: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 300;
+  --display-tracking: -0.02em;
+  --display-tracking-xl: -0.03em;
+}
+</style>
+<link rel="stylesheet" href="../shared/case.css?v=2">
+<link rel="stylesheet" href="page.css?v=1">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+</head>
+<body>
+<!-- type: hardware (a project case study for interviewers)
+     look: the mirror itself: near-black glass, thin light type like the mirror's own clock, a warm wood
+     accent from its frame. One effect, the hero: as you scroll the mirror turns and zooms, and the
+     two-way glass, the monitor, the Raspberry Pi and the power supply come apart (page.js).
+     Motion explains the system: #features lights each module on the mirror, #seamless plays the cast path. -->
+
+<header class="nav nav--split">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#features">Features</a></div>
+      <div class="nav__item"><a class="nav__link" href="#custom">Customize</a></div>
+      <div class="nav__item"><a class="nav__link" href="#arch">Architecture</a></div>
+      <div class="nav__item"><a class="nav__link" href="#details">Problems</a></div>
+    </nav>
+    <a class="nav__logo" href="#top">MagicMirror</a>
+    <div class="nav__actions">
+      <a class="btn btn--secondary" href="https://github.com/rohangandhi05/MagicMirror">View the code</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero mm-hero" data-enter aria-labelledby="hero-h">
+    <div class="mm-hero__sticky">
+      <div class="wrap mm-hero__wrap">
+        <div class="mm-hero__copy">
+          <h1 id="hero-h">A smart mirror that briefs me every morning</h1>
+          <p class="t-lead">A monitor behind two-way glass, run by a Raspberry Pi. It shows the time and weather, writes a morning briefing from three web APIs, and plays YouTube cast from my phone.</p>
+          <div class="btn-row"><a class="btn btn--primary" href="#features">See what it shows<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="https://github.com/rohangandhi05/MagicMirror">View the code</a></div>
+          <ul class="hero__facts" aria-label="Project facts">
+            <li>Raspberry Pi</li><li>C# / .NET</li><li>MagicMirror²</li><li>Electron</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mm-stage" role="img" aria-label="The mirror from the front, showing the time, the weather, a morning briefing and a YouTube window. Scrolling turns it and pulls apart its four parts: the two-way glass, the monitor, the Raspberry Pi and the power supply.">
+        <div class="mm-rig" aria-hidden="true">
+          <div class="mm-layer mm-layer--psu">
+            <svg viewBox="0 0 240 150" class="mm-psu">
+              <path d="M150 75 C 200 75, 210 20, 238 18" fill="none" stroke="#2a2c31" stroke-width="7" stroke-linecap="round"/>
+              <rect x="10" y="30" width="150" height="90" rx="16" fill="#1d1f23" stroke="#34373d" stroke-width="2"/>
+              <rect x="22" y="42" width="126" height="66" rx="10" fill="#24262b"/>
+              <text x="85" y="80" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="15" fill="#6d727a">5V</text>
+              <rect x="0" y="62" width="14" height="26" rx="3" fill="#9aa0a8"/>
+            </svg>
+          </div>
+          <div class="mm-layer mm-layer--pi">
+            <svg viewBox="0 0 340 220" class="mm-pi">
+              <rect x="2" y="2" width="336" height="216" rx="14" fill="#1f7a3f" stroke="#145a2d" stroke-width="3"/>
+              <g fill="#0f4d26"><circle cx="20" cy="20" r="8"/><circle cx="20" cy="200" r="8"/><circle cx="258" cy="20" r="8"/><circle cx="258" cy="200" r="8"/></g>
+              <g fill="#e2c46a"><circle cx="20" cy="20" r="4"/><circle cx="20" cy="200" r="4"/><circle cx="258" cy="20" r="4"/><circle cx="258" cy="200" r="4"/></g>
+              <rect x="40" y="10" width="200" height="22" rx="2" fill="#151515"/>
+              <g fill="#d4b14a">
+                <rect x="46" y="14" width="5" height="5"/><rect x="56" y="14" width="5" height="5"/><rect x="66" y="14" width="5" height="5"/><rect x="76" y="14" width="5" height="5"/><rect x="86" y="14" width="5" height="5"/><rect x="96" y="14" width="5" height="5"/><rect x="106" y="14" width="5" height="5"/><rect x="116" y="14" width="5" height="5"/><rect x="126" y="14" width="5" height="5"/><rect x="136" y="14" width="5" height="5"/><rect x="146" y="14" width="5" height="5"/><rect x="156" y="14" width="5" height="5"/><rect x="166" y="14" width="5" height="5"/><rect x="176" y="14" width="5" height="5"/><rect x="186" y="14" width="5" height="5"/><rect x="196" y="14" width="5" height="5"/><rect x="206" y="14" width="5" height="5"/><rect x="216" y="14" width="5" height="5"/><rect x="226" y="14" width="5" height="5"/>
+                <rect x="46" y="23" width="5" height="5"/><rect x="56" y="23" width="5" height="5"/><rect x="66" y="23" width="5" height="5"/><rect x="76" y="23" width="5" height="5"/><rect x="86" y="23" width="5" height="5"/><rect x="96" y="23" width="5" height="5"/><rect x="106" y="23" width="5" height="5"/><rect x="116" y="23" width="5" height="5"/><rect x="126" y="23" width="5" height="5"/><rect x="136" y="23" width="5" height="5"/><rect x="146" y="23" width="5" height="5"/><rect x="156" y="23" width="5" height="5"/><rect x="166" y="23" width="5" height="5"/><rect x="176" y="23" width="5" height="5"/><rect x="186" y="23" width="5" height="5"/><rect x="196" y="23" width="5" height="5"/><rect x="206" y="23" width="5" height="5"/><rect x="216" y="23" width="5" height="5"/><rect x="226" y="23" width="5" height="5"/>
+              </g>
+              <rect x="90" y="70" width="70" height="70" rx="4" fill="#b9bec5"/><rect x="98" y="78" width="54" height="54" rx="2" fill="#a3a9b1"/>
+              <rect x="176" y="80" width="44" height="50" rx="3" fill="#121212"/>
+              <rect x="40" y="96" width="30" height="30" rx="2" fill="#121212"/>
+              <rect x="286" y="20" width="54" height="52" rx="3" fill="#c3c8ce"/><rect x="286" y="82" width="54" height="52" rx="3" fill="#c3c8ce"/><rect x="282" y="146" width="58" height="56" rx="3" fill="#c3c8ce"/>
+              <rect x="294" y="30" width="38" height="12" rx="2" fill="#2f6bd8"/><rect x="294" y="92" width="38" height="12" rx="2" fill="#2f6bd8"/>
+              <rect x="44" y="196" width="34" height="22" rx="3" fill="#c3c8ce"/><rect x="104" y="196" width="34" height="22" rx="3" fill="#c3c8ce"/><rect x="160" y="196" width="34" height="22" rx="3" fill="#c3c8ce"/>
+              <g stroke="#2a8f4f" stroke-width="1.5" fill="none" opacity=".8"><path d="M160 105 H176"/><path d="M125 140 V196"/><path d="M70 110 H90"/><path d="M220 105 H282"/></g>
+            </svg>
+          </div>
+          <div class="mm-layer mm-layer--monitor">
+            <div class="mm-screen">
+              <div class="mirror-ui" data-ui>
+                <div class="mu-clock" data-mod="clock"><span class="mu-date">Tuesday, November 10</span><span class="mu-time">7:42<small>AM</small></span></div>
+                <div class="mu-weather" data-mod="weather"><span class="mu-temp"><svg viewBox="-30 -30 60 60" class="mu-sun"><circle r="12" fill="none" stroke="currentColor" stroke-width="2.4"/><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M0-20v-6M0 20v6M-20 0h-6M20 0h6M-14-14l-4-4M14 14l4 4M-14 14l-4 4M14-14l4-4"/></g></svg>9°C</span><span class="mu-sub">Clear · ↑ 07:18 ↓ 16:31</span></div>
+                <div class="mu-brief" data-mod="brief">
+                  <b>Good morning Rohan</b>
+                  <span>The current time is 7:42 AM and the outside weather is Clear.</span>
+                  <span>Current topside temperature is 9 degrees Celsius.</span>
+                  <span>Your trip to work is about 14.2 kilometers long and will take about 26 minutes.</span>
+                  <span>If you leave now, you should arrive at approximately 8:08 AM.</span>
+                </div>
+                <div class="mu-cast" data-mod="cast"><i></i><span>Cast · YouTube</span></div>
+                <span class="mu-tag">MagicMirror</span>
+              </div>
+            </div>
+          </div>
+          <div class="mm-layer mm-layer--glass"><div class="mm-glass"></div></div>
+        </div>
+      </div>
+
+      <ol class="mm-parts" aria-label="The four parts">
+        <li><span>01</span><b>Two-way glass</b>Reflects the room; bright pixels shine through it.</li>
+        <li><span>02</span><b>Monitor</b>Black background, white text, so only the words show.</li>
+        <li><span>03</span><b>Raspberry Pi</b>Runs MagicMirror², the modules and the cast window.</li>
+        <li><span>04</span><b>Power supply</b>One 5V supply for the Pi, behind the frame.</li>
+      </ol>
+      <p class="mm-hint" aria-hidden="true">Scroll to take it apart</p>
+    </div>
+  </section>
+
+  <section class="section" id="features" aria-labelledby="features-h">
+    <div class="wrap">
+      <div class="grid feat__grid">
+        <div class="span-4 section-head">
+          <h2 id="features-h">What the mirror shows, and where it comes from</h2>
+          <p>Four modules on one black screen. Hover or tap one to find it on the mirror.</p>
+          <ol class="feat__list">
+            <li><button type="button" data-feat="clock"><span>01</span><b>Clock and date</b>MagicMirror²'s built-in clock, top left.</button></li>
+            <li><button type="button" data-feat="weather"><span>02</span><b>Weather</b>OpenWeatherMap: Kelvin turned into °C, sunrise and sunset from Unix time.</button></li>
+            <li><button type="button" data-feat="brief"><span>03</span><b>Morning briefing</b>My C# app: weather plus the drive to work from MapQuest or Google Maps.</button></li>
+            <li><button type="button" data-feat="cast"><span>04</span><b>YouTube cast</b>The mirror shows up in the phone's cast list, like a TV.</button></li>
+          </ol>
+        </div>
+        <div class="span-8 start-5 feat__mirror">
+          <div class="mirror-frame">
+            <div class="mirror-ui mirror-ui--big" data-feat-ui>
+              <div class="mu-clock" data-mod="clock"><span class="mu-date">Tuesday, November 10</span><span class="mu-time">7:42<small>AM</small></span></div>
+              <div class="mu-weather" data-mod="weather"><span class="mu-temp"><svg viewBox="-30 -30 60 60" class="mu-sun"><circle r="12" fill="none" stroke="currentColor" stroke-width="2.4"/><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M0-20v-6M0 20v6M-20 0h-6M20 0h6M-14-14l-4-4M14 14l4 4M-14 14l-4 4M14-14l4-4"/></g></svg>9°C</span><span class="mu-sub">Clear · ↑ 07:18 ↓ 16:31</span></div>
+              <div class="mu-brief" data-mod="brief">
+                <b>Good morning Rohan</b>
+                <span>The current time is 7:42 AM and the outside weather is Clear.</span>
+                <span>Current topside temperature is 9 degrees Celsius.</span>
+                <span>Your trip to work is about 14.2 kilometers long and will take about 26 minutes.</span>
+                <span>If you leave now, you should arrive at approximately 8:08 AM.</span>
+              </div>
+              <div class="mu-cast" data-mod="cast"><i></i><span>Cast · YouTube</span></div>
+              <span class="mu-tag">MagicMirror</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="custom" aria-labelledby="custom-h">
+    <div class="wrap">
+      <div class="grid custom__grid">
+        <div class="span-5 section-head">
+          <h2 id="custom-h">Customizable: every module is a few lines of config</h2>
+          <p>MagicMirror² places each module in a named region of the screen, and the cast module takes its own window position and size. Change them here and the config below changes with them.</p>
+          <div class="custom__controls">
+            <p class="custom__k">Region</p>
+            <div class="custom__opts" role="group" aria-label="Region">
+              <button type="button" data-pos="top_left" aria-pressed="false">top_left</button>
+              <button type="button" data-pos="top_right" aria-pressed="false">top_right</button>
+              <button type="button" data-pos="bottom_left" aria-pressed="false">bottom_left</button>
+              <button type="button" data-pos="bottom_right" aria-pressed="true">bottom_right</button>
+            </div>
+            <p class="custom__k">Window size</p>
+            <div class="custom__opts" role="group" aria-label="Window size">
+              <button type="button" data-size="400x240" aria-pressed="false">400 × 240</button>
+              <button type="button" data-size="500x300" aria-pressed="true">500 × 300</button>
+              <button type="button" data-size="640x384" aria-pressed="false">640 × 384</button>
+            </div>
+          </div>
+        </div>
+        <div class="span-6 start-7 custom__side">
+          <div class="mirror-frame mirror-frame--small">
+            <div class="mirror-ui mirror-ui--mini" data-custom-ui data-pos="bottom_right" data-size="500x300">
+              <div class="mu-clock"><span class="mu-date">Tuesday, November 10</span><span class="mu-time">7:42<small>AM</small></span></div>
+              <div class="mu-weather"><span class="mu-temp">9°C</span><span class="mu-sub">Clear</span></div>
+              <div class="mu-brief"><b>Good morning Rohan</b><span>Your trip to work will take about 26 minutes.</span></div>
+              <div class="mu-cast mu-cast--live"><i></i><span>Cast · YouTube</span></div>
+            </div>
+          </div>
+<pre class="custom__code" aria-live="polite"><code>// config/config.js
+{
+  module: 'MMM-Screencast',
+  position: '<em data-out="region">bottom_right</em>',
+  config: {
+    position: '<em data-out="window">bottomRight</em>',
+    width: <em data-out="w">500</em>,
+    height: <em data-out="h">300</em>
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="seamless" aria-labelledby="seamless-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="seamless-h">Seamless: it never goes blank, and casting works like a TV</h2>
+      </div>
+      <div class="grid seam__grid">
+        <div class="span-5 seam__card">
+          <h3>When an API fails, the mirror still has something to say</h3>
+          <p>If the weather or traffic call throws, the app swaps in built-in values and marks the result as offline data. Tests check that flag when the weather or the traffic data comes back empty.</p>
+          <div class="seam__demo">
+            <div class="seam__brief" data-offline="false">
+              <span class="seam__badge">Offline data</span>
+              <b>Good morning Rohan</b>
+              <span data-on="Current topside temperature is 9 degrees Celsius." data-off="Current topside temperature is 17 degrees Celsius.">Current topside temperature is 9 degrees Celsius.</span>
+              <span data-on="Your trip to work is about 14.2 kilometers long and will take about 26 minutes." data-off="Your trip to work is about 27.5 kilometers long and will take about 35 minutes.">Your trip to work is about 14.2 kilometers long and will take about 26 minutes.</span>
+            </div>
+            <button class="btn btn--secondary seam__toggle" type="button" aria-pressed="false">Simulate an API failure</button>
+          </div>
+        </div>
+        <div class="span-6 start-7 flow-panel seam__flow">
+          <p class="seam__flow-k">Casting a video from a phone</p>
+          <ol class="flow" data-flow aria-label="The phone finds the mirror through DIAL, the mirror's DIAL server opens an Electron window that identifies as a smart TV, YouTube's TV site pairs with the phone, and stopping the cast closes the window">
+            <li class="flow__node" data-flow-step="0"><span class="flow__file">Phone</span><span class="flow__role">YouTube app</span><p>Looks for TVs on the home network.</p></li>
+            <li class="flow__msg" data-flow-step="1"><code>DIAL discovery · port 8569</code></li>
+            <li class="flow__node" data-flow-step="1"><span class="flow__file">DIAL server</span><span class="flow__role">node_helper</span><p>Answers as a TV, so the mirror appears in the cast list.</p></li>
+            <li class="flow__msg" data-flow-step="2"><code>launch YouTube → spawn Electron, talk over IPC</code></li>
+            <li class="flow__node" data-flow-step="2"><span class="flow__file">Electron window</span><span class="flow__role">Samsung Tizen user agent</span><p>Placed where the config says, on top of the mirror.</p></li>
+            <li class="flow__msg" data-flow-step="3"><code>youtube.com/tv</code></li>
+            <li class="flow__node" data-flow-step="3"><span class="flow__file">YouTube TV site</span><span class="flow__role">pairs with the phone</span><p>The phone controls playback like on a real TV.</p></li>
+            <li class="flow__msg flow__msg--back" data-flow-step="4"><code>stop casting → QUIT over IPC</code><span>the window closes and the mirror is back</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="arch" aria-labelledby="arch-h">
+    <div class="wrap">
+      <div class="grid arch__grid">
+        <div class="span-4 section-head">
+          <h2 id="arch-h">Architecture: the C# backend, one layer at a time</h2>
+          <p>Each layer only knows about the one below it, and everything is wired in one place, <code>Program.cs</code>. Switch the traffic provider to see what changes.</p>
+          <div class="arch__switch" role="group" aria-label="Traffic provider">
+            <button type="button" data-provider="mq" aria-pressed="true">MapQuest</button>
+            <button type="button" data-provider="gm" aria-pressed="false">Google Maps</button>
+          </div>
+<pre class="arch__code"><code>services.AddTransient&lt;ITrafficService,
+    <em data-prov-svc>MapQuestTrafficService</em>&gt;();</code></pre>
+          <p class="arch__note">One line changes. Nothing else in the app knows which provider it's talking to.</p>
+        </div>
+        <div class="span-7 start-6 arch__stack" data-provider="mq">
+          <div class="arch__layer"><span class="arch__k">Presentation</span><b>MagicMirror.ConsoleApp</b><p>Asks for name, home and work, builds the view model, falls back to offline data, prints the briefing.</p></div>
+          <div class="arch__layer"><span class="arch__k">Business</span><b>WeatherService · <em data-prov-name>MapQuestTrafficService</em></b><p>AutoMapper profiles turn raw API values into display values: <span data-prov-unit>miles × 1.60934 → km</span>, Kelvin − 273.15 → °C, seconds → arrival time.</p></div>
+          <div class="arch__layer"><span class="arch__k">Data access</span><b>WeatherRepo · <em data-prov-repo>MapQuestTrafficRepo</em></b><p>One generic repository: validate input, GET with HttpClient, deserialize with Json.NET, throw a clear error on a bad status.</p></div>
+          <div class="arch__apis"><span>OpenWeatherMap</span><span class="arch__api" data-api="mq">MapQuest Directions</span><span class="arch__api" data-api="gm">Google Distance Matrix</span></div>
+          <div class="arch__side">
+            <div><span class="arch__k">Shared</span><b>Acme.Generic</b><p>Temperature, distance and Unix-time helpers every layer uses.</p></div>
+            <div><span class="arch__k">Tests</span><b>xUnit + Moq · 30 tests</b><p>Repositories mocked, so business logic runs without the network.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="details" aria-labelledby="details-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="details-h">3 problems the mirror's code handles</h2>
+      </div>
+      <div class="grid">
+        <article class="card card--row card--open span-4">
+          <h3>Three APIs, three unit systems</h3>
+          <p>MapQuest answers in miles, Google in metres and OpenWeatherMap in Kelvin. The mirror has to show one consistent set.</p>
+          <div class="panel det__panel">
+            <div class="mini-units" role="img" aria-label="Conversions: 282.15 kelvin to 9 degrees Celsius, 8.82 miles to 14.2 kilometres, 14200 metres to 14.2 kilometres">
+              <span><code>282.15 K</code><i>→</i><b>9 °C</b></span>
+              <span><code>8.82 mi</code><i>→</i><b>14.2 km</b></span>
+              <span><code>14200 m</code><i>→</i><b>14.2 km</b></span>
+            </div>
+          </div>
+          <button class="det__toggle" type="button" aria-expanded="false" aria-controls="det-1">How it's solved <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="det__more" id="det-1">
+            <div class="det__drop">
+              <p class="det__k">The problem</p>
+              <p>Each provider returns its own entity shape and units. Converting inside each service would spread the same math across the app, and swapping MapQuest for Google would mean touching the display code.</p>
+              <p class="det__k">How it's solved</p>
+              <ul>
+                <li>Each API response deserializes into its own entity class in the data-access layer.</li>
+                <li>AutoMapper profiles map every entity onto one shared model, and a second profile maps that onto the view model the console prints.</li>
+                <li>The math lives once, in <code>Acme.Generic</code>: Kelvin to Celsius, miles and metres to km, Unix seconds to a time of day.</li>
+                <li>Those helpers have their own tests against known inputs.</li>
+              </ul>
+<pre><code>public static double KelvinToCelsius(double value, int precision = 2)
+{
+    double converted = value - 273.15;
+    ...
+}</code></pre>
+              <p class="det__k">The result</p>
+              <p>The view model always holds °C and km, whichever API answered.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card card--row card--open span-4">
+          <h3>An API can fail at 7am</h3>
+          <p>A mirror that shows an error, or nothing, is worse than no mirror. A failed call falls back to built-in data and says so.</p>
+          <div class="panel det__panel">
+            <div class="mini-offline" role="img" aria-label="A failed request falling back to offline data">
+              <span class="mini-offline__err">GET api.openweathermap.org → 503</span>
+              <span class="mini-offline__arrow">↓</span>
+              <span class="mini-offline__ok">IsOfflineData = true · Sunny, 17 °C</span>
+            </div>
+          </div>
+          <button class="det__toggle" type="button" aria-expanded="false" aria-controls="det-2">How it's solved <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="det__more" id="det-2">
+            <div class="det__drop">
+              <p class="det__k">The problem</p>
+              <p>The briefing depends on two network calls, and the mirror sits on a home network that drops. An unhandled exception would leave the screen blank until someone restarted the app.</p>
+              <p class="det__k">How it's solved</p>
+              <ul>
+                <li>Both calls run inside one try block when the view model is built.</li>
+                <li>On any exception the app logs it, loads built-in weather and traffic models, and sets <code>IsOfflineData</code> on the view model.</li>
+                <li>Tests mock an empty weather response and an empty traffic response and assert the flag is set, and that a good response leaves it unset.</li>
+              </ul>
+<pre><code>catch (Exception ex)
+{
+    weatherModel = GetOfflineWeatherData();
+    trafficModel = GetOfflineTrafficData();
+    model.IsOfflineData = true;
+}</code></pre>
+              <p class="det__k">The result</p>
+              <p>The screen is never blank, and offline values are labelled as offline.</p>
+            </div>
+          </div>
+        </article>
+        <article class="card card--row card--open span-4">
+          <h3>There's no YouTube app for a mirror</h3>
+          <p>The cast module makes the mirror pass as a smart TV, so the phone's own cast button works. I added it and placed its window.</p>
+          <div class="panel det__panel">
+            <div class="mini-cast" role="img" aria-label="A phone's cast list showing the mirror next to a TV">
+              <span class="mini-cast__head">Cast to</span>
+              <span class="mini-cast__row"><i class="is-tv"></i>Living room TV</span>
+              <span class="mini-cast__row is-hot"><i></i>MagicMirror</span>
+            </div>
+          </div>
+          <button class="det__toggle" type="button" aria-expanded="false" aria-controls="det-3">How it's solved <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="det__more" id="det-3">
+            <div class="det__drop">
+              <p class="det__k">The problem</p>
+              <p>YouTube only casts to devices it recognises, and a Raspberry Pi running a web dashboard isn't one. The video also had to sit in one corner without covering the rest of the mirror.</p>
+              <p class="det__k">How it's solved</p>
+              <ul>
+                <li>The module (Kevin Townsend's MMM-Screencast, MIT) runs a DIAL server, the discovery protocol smart TVs use, so the mirror shows up in the cast list.</li>
+                <li>On cast it spawns an Electron window that sends a Samsung Tizen TV user agent, so <code>youtube.com/tv</code> serves the TV interface and pairs with the phone.</li>
+                <li>The mirror and the window are separate processes talking over IPC; stopping the cast sends QUIT and the window closes.</li>
+                <li>My part: installing it on the Pi and setting the region, window position and size in the config.</li>
+              </ul>
+<pre><code>const userAgent = 'Mozilla/5.0 (SMART-TV; Linux; Tizen 2.4.0) ...'
+electron.session.defaultSession.setUserAgent(userAgent)</code></pre>
+              <p class="det__k">The result</p>
+              <p>Any phone with YouTube casts to the mirror with no app to install.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="credits" aria-labelledby="credits-h">
+    <div class="wrap">
+      <div class="grid credits__grid">
+        <div class="span-5 section-head">
+          <h2 id="credits-h">A learning build, and where the code comes from</h2>
+          <p>I built this to learn how a real backend is put together, and both halves started from other people's work. Being clear about that is part of the project.</p>
+        </div>
+        <div class="span-6 start-7 credits__list">
+          <div><span class="credits__k">C# backend</span><p>Follows Mich Wouters' MagicMirror tutorial. It's how I learned layered architecture, dependency injection, AutoMapper, async code and testing with mocks.</p><a class="link" href="https://github.com/MichWouters/MagicMirror-Tutorial">The tutorial</a></div>
+          <div><span class="credits__k">Cast module</span><p>Kevin Townsend's MMM-Screencast, included under its MIT licence and configured for my mirror.</p><a class="link" href="https://github.com/kevinatown/MMM-Screencast">MMM-Screencast</a></div>
+          <div><span class="credits__k">Platform</span><p>MagicMirror², the open-source smart mirror platform the modules run on.</p><a class="link" href="https://github.com/MichMich/MagicMirror">MagicMirror²</a></div>
+          <div><span class="credits__k">Mine</span><p>The physical mirror, the Pi setup, the API keys and configuration, and the README and diagrams that explain how it all fits.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--word">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Read the code behind the mirror</h2><p class="t-lead">The C# solution, the tests and the cast module are on GitHub.</p></div>
+        <a class="btn btn--primary" href="https://github.com/rohangandhi05/MagicMirror">View on GitHub<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <p class="close__word" aria-hidden="true">MagicMirror</p>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top">MagicMirror</a>
+          <p class="footer__lede">A personal project by Rohan Gandhi.</p>
+        </div>
+        <div class="span-2 start-7 footer__col"><h3>Page</h3><ul><li><a href="#features">Features</a></li><li><a href="#custom">Customize</a></li><li><a href="#arch">Architecture</a></li><li><a href="#details">Problems</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Project</h3><ul><li><a href="https://github.com/rohangandhi05/MagicMirror">Source code</a></li><li><a href="https://github.com/rohangandhi05/MagicMirror#readme">README</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Rohan</h3><ul><li><a href="/">Home</a></li><li><a href="/projects">Projects</a></li><li><a href="/blog">Blog</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Rohan Gandhi</span>
+        <div class="socials"></div>
+        <span class="credits">MMM-Screencast by Kevin Townsend (MIT). MagicMirror² by Michael Teeuw (MIT). The hardware is drawn, not photographed. Product names are trademarks of their owners.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="actionbar" aria-label="Quick actions">
+  <a class="btn btn--primary" href="https://github.com/rohangandhi05/MagicMirror">View the code</a>
+</nav>
+
+<script type="module" src="../assets/system.js"></script>
+<script type="module" src="../assets/motion/motion.js"></script>
+<script src="../shared/case.js?v=1"></script>
+<script src="page.js?v=1"></script>
+</body>
+</html>

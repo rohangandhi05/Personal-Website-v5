@@ -27,3 +27,6 @@ node_modules
 
 pnpm-lock.yaml
 
+
+# taste-skill working files (screenshots, gate state)
+.taste-skill/
