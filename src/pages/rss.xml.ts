@@ -12,7 +12,7 @@ export async function GET() {
 			title: post.data.title,
 			description: post.data.description,
 			pubDate: post.data.pubDate,
-			link: `post/${post.slug}/`
+			link: `post/${post.id}/`
 		}))
 	})
 }

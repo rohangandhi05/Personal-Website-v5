@@ -43,7 +43,7 @@ const fmt = (date: Date) =>
 						data-tags={(post.data.tags ?? []).join('|')}
 					>
 						<h2>
-							<a href={`/post/${post.slug}/`}>{post.data.title}</a>
+							<a href={`/post/${post.id}/`}>{post.data.title}</a>
 						</h2>
 						<p class='post-meta'>{fmt(post.data.pubDate)}</p>
 					</article>

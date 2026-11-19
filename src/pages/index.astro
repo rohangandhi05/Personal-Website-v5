@@ -69,7 +69,7 @@ const fmt = (date: Date) =>
 					<ul class='post-list'>
 						<li>
 							<h3>
-								<a href={`/post/${latest.slug}/`}>{latest.data.title}</a>
+								<a href={`/post/${latest.id}/`}>{latest.data.title}</a>
 							</h3>
 							<span class='post-meta'>{fmt(latest.data.pubDate)}</span>
 							<p>{latest.data.description}</p>
