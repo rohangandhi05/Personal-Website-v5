@@ -6,8 +6,3 @@ export const getPosts = async (max?: number) => {
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 		.slice(0, max)
 }
-
-export const getPostByYear = async (year: number) => {
-	const posts = await getPosts()
-	return posts.filter((post) => post.data.pubDate.getFullYear() === year)
-}

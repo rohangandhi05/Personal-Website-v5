@@ -1,36 +1,20 @@
 import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
-import { remarkReadingTime } from './src/utils/readTime.ts'
 
 // https://astro.build/config
 export default defineConfig({
-    vite: {
-        build: {
-            rollupOptions: {}
-        }
-    },
-
-    site: 'https://rohanxg.vercel.app/',
-    // Write here your website url
-    markdown: {
-        remarkPlugins: [remarkReadingTime, remarkMath],
-        rehypePlugins: [rehypeKatex],
-        drafts: true,
-        shikiConfig: {
-            theme: 'material-theme-palenight',
-            wrap: true
-        }
-    },
-    integrations: [mdx({
-        syntaxHighlight: 'shiki',
-        shikiConfig: {
-            theme: 'material-theme-palenight',
-            wrap: true
-        },
-        drafts: true
-    }), sitemap(), tailwind({ applyBaseStyles: false })]
+	site: 'https://rohanxg.vercel.app/',
+	markdown: {
+		remarkPlugins: [remarkMath],
+		rehypePlugins: [rehypeKatex],
+		shikiConfig: {
+			theme: 'material-theme-palenight',
+			wrap: true
+		}
+	},
+	// MDX inherits the markdown config above (remark/rehype plugins, Shiki)
+	integrations: [mdx(), sitemap()]
 })

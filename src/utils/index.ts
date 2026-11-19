@@ -1,2 +1,1 @@
-export { getPosts, getPostByYear } from './post'
-export { remarkReadingTime } from './readTime'
+export { getPosts } from './post'
