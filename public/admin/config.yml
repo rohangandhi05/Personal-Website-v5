@@ -5,18 +5,31 @@ backend:
   base_url: https://rohanxg.vercel.app
   auth_endpoint: /api/auth
 
+app_title: The Writing Desk
+site_url: https://rohanxg.vercel.app
+logo:
+  src: /admin/logo.svg
+
 # Body images are stored in public/ so they resolve as static URLs in the build
 media_folder: public/assets/uploads
 public_folder: /assets/uploads
+media_libraries:
+  default:
+    config:
+      # Keep upload filenames lowercase and hyphenated, as Decap did
+      slugify_filename: true
 
 collections:
   - name: blog
     label: Blog Posts
+    label_singular: Post
     folder: src/content/blog
     create: true
     format: frontmatter
     extension: md
     slug: '{{slug}}'
+    preview_path: post/{{slug}}/
+    sortable_fields: [pubDate, title]
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Description, name: description, widget: string }
@@ -36,6 +49,8 @@ collections:
       - label: Body
         name: body
         widget: markdown
+        # Markdown mode first: the rich text editor can rewrite LaTeX
+        modes: [raw, rich_text]
         hint: >-
-          Math (LaTeX/KaTeX): $...$ inline, $$...$$ block. Switch the editor
-          to Markdown mode when writing equations.
+          Math (LaTeX/KaTeX): $...$ inline, $$...$$ block. Stay in Markdown
+          mode when a post has equations.
