@@ -5,6 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Writing Desk — Rohan Gandhi</title>
+    <style>
+      /*
+        macOS-style theme for Sveltia CMS. Only overrides Sveltia's own
+        --sui-* design tokens (plus its documented [data-key-path] field
+        hooks), so an upstream rename falls back to the default look
+        instead of breaking the layout. The `html` prefix outranks
+        Sveltia's :root[data-theme] / [data-contrast] rules.
+      */
+      html:root {
+        --sui-font-family-default: -apple-system, BlinkMacSystemFont,
+          'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;
+        --sui-font-family-monospace: ui-monospace, 'SF Mono', SFMono-Regular,
+          Menlo, monospace;
+        --sui-control-font-family: var(--sui-font-family-default);
+        --sui-textbox-font-family: var(--sui-font-family-default);
+        --sui-heading-font-family: var(--sui-font-family-default);
+
+        --sui-control-small-border-radius: 6px;
+        --sui-control-medium-border-radius: 8px;
+        --sui-control-large-border-radius: 10px;
+        --sui-button-small-border-radius: 6px;
+        --sui-button-medium-border-radius: 8px;
+        --sui-button-large-border-radius: 10px;
+        --sui-textbox-border-radius: 8px;
+        --sui-checkbox-border-radius: 5px;
+
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Apple dark system greys and system blue */
+      html:root[data-theme='dark'] {
+        --sui-base-hue: 240;
+        --sui-background-color-1-hsl: 240 3% 7%;
+        --sui-background-color-2-hsl: 240 3% 11%;
+        --sui-background-color-3-hsl: 240 2% 17%;
+        --sui-background-color-4-hsl: 240 2% 23%;
+        --sui-background-color-5-hsl: 240 2% 30%;
+        --sui-foreground-color-1-hsl: 240 6% 97%;
+        --sui-foreground-color-2-hsl: 240 5% 84%;
+        --sui-foreground-color-3-hsl: 240 4% 68%;
+        --sui-foreground-color-4-hsl: 240 3% 52%;
+        --sui-foreground-color-5-hsl: 240 3% 36%;
+        --sui-border-color-1-hsl: 240 3% 36%;
+        --sui-border-color-2-hsl: 240 3% 22%;
+        --sui-border-color-3-hsl: 240 3% 16%;
+        --sui-primary-accent-color: hsl(211 100% 52%);
+        --sui-primary-accent-color-text: hsl(211 100% 66%);
+        --sui-focus-ring-color: hsl(211 100% 52% / 60%);
+      }
+
+      /* Post title reads like a document title */
+      [data-key-path='title'] input {
+        font-size: 1.5em;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+    </style>
   </head>
   <body>
     <!-- Sveltia CMS: reads config.yml from this folder -->
