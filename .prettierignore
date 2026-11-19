@@ -1,6 +1,13 @@
-test/fixtures/**/*.md
-test/fixtures/**/*.astro
 **/dist
+.astro
+node_modules
 pnpm-lock.yaml
+package-lock.json
 .github
 .changeset
+.taste-skill
+# Generated project pages and vendored assets
+public/
+# Posts written by Decap CMS; keep its output as-is
+src/content/
+.claude

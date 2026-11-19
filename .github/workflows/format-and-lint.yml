@@ -1,0 +1,33 @@
+name: Format and Lint
+
+on:
+  push:
+    branches:
+      - astro
+  pull_request:
+
+jobs:
+  format-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Node LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Check Formatting
+        run: npm run format:check
+
+      - name: Lint Code
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
