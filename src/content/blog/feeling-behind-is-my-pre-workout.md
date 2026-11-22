@@ -31,7 +31,9 @@ Psychologists have a framework for this that hit a little close to home. Robert 
 
 Reading that, I'm pretty sure I'm somewhere in between. Some days I'm there because I love it. Other days I'm there because I've got something to prove. Most days, if I'm honest, it's both.
 
-> **✍️ Your story:** Has it ever tipped over? Pushing through something you shouldn't have, or walking out feeling worse instead of better. Or the opposite: a session on a good day that reminded you that you actually like this.
+The moment I realised how far this goes was the other day. It was one of those days where I just couldn't get myself going, and I didn't have anything real to push against. So I made something up. I sat there and built a completely fictional scenario in my head about someone I'm close to, the kind of worst-case story you know isn't true but still lands if you let yourself picture it properly. I knew it was fake the entire time. And it worked anyway. I was out the door.
+
+Looking back, it's a little ridiculous. I'd run out of real reasons to feel behind, so I wrote myself a fake one, starring someone who had done absolutely nothing to deserve being cast as the villain. That's a pretty clear sign of which side of Vallerand's line I was on that day. When you start writing fiction just to get yourself out the door, the motivation isn't really coming from the run anymore.
 
 So is it unhealthy? Maybe a little. If being behind is what gets you moving, you kind of need to keep feeling behind. There's a version of this where you're never allowed to feel caught up, because then what would you train for? That's probably not the best way to live.
 
