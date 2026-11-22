@@ -72,6 +72,11 @@ collections:
         widget: string
         required: false
         hint: Optional. Leave blank to show only the date.
+      - label: Company
+        name: company
+        widget: string
+        required: false
+        hint: Optional. Shown as a small label above the title.
       - label: Publish Date
         name: pubDate
         widget: datetime
@@ -83,3 +88,6 @@ collections:
         name: body
         widget: markdown
         modes: [raw, rich_text]
+        hint: >-
+          Write dollar amounts as \$5 (with a backslash), or two of them on
+          one line render as a math equation.

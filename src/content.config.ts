@@ -20,6 +20,8 @@ const snippets = defineCollection({
 	loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/snippets' }),
 	schema: z.object({
 		title: z.string().max(120).optional(),
+		// Shown as a small label above the title, e.g. on company overviews
+		company: z.string().max(60).optional(),
 		pubDate: z
 			.string()
 			.or(z.date())

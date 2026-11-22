@@ -8,7 +8,10 @@ export const getPosts = async (max?: number) => {
 }
 
 export const getSnippets = async () => {
-	return (await getCollection('snippets'))
-		.filter((snippet) => !snippet.data.draft)
-		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	return (
+		(await getCollection('snippets'))
+			// Drafts show in `astro dev` for review, never in the built site
+			.filter((snippet) => import.meta.env.DEV || !snippet.data.draft)
+			.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	)
 }

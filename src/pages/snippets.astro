@@ -41,6 +41,12 @@ const snippets = await Promise.all(
 	{
 		snippets.map(({ id, data, Content }) => (
 			<article class='snippet' id={id}>
+				{(data.company || data.draft) && (
+					<p class='kicker'>
+						{data.draft && <span class='draft-badge'>Draft</span>}
+						{data.company}
+					</p>
+				)}
 				{data.title && <h2>{data.title}</h2>}
 				<div class='post-content'>
 					<span class='dateline'>
@@ -53,6 +59,14 @@ const snippets = await Promise.all(
 					</span>
 					<Content />
 				</div>
+				<button
+					class='snippet-toggle'
+					type='button'
+					aria-expanded='false'
+					hidden
+				>
+					Continue reading
+				</button>
 			</article>
 		))
 	}
@@ -69,6 +83,48 @@ const snippets = await Promise.all(
 	</div>
 
 	<script is:inline>
+		// Collapse long snippets to a preview; expand on click
+		;(() => {
+			const setOpen = (snippet, open) => {
+				snippet.classList.toggle('is-collapsed', !open)
+				const toggle = snippet.querySelector('.snippet-toggle')
+				toggle.setAttribute('aria-expanded', String(open))
+				toggle.textContent = open ? 'Show less' : 'Continue reading'
+			}
+
+			for (const snippet of document.querySelectorAll('.snippet')) {
+				const content = snippet.querySelector('.post-content')
+				const toggle = snippet.querySelector('.snippet-toggle')
+				snippet.classList.add('is-collapsed')
+				// Short snippets fit in the preview, so leave them as they are
+				if (content.scrollHeight <= content.clientHeight + 8) {
+					snippet.classList.remove('is-collapsed')
+					continue
+				}
+				toggle.hidden = false
+				toggle.addEventListener('click', () => {
+					const open = snippet.classList.contains('is-collapsed')
+					setOpen(snippet, open)
+					if (!open) snippet.scrollIntoView({ block: 'nearest' })
+				})
+				content.addEventListener('click', (e) => {
+					if (
+						snippet.classList.contains('is-collapsed') &&
+						!e.target.closest('a')
+					)
+						setOpen(snippet, true)
+				})
+			}
+
+			// A shared link to a snippet opens it
+			const openTarget = () => {
+				const target =
+					location.hash && document.getElementById(location.hash.slice(1))
+				if (target?.classList.contains('is-collapsed')) setOpen(target, true)
+			}
+			openTarget()
+			window.addEventListener('hashchange', openTarget)
+		})()
 		;(async () => {
 			const ticker = document.getElementById('ticker')
 			const track = document.getElementById('ticker-track')
@@ -142,9 +198,62 @@ const snippets = await Promise.all(
 	}
 
 	.snippet + .snippet {
-		margin-top: 2.25rem;
-		padding-top: 2.25rem;
+		margin-top: 1.5rem;
+		padding-top: 1.5rem;
 		border-top: 1px solid var(--border-color);
+	}
+
+	/* Collapsed preview: about five lines, fading out */
+	.snippet.is-collapsed .post-content {
+		max-height: 9em;
+		overflow: hidden;
+		cursor: pointer;
+		mask-image: linear-gradient(to bottom, #000 45%, transparent);
+	}
+
+	.snippet-toggle {
+		margin-top: 0.4rem;
+		padding: 0;
+		border: none;
+		background: none;
+		font-family: 'EB Garamond', serif;
+		font-size: 0.95em;
+		font-variant: small-caps;
+		text-transform: lowercase;
+		letter-spacing: 0.06em;
+		color: var(--link-color);
+		cursor: pointer;
+	}
+
+	.snippet-toggle::after {
+		content: ' ↓';
+	}
+
+	.snippet-toggle[aria-expanded='true']::after {
+		content: ' ↑';
+	}
+
+	.snippet-toggle:hover {
+		color: var(--heading-color);
+	}
+
+	/* Section-label style company name above the headline */
+	.kicker {
+		margin: 0 0 0.1rem;
+		font-size: 0.85em;
+		font-variant: small-caps;
+		text-transform: lowercase;
+		letter-spacing: 0.1em;
+		color: var(--link-hover-color);
+	}
+
+	/* Only visible in local dev, where drafts are shown */
+	.draft-badge {
+		margin-right: 0.5em;
+		padding: 0 0.35em;
+		border: 1px solid currentColor;
+		border-radius: 3px;
+		color: #b42318;
 	}
 
 	.snippet h2 {
