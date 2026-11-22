@@ -3,7 +3,7 @@ title: Chanakya Would Have Crushed It in Silicon Valley
 description: A 2,300-year-old Indian manual on statecraft explains the AI race better than most earnings calls.
 pubDate: 2026-11-22T00:40:00.000-07:00
 tags: []
-draft: true
+draft: false
 ---
 
 ![](/assets/uploads/61que-zqpul._ac_uf894-1000_ql80_.jpg)
