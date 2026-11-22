@@ -7,7 +7,7 @@ tags:
 draft: true
 ---
 
-> **🖼️ Cover image:** Something moody and empty: a wet road at dawn, or an empty wrestling mat under one light. Unsplash has plenty under "running dawn" or "empty mat".
+
 
 The workouts I'm proudest of did not come from feeling good.
 
