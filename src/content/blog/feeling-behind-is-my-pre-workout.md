@@ -17,8 +17,6 @@ I wrote [last time](/post/its-all-mental) about how, past a certain distance, th
 
 Here's how it actually works. There are days where convincing myself to go for a run, or get to wrestling, BJJ or Muay Thai, feels like negotiating with a toddler. Tired, busy, the couch is right there, I'll go tomorrow. Motivation in the nice sense is gone. Then some thought sneaks in: you're not where you should be, they said no, everyone else is moving and you're standing still. And suddenly I'm lacing up or packing my gear bag. Not because I feel inspired. Because sitting around with that thought is way more annoying than any hill or any round I could do.
 
-> **✍️ Your story:** Drop in one specific day here. What happened, what you were thinking on the way in, and how you felt by the end.
-
 That's the trade, really. Training is the one place where feeling behind turns into something I can actually do something about. I can't make someone say yes. I can't speed my life up to match someone else's timeline. But I can run one more kilometre than last week. I can take one more round, one more scramble, one more sparring session where someone better than me makes me feel it. A no on its own just gets replayed in your head. A no you take out on a long run or a hard round at least goes somewhere.
 
 And it works, which is the funny part. It works on exactly the days nothing else does.
