@@ -2,9 +2,11 @@
 title: Its All Mental
 description: mental
 pubDate: 2026-09-22T16:02:00.000-07:00
-tags: []
+tags:
+  - Sports
 draft: false
 ---
+
 ![](/assets/uploads/5e1c3038b41adde7840e1d62b3e1ed5f-f02574b5.jpeg)
 
 There is a distance at which the body's contribution to performance asymptotes toward zero.
