@@ -6,7 +6,7 @@ tags: []
 draft: true
 ---
 
-![]('/Users/rohanxg/Downloads/61quE-ZqpUL._AC_UF894,1000_QL80_.jpg')
+![](/public/assets/uploads/61que-zqpul._ac_uf894-1000_ql80_.jpg)
 
 Peter Thiel wrote an essay in 2014 called "Competition Is for Losers," and Silicon Valley has been treating it like scripture ever since. Build a monopoly, own your corner, never fight a fair fight. Very edgy. Very contrarian.
 
