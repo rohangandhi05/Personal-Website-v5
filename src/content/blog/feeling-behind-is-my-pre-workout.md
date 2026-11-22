@@ -6,7 +6,7 @@ tags: []
 draft: true
 ---
 
-![](/public/assets/uploads/06ce7a6251cfa0c8f4b88e4a4675da03.jpg)
+<img src="/assets/uploads/06ce7a6251cfa0c8f4b88e4a4675da03.jpg" alt="" width="360" style="height: 270px; object-fit: cover;" />
 
 The workouts I'm proudest of did not come from feeling good.
 
