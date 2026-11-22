@@ -1,6 +1,7 @@
 ---
 title: QVC for the Pokémon Generation
 company: Whatnot
+tags: ["Consumer"]
 pubDate: 2026-11-17T20:11:00.000-08:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: Fusion Is Always 30 Years Away. Helion Says 2028.
 company: Helion
+tags: ["Energy"]
 pubDate: 2026-10-27T15:58:00.000-07:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: Assembly Instructions Not Required
 company: Lovable
+tags: ["AI"]
 pubDate: 2026-10-17T15:05:00.000-07:00
 draft: false
 ---

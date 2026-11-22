@@ -1,6 +1,7 @@
 ---
 title: The Jetsons Are Waiting on Paperwork
 company: Archer Aviation
+tags: ["Space & Aviation"]
 pubDate: 2026-11-13T19:40:00.000-08:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: The Nonprofit That Ate the World
 company: OpenAI
+tags: ["AI"]
 pubDate: 2026-09-22T21:39:00.000-07:00
 draft: false
 ---

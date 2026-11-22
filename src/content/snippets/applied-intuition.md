@@ -1,6 +1,7 @@
 ---
 title: The Video Game Where Cars Learn to Drive
 company: Applied Intuition
+tags: ["Robotics", "Defense"]
 pubDate: 2026-11-16T09:21:00.000-08:00
 draft: false
 ---

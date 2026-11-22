@@ -77,6 +77,15 @@ collections:
         widget: string
         required: false
         hint: Optional. Shown as a small label above the title.
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        default: []
+        hint: >-
+          Sectors for the filter chips, e.g. AI, Big Tech, Chips & Compute,
+          Software, Fintech, Finance & VC, Consumer, Media & Gaming, Health,
+          Robotics, Defense, Space & Aviation, Energy, Industrials.
       - label: Publish Date
         name: pubDate
         widget: datetime

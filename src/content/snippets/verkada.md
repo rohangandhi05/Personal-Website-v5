@@ -1,6 +1,7 @@
 ---
 title: The Camera Company That Got Hacked, Then Grew Up
 company: Verkada
+tags: ["Software"]
 pubDate: 2026-10-23T21:12:00.000-07:00
 draft: false
 ---

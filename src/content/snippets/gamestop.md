@@ -1,6 +1,7 @@
 ---
 title: The Meme That Tried to Buy eBay
 company: GameStop
+tags: ["Consumer"]
 pubDate: 2026-11-04T10:55:00.000-08:00
 draft: false
 ---

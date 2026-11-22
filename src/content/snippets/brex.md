@@ -1,6 +1,7 @@
 ---
 title: From Teen Founders to Capital One
 company: Brex
+tags: ["Fintech"]
 pubDate: 2026-09-30T18:51:00.000-07:00
 draft: false
 ---

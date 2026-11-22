@@ -1,6 +1,7 @@
 ---
 title: The Bank That Won SVB's Worst Week
 company: Mercury
+tags: ["Fintech"]
 pubDate: 2026-11-04T07:04:00.000-08:00
 draft: false
 ---

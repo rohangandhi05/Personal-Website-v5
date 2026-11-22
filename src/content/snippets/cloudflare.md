@@ -1,6 +1,7 @@
 ---
 title: The Internet Runs on Lava Lamps
 company: Cloudflare
+tags: ["Software"]
 pubDate: 2026-11-14T14:27:00.000-08:00
 draft: false
 ---

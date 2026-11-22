@@ -1,6 +1,7 @@
 ---
 title: Bricks Made of Data
 company: Databricks
+tags: ["Software"]
 pubDate: 2026-09-24T08:47:00.000-07:00
 draft: false
 ---

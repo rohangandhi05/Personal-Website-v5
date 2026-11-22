@@ -1,6 +1,7 @@
 ---
 title: Grandma's Annuity Is Funding the Data Center
 company: Apollo
+tags: ["Finance & VC"]
 pubDate: 2026-11-18T10:50:00.000-08:00
 draft: false
 ---

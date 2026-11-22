@@ -18,6 +18,29 @@ const snippets = await Promise.all(
 		Content: (await render(snippet)).Content
 	}))
 )
+
+// Filter chips in a fixed order, then any other tags alphabetically
+const SECTORS = [
+	'AI',
+	'Big Tech',
+	'Chips & Compute',
+	'Software',
+	'Fintech',
+	'Finance & VC',
+	'Consumer',
+	'Media & Gaming',
+	'Health',
+	'Robotics',
+	'Defense',
+	'Space & Aviation',
+	'Energy',
+	'Industrials'
+]
+const used = new Set(snippets.flatMap((s) => s.data.tags))
+const sectors = [
+	...SECTORS.filter((tag) => used.has(tag)),
+	...[...used].filter((tag) => !SECTORS.includes(tag)).sort()
+]
 ---
 
 <BaseLayout
@@ -34,7 +57,10 @@ const snippets = await Promise.all(
 
 	<div class='masthead'>
 		<h1 class='page-title'>Snippets</h1>
-		<label class='search' id='search' hidden>
+	</div>
+
+	<div class='toolbar' id='toolbar' hidden>
+		<label class='search'>
 			<span class='visually-hidden'>Search snippets</span>
 			<input
 				id='snippet-search'
@@ -45,6 +71,35 @@ const snippets = await Promise.all(
 			/>
 			<kbd aria-hidden='true'>/</kbd>
 		</label>
+		{
+			sectors.length > 0 && (
+				<div
+					class='chips'
+					id='chips'
+					role='group'
+					aria-label='Filter by sector'
+				>
+					<button
+						class='chip is-active'
+						type='button'
+						data-tag='*'
+						aria-pressed='true'
+					>
+						All
+					</button>
+					{sectors.map((tag) => (
+						<button
+							class='chip'
+							type='button'
+							data-tag={tag}
+							aria-pressed='false'
+						>
+							{tag}
+						</button>
+					))}
+				</div>
+			)
+		}
 	</div>
 
 	<p class='search-status' id='search-status' aria-live='polite' hidden></p>
@@ -53,7 +108,7 @@ const snippets = await Promise.all(
 
 	{
 		snippets.map(({ id, data, Content }) => (
-			<article class='snippet' id={id}>
+			<article class='snippet' id={id} data-tags={data.tags.join('|')}>
 				{(data.company || data.draft) && (
 					<p class='kicker'>
 						{data.draft && <span class='draft-badge'>Draft</span>}
@@ -84,6 +139,20 @@ const snippets = await Promise.all(
 		))
 	}
 
+	<button class='load-more' id='load-more' type='button' hidden>
+		More snippets
+	</button>
+
+	<button
+		class='back-to-top'
+		id='back-to-top'
+		type='button'
+		aria-label='Back to top'
+		tabindex='-1'
+	>
+		↑
+	</button>
+
 	<div
 		class='ticker'
 		id='ticker'
@@ -96,8 +165,20 @@ const snippets = await Promise.all(
 	</div>
 
 	<script is:inline>
-		// Collapse long snippets to a preview; expand on click
 		;(() => {
+			const PAGE = 20
+			const reduceMotion = matchMedia(
+				'(prefers-reduced-motion: reduce)'
+			).matches
+			const snippets = [...document.querySelectorAll('.snippet')]
+			const toolbar = document.getElementById('toolbar')
+			const input = document.getElementById('snippet-search')
+			const chips = document.getElementById('chips')
+			const status = document.getElementById('search-status')
+			const loadMore = document.getElementById('load-more')
+			const backToTop = document.getElementById('back-to-top')
+
+			// ---------- Collapse long snippets to a preview ----------
 			const setOpen = (snippet, open) => {
 				snippet.classList.toggle('is-collapsed', !open)
 				const toggle = snippet.querySelector('.snippet-toggle')
@@ -105,7 +186,7 @@ const snippets = await Promise.all(
 				toggle.textContent = open ? 'Show less' : 'Continue reading'
 			}
 
-			for (const snippet of document.querySelectorAll('.snippet')) {
+			for (const snippet of snippets) {
 				const content = snippet.querySelector('.post-content')
 				const toggle = snippet.querySelector('.snippet-toggle')
 				snippet.classList.add('is-collapsed')
@@ -129,21 +210,7 @@ const snippets = await Promise.all(
 				})
 			}
 
-			// A shared link to a snippet opens it
-			const openTarget = () => {
-				const target =
-					location.hash && document.getElementById(location.hash.slice(1))
-				if (target && target.classList.contains('is-collapsed'))
-					setOpen(target, true)
-			}
-			openTarget()
-			window.addEventListener('hashchange', openTarget)
-
-			// Search every snippet's company, headline and text
-			const searchBox = document.getElementById('search')
-			const input = document.getElementById('snippet-search')
-			const status = document.getElementById('search-status')
-			const snippets = [...document.querySelectorAll('.snippet')]
+			// ---------- Search highlighting ----------
 			const searchable = (snippet) =>
 				snippet.querySelectorAll('.kicker, h2, .post-content')
 
@@ -178,19 +245,28 @@ const snippets = await Promise.all(
 				}
 			}
 
-			const search = () => {
-				const raw = input.value.trim()
-				const query = raw.toLowerCase()
+			// ---------- Filtering, search and paging in one pass ----------
+			const state = { raw: '', tag: '*', limit: PAGE }
+
+			const apply = () => {
+				const query = state.raw.toLowerCase()
+				const { tag } = state
+				const filtering = Boolean(query) || tag !== '*'
 				let shown = 0
-				for (const snippet of snippets) {
+
+				snippets.forEach((snippet, i) => {
 					clearMarks(snippet)
 					const parts = searchable(snippet)
+					const tags = (snippet.dataset.tags || '').split('|')
 					const match =
-						!query ||
-						[...parts].some((el) =>
-							el.textContent.toLowerCase().includes(query)
-						)
-					snippet.classList.toggle('is-hidden', !match)
+						(tag === '*' || tags.includes(tag)) &&
+						(!query ||
+							[...parts].some((el) =>
+								el.textContent.toLowerCase().includes(query)
+							))
+					// Paging only applies to the unfiltered stream
+					const visible = match && (filtering || i < state.limit)
+					snippet.classList.toggle('is-hidden', !visible)
 					if (match) shown++
 
 					if (query && match) {
@@ -204,23 +280,44 @@ const snippets = await Promise.all(
 						delete snippet.dataset.autoOpen
 						setOpen(snippet, false)
 					}
-				}
-				status.hidden = !query
-				status.textContent =
-					shown === 0
-						? `No snippets mention “${raw}”`
-						: `${shown} ${shown === 1 ? 'snippet mentions' : 'snippets mention'} “${raw}”`
+				})
+
+				loadMore.hidden = filtering || state.limit >= snippets.length
+
+				const noun = shown === 1 ? 'snippet' : 'snippets'
+				const inTag = tag === '*' ? '' : ` in ${tag}`
+				status.hidden = !filtering
+				status.textContent = query
+					? shown === 0
+						? `No snippets${inTag} mention “${state.raw}”`
+						: `${shown} ${noun}${inTag} ${shown === 1 ? 'mentions' : 'mention'} “${state.raw}”`
+					: `${shown} ${noun}${inTag}`
+			}
+
+			// If the toolbar is stuck to the top, jump back to the start of the list
+			const scrollToList = () => {
+				const top =
+					status.getBoundingClientRect().top +
+					window.scrollY -
+					toolbar.offsetHeight -
+					8
+				if (window.scrollY > top) window.scrollTo({ top })
 			}
 
 			let timer
 			input.addEventListener('input', () => {
 				clearTimeout(timer)
-				timer = setTimeout(search, 120)
+				timer = setTimeout(() => {
+					state.raw = input.value.trim()
+					apply()
+					scrollToList()
+				}, 120)
 			})
 			input.addEventListener('keydown', (e) => {
 				if (e.key === 'Escape') {
 					input.value = ''
-					search()
+					state.raw = ''
+					apply()
 					input.blur()
 				}
 			})
@@ -231,7 +328,95 @@ const snippets = await Promise.all(
 					input.focus()
 				}
 			})
-			searchBox.hidden = false
+
+			chips?.addEventListener('click', (e) => {
+				const chip = e.target.closest('.chip')
+				if (!chip) return
+				state.tag = chip.dataset.tag
+				for (const c of chips.querySelectorAll('.chip')) {
+					const active = c === chip
+					c.classList.toggle('is-active', active)
+					c.setAttribute('aria-pressed', String(active))
+				}
+				apply()
+				scrollToList()
+			})
+
+			// ---------- Load more, by button or automatically near the end ----------
+			const showMore = () => {
+				state.limit += PAGE
+				apply()
+				// Re-observe so a still-visible button keeps loading
+				autoLoad.unobserve(loadMore)
+				autoLoad.observe(loadMore)
+			}
+			loadMore.addEventListener('click', showMore)
+			const autoLoad = new IntersectionObserver(
+				(entries) => {
+					if (entries.some((e) => e.isIntersecting) && !loadMore.hidden)
+						showMore()
+				},
+				{ rootMargin: '0px 0px 600px 0px' }
+			)
+			autoLoad.observe(loadMore)
+
+			// ---------- Shared links open (and reveal) their snippet ----------
+			const openTarget = () => {
+				const target =
+					location.hash && document.getElementById(location.hash.slice(1))
+				if (!target || !target.classList.contains('snippet')) return
+				const index = snippets.indexOf(target)
+				if (index >= state.limit) {
+					state.limit = Math.ceil((index + 1) / PAGE) * PAGE
+					apply()
+				}
+				if (target.classList.contains('is-collapsed')) setOpen(target, true)
+				target.classList.add('is-in')
+				target.scrollIntoView()
+			}
+
+			// ---------- Fade snippets in as they scroll into view ----------
+			if (!reduceMotion && 'IntersectionObserver' in window) {
+				document.documentElement.classList.add('reveal')
+				const reveal = new IntersectionObserver(
+					(entries) => {
+						for (const entry of entries) {
+							if (!entry.isIntersecting) continue
+							entry.target.classList.add('is-in')
+							reveal.unobserve(entry.target)
+						}
+					},
+					{ rootMargin: '0px 0px -6% 0px' }
+				)
+				snippets.forEach((s) => reveal.observe(s))
+			}
+
+			// ---------- Back to top ----------
+			let ticking = false
+			const updateBackToTop = () => {
+				const shown = window.scrollY > window.innerHeight * 1.5
+				backToTop.classList.toggle('is-shown', shown)
+				backToTop.tabIndex = shown ? 0 : -1
+				ticking = false
+			}
+			window.addEventListener(
+				'scroll',
+				() => {
+					if (ticking) return
+					ticking = true
+					requestAnimationFrame(updateBackToTop)
+				},
+				{ passive: true }
+			)
+			backToTop.addEventListener('click', () => {
+				window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })
+				input.focus({ preventScroll: true })
+			})
+
+			toolbar.hidden = false
+			apply()
+			if (location.hash) openTarget()
+			window.addEventListener('hashchange', openTarget)
 		})()
 		;(async () => {
 			const ticker = document.getElementById('ticker')
@@ -290,12 +475,7 @@ const snippets = await Promise.all(
 
 	/* ---------- Masthead: double rule, like a broadsheet ---------- */
 	.masthead {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: flex-end;
-		justify-content: space-between;
-		gap: 0.75rem 1.5rem;
-		margin: 0 0 2.5rem;
+		margin: 0;
 		padding: 0 0 0.6rem;
 		border-bottom: 3px double var(--heading-color);
 	}
@@ -305,40 +485,46 @@ const snippets = await Promise.all(
 		text-align: left;
 	}
 
-	/* ---------- Search ---------- */
+	/* ---------- Sticky toolbar: search plus sector chips ---------- */
+	.toolbar {
+		position: sticky;
+		top: 0;
+		z-index: 5;
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+		margin: 0 0 1.5rem;
+		padding: 0.9rem 0 0.75rem;
+		background: var(--bg-color);
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.toolbar[hidden] {
+		display: none;
+	}
+
 	.search {
 		position: relative;
 		display: flex;
 		align-items: center;
-		margin-bottom: 0.4rem;
-	}
-
-	.search[hidden] {
-		display: none;
 	}
 
 	.search input {
-		width: 15rem;
+		width: 100%;
 		padding: 0.3rem 1.8rem 0.3rem 0;
 		border: none;
-		border-bottom: 1px solid var(--border-color);
 		border-radius: 0;
 		background: transparent;
 		font-family: 'EB Garamond', serif;
-		font-size: 1rem;
+		font-size: 1.05rem;
 		color: var(--heading-color);
 		outline: none;
 		appearance: none;
-		transition: border-color 0.2s ease;
 	}
 
 	.search input::placeholder {
 		font-style: italic;
 		color: var(--link-hover-color);
-	}
-
-	.search input:focus {
-		border-bottom-color: var(--heading-color);
 	}
 
 	.search input::-webkit-search-cancel-button {
@@ -371,16 +557,62 @@ const snippets = await Promise.all(
 		white-space: nowrap;
 	}
 
+	/* One scrollable row, so the sticky bar stays short */
+	.chips {
+		display: flex;
+		gap: 0.4rem;
+		overflow-x: auto;
+		scrollbar-width: none;
+		mask-image: linear-gradient(
+			to right,
+			#000 calc(100% - 2.5rem),
+			transparent
+		);
+	}
+
+	.chips::-webkit-scrollbar {
+		display: none;
+	}
+
+	.chip {
+		flex: none;
+		padding: 0.3rem 0.75rem;
+		border: 1px solid var(--border-color);
+		border-radius: 999px;
+		background: transparent;
+		font-family: 'EB Garamond', serif;
+		font-size: 0.9rem;
+		line-height: 1.2;
+		white-space: nowrap;
+		color: var(--link-color);
+		cursor: pointer;
+		transition:
+			color 0.2s ease,
+			border-color 0.2s ease,
+			background-color 0.2s ease;
+	}
+
+	.chip:hover {
+		color: var(--heading-color);
+		border-color: var(--link-hover-color);
+	}
+
+	.chip.is-active {
+		background: var(--heading-color);
+		border-color: var(--heading-color);
+		color: var(--bg-color);
+	}
+
+	.chip:last-child {
+		margin-right: 2rem;
+	}
+
 	.search-status {
-		margin: -1.5rem 0 1.75rem;
+		margin: 0 0 1.5rem;
 		font-variant: small-caps;
 		text-transform: lowercase;
 		letter-spacing: 0.06em;
 		color: var(--link-hover-color);
-	}
-
-	.snippet.is-hidden {
-		display: none;
 	}
 
 	.snippet :global(mark.hit) {
@@ -394,16 +626,14 @@ const snippets = await Promise.all(
 		background: #6b4a2c;
 	}
 
-	@media (max-width: 600px) {
-		.search,
-		.search input {
-			width: 100%;
-		}
-	}
-
 	/* ---------- Snippets ---------- */
 	.snippet {
-		scroll-margin-top: 2rem;
+		/* Clear the sticky toolbar when jumping to a snippet */
+		scroll-margin-top: 8rem;
+	}
+
+	.snippet.is-hidden {
+		display: none;
 	}
 
 	/* Rule between visible snippets, so filtering doesn't leave a stray line on top */
@@ -411,6 +641,20 @@ const snippets = await Promise.all(
 		margin-top: 1.5rem;
 		padding-top: 1.5rem;
 		border-top: 1px solid var(--border-color);
+	}
+
+	/* Fade in on scroll (only when motion is allowed and JS is running) */
+	:global(html.reveal) .snippet {
+		opacity: 0;
+		transform: translateY(14px);
+		transition:
+			opacity 0.5s ease,
+			transform 0.5s ease;
+	}
+
+	:global(html.reveal) .snippet.is-in {
+		opacity: 1;
+		transform: none;
 	}
 
 	/* Collapsed preview: about five lines, fading out */
@@ -500,6 +744,63 @@ const snippets = await Promise.all(
 
 	.snippet .dateline + :global(*) {
 		margin-top: 0;
+	}
+
+	/* ---------- More snippets ---------- */
+	.load-more {
+		display: block;
+		margin: 2.5rem auto 1rem;
+		padding: 0.5rem 1.25rem;
+		border: 1px solid var(--border-color);
+		border-radius: 999px;
+		background: transparent;
+		font-family: 'EB Garamond', serif;
+		font-size: 1rem;
+		font-variant: small-caps;
+		text-transform: lowercase;
+		letter-spacing: 0.08em;
+		color: var(--link-color);
+		cursor: pointer;
+	}
+
+	.load-more:hover {
+		color: var(--heading-color);
+		border-color: var(--link-hover-color);
+	}
+
+	.load-more[hidden] {
+		display: none;
+	}
+
+	/* ---------- Back to top, stacked above the theme button ---------- */
+	.back-to-top {
+		position: fixed;
+		right: 36px;
+		bottom: calc(30px + 2.5rem + 72px);
+		z-index: 10;
+		width: 48px;
+		height: 48px;
+		padding: 0;
+		border: 2px solid var(--border-color);
+		border-radius: 50%;
+		background: var(--bg-color);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+		font-size: 1.3rem;
+		line-height: 1;
+		color: var(--heading-color);
+		cursor: pointer;
+		opacity: 0;
+		transform: translateY(8px);
+		pointer-events: none;
+		transition:
+			opacity 0.25s ease,
+			transform 0.25s ease;
+	}
+
+	.back-to-top.is-shown {
+		opacity: 1;
+		transform: none;
+		pointer-events: auto;
 	}
 
 	/* ---------- Ticker, pinned to the bottom of the window ---------- */

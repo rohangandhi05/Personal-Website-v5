@@ -1,6 +1,7 @@
 ---
 title: It's in the Game, and Off the Market
 company: Electronic Arts
+tags: ["Media & Gaming"]
 pubDate: 2026-10-26T09:36:00.000-07:00
 draft: false
 ---

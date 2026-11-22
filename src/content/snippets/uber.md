@@ -1,6 +1,7 @@
 ---
 title: Your Next Driver Is a Robot
 company: Uber
+tags: ["Consumer"]
 pubDate: 2026-10-07T16:22:00.000-07:00
 draft: false
 ---

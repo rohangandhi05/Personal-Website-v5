@@ -1,6 +1,7 @@
 ---
 title: It Backed Your Whole Phone
 company: Sequoia Capital
+tags: ["Finance & VC"]
 pubDate: 2026-10-29T21:17:00.000-07:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: The Plumber Is Back
 company: Cisco
+tags: ["Big Tech"]
 pubDate: 2026-10-09T17:20:00.000-07:00
 draft: false
 ---

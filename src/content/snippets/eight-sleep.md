@@ -1,6 +1,7 @@
 ---
 title: When AWS Went Down, the Beds Got Hot
 company: Eight Sleep
+tags: ["Health"]
 pubDate: 2026-09-23T08:16:00.000-07:00
 draft: false
 ---

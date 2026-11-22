@@ -1,6 +1,7 @@
 ---
 title: The Store Is the Side Hustle
 company: Amazon Web Services
+tags: ["Big Tech"]
 pubDate: 2026-11-02T19:32:00.000-08:00
 draft: false
 ---

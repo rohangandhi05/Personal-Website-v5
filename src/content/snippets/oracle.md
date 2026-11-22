@@ -1,6 +1,7 @@
 ---
 title: The CIA's Database Goes All In
 company: Oracle
+tags: ["Big Tech"]
 pubDate: 2026-10-02T09:18:00.000-07:00
 draft: false
 ---

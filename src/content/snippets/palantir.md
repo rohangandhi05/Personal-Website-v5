@@ -1,6 +1,7 @@
 ---
 title: The Seeing Stone
 company: Palantir
+tags: ["Software", "Defense"]
 pubDate: 2026-11-09T13:09:00.000-08:00
 draft: false
 ---

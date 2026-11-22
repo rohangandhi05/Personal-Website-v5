@@ -1,6 +1,7 @@
 ---
 title: Why It's Called a16z
 company: Andreessen Horowitz
+tags: ["Finance & VC"]
 pubDate: 2026-10-11T10:58:00.000-07:00
 draft: false
 ---

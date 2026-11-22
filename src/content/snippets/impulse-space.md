@@ -1,6 +1,7 @@
 ---
 title: Last-Mile Delivery, but Make It Orbit
 company: Impulse Space
+tags: ["Space & Aviation"]
 pubDate: 2026-10-17T18:04:00.000-07:00
 draft: false
 ---

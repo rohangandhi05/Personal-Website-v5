@@ -1,6 +1,7 @@
 ---
 title: Vice City Money
 company: Take-Two Interactive
+tags: ["Media & Gaming"]
 pubDate: 2026-11-20T21:46:00.000-08:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: Everyone Takes a Bite
 company: DoorDash
+tags: ["Consumer"]
 pubDate: 2026-11-19T13:50:00.000-08:00
 draft: false
 ---

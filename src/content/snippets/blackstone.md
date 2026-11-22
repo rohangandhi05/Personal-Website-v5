@@ -1,6 +1,7 @@
 ---
 title: Black Plus Stone
 company: Blackstone
+tags: ["Finance & VC"]
 pubDate: 2026-11-21T14:44:00.000-08:00
 draft: false
 ---

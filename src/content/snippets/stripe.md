@@ -1,6 +1,7 @@
 ---
 title: 2.9% of Everything
 company: Stripe
+tags: ["Fintech"]
 pubDate: 2026-10-28T16:27:00.000-07:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: Top Gun, No Pilot
 company: Shield AI
+tags: ["Defense"]
 pubDate: 2026-10-16T18:54:00.000-07:00
 draft: false
 ---

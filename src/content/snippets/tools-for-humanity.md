@@ -1,6 +1,7 @@
 ---
 title: Look Into the Orb
 company: Tools for Humanity
+tags: ["AI"]
 pubDate: 2026-10-16T15:56:00.000-07:00
 draft: false
 ---

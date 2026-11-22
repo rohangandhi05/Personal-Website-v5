@@ -1,6 +1,7 @@
 ---
 title: One Brain, Any Body
 company: Skild AI
+tags: ["Robotics"]
 pubDate: 2026-11-14T08:15:00.000-08:00
 draft: false
 ---

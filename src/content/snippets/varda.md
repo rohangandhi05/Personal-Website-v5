@@ -1,6 +1,7 @@
 ---
 title: Breaking Bad, in Orbit
 company: Varda
+tags: ["Space & Aviation"]
 pubDate: 2026-10-20T19:48:00.000-07:00
 draft: false
 ---

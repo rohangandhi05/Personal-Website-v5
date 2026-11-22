@@ -1,6 +1,7 @@
 ---
 title: Bringing the Factory Back
 company: Hadrian
+tags: ["Defense", "Industrials"]
 pubDate: 2026-10-15T18:40:00.000-07:00
 draft: false
 ---

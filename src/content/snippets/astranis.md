@@ -1,6 +1,7 @@
 ---
 title: A Satellite of Your Very Own
 company: Astranis
+tags: ["Space & Aviation"]
 pubDate: 2026-10-19T12:58:00.000-07:00
 draft: false
 ---

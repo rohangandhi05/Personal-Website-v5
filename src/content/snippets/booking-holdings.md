@@ -1,6 +1,7 @@
 ---
 title: Captain Kirk's Hotel Empire
 company: Booking Holdings
+tags: ["Consumer"]
 pubDate: 2026-11-02T20:28:00.000-08:00
 draft: false
 ---

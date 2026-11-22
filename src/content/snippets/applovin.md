@@ -1,6 +1,7 @@
 ---
 title: The Ad Between Your Levels
 company: AppLovin
+tags: ["Software"]
 pubDate: 2026-11-09T10:20:00.000-08:00
 draft: false
 ---

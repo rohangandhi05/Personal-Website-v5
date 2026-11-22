@@ -1,6 +1,7 @@
 ---
 title: AI Is Paying for the Next Concorde
 company: Boom Supersonic
+tags: ["Space & Aviation"]
 pubDate: 2026-10-29T10:23:00.000-07:00
 draft: false
 ---

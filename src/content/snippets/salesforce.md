@@ -1,6 +1,7 @@
 ---
 title: Who You Gonna Call?
 company: Salesforce
+tags: ["Big Tech"]
 pubDate: 2026-11-06T09:22:00.000-08:00
 draft: false
 ---

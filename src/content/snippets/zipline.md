@@ -1,6 +1,7 @@
 ---
 title: "Blood, Sweat and Burritos"
 company: Zipline
+tags: ["Robotics"]
 pubDate: 2026-11-11T18:00:00.000-08:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: The Landlord of Your Pocket
 company: Apple
+tags: ["Big Tech"]
 pubDate: 2026-10-18T09:35:00.000-07:00
 draft: false
 ---

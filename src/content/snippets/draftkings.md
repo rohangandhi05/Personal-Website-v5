@@ -1,6 +1,7 @@
 ---
 title: The House Learns a New Game
 company: DraftKings
+tags: ["Media & Gaming"]
 pubDate: 2026-11-12T09:07:00.000-08:00
 draft: false
 ---

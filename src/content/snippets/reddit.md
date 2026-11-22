@@ -1,6 +1,7 @@
 ---
 title: The Front Page of the Training Data
 company: Reddit
+tags: ["Media & Gaming"]
 pubDate: 2026-11-21T15:45:00.000-08:00
 draft: false
 ---

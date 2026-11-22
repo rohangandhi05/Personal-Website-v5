@@ -1,6 +1,7 @@
 ---
 title: Four MIT Kids and a Rocket Company
 company: Cursor
+tags: ["AI"]
 pubDate: 2026-10-02T11:32:00.000-07:00
 draft: false
 ---

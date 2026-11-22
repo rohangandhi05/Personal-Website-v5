@@ -1,6 +1,7 @@
 ---
 title: Adobe Paid a Billion to Not Buy It
 company: Figma
+tags: ["Software"]
 pubDate: 2026-11-17T20:05:00.000-08:00
 draft: false
 ---

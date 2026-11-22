@@ -1,6 +1,7 @@
 ---
 title: The S-1 Speedrun
 company: Anthropic
+tags: ["AI"]
 pubDate: 2026-11-07T15:01:00.000-08:00
 draft: false
 ---

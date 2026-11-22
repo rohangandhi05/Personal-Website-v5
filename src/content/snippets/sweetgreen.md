@@ -1,6 +1,7 @@
 ---
 title: The Robot Makes the Salad
 company: Sweetgreen
+tags: ["Consumer"]
 pubDate: 2026-11-11T18:24:00.000-08:00
 draft: false
 ---

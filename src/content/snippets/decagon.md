@@ -1,6 +1,7 @@
 ---
 title: Your Call Is Important to Us (A Robot Is Answering)
 company: Decagon
+tags: ["AI"]
 pubDate: 2026-10-09T21:11:00.000-07:00
 draft: false
 ---

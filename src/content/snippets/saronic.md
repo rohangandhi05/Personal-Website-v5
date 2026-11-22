@@ -1,6 +1,7 @@
 ---
 title: Drone Boats, Hold the Sailors
 company: Saronic
+tags: ["Defense", "Industrials"]
 pubDate: 2026-10-09T18:28:00.000-07:00
 draft: false
 ---

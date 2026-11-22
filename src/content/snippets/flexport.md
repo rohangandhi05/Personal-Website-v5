@@ -1,6 +1,7 @@
 ---
 title: The Guy Who Tweeted at the Ports
 company: Flexport
+tags: ["Industrials"]
 pubDate: 2026-11-08T18:40:00.000-08:00
 draft: false
 ---

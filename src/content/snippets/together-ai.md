@@ -1,6 +1,7 @@
 ---
 title: The Landlord for Open-Source AI
 company: Together AI
+tags: ["AI", "Chips & Compute"]
 pubDate: 2026-11-08T15:18:00.000-08:00
 draft: false
 ---

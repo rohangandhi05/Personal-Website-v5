@@ -1,6 +1,7 @@
 ---
 title: "Don't Cut the Pizza"
 company: Cerebras
+tags: ["Chips & Compute"]
 pubDate: 2026-11-07T09:54:00.000-08:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: From Mining Ethereum to Renting Brains
 company: CoreWeave
+tags: ["Chips & Compute"]
 pubDate: 2026-11-14T11:23:00.000-08:00
 draft: false
 ---

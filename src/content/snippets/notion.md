@@ -1,6 +1,7 @@
 ---
 title: Saved by Kyoto
 company: Notion
+tags: ["Software"]
 pubDate: 2026-11-12T14:35:00.000-08:00
 draft: false
 ---

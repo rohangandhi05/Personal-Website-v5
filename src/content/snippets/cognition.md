@@ -1,6 +1,7 @@
 ---
 title: The Olympiad Kids Built a Coworker
 company: Cognition
+tags: ["AI"]
 pubDate: 2026-11-20T11:42:00.000-08:00
 draft: false
 ---

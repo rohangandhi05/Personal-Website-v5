@@ -1,6 +1,7 @@
 ---
 title: "Game Over, Gamers"
 company: Nvidia
+tags: ["Chips & Compute"]
 pubDate: 2026-11-15T10:37:00.000-08:00
 draft: false
 ---

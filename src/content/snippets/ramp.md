@@ -1,6 +1,7 @@
 ---
 title: "Ramp It Up"
 company: Ramp
+tags: ["Fintech"]
 pubDate: 2026-11-03T17:17:00.000-08:00
 draft: false
 ---

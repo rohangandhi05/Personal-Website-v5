@@ -1,6 +1,7 @@
 ---
 title: Points for Paying Rent
 company: Bilt Rewards
+tags: ["Fintech"]
 pubDate: 2026-10-25T13:51:00.000-07:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: Insert Coin, Receive Car
 company: Carvana
+tags: ["Consumer"]
 pubDate: 2026-10-11T15:33:00.000-07:00
 draft: false
 ---

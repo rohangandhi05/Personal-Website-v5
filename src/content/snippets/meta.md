@@ -1,6 +1,7 @@
 ---
 title: Ready Player Zero
 company: Meta
+tags: ["Big Tech"]
 pubDate: 2026-09-28T17:25:00.000-07:00
 draft: false
 ---

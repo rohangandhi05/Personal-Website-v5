@@ -1,6 +1,7 @@
 ---
 title: "Murder, She Hydrated"
 company: Liquid Death
+tags: ["Consumer"]
 pubDate: 2026-11-03T07:07:00.000-08:00
 draft: false
 ---

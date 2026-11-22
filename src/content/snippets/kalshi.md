@@ -1,6 +1,7 @@
 ---
 title: Is This Gambling? Depends Who You Ask
 company: Kalshi
+tags: ["Fintech"]
 pubDate: 2026-11-10T10:14:00.000-08:00
 draft: false
 ---

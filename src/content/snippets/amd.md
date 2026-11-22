@@ -1,6 +1,7 @@
 ---
 title: Cousin Rivalry
 company: AMD
+tags: ["Chips & Compute"]
 pubDate: 2026-10-31T16:05:00.000-07:00
 draft: false
 ---

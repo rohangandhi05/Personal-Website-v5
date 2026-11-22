@@ -1,6 +1,7 @@
 ---
 title: Potato Money
 company: Micron
+tags: ["Chips & Compute"]
 pubDate: 2026-10-13T10:02:00.000-07:00
 draft: false
 ---

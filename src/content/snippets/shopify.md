@@ -1,6 +1,7 @@
 ---
 title: It Started With Snowboards
 company: Shopify
+tags: ["Software"]
 pubDate: 2026-11-09T11:03:00.000-08:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: The Vampire Squid Has a Good Year
 company: Goldman Sachs
+tags: ["Finance & VC"]
 pubDate: 2026-11-21T16:47:00.000-08:00
 draft: false
 ---

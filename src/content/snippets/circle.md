@@ -1,6 +1,7 @@
 ---
 title: The Digital Dollar Store
 company: Circle
+tags: ["Fintech"]
 pubDate: 2026-11-14T12:58:00.000-08:00
 draft: false
 ---

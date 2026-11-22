@@ -1,6 +1,7 @@
 ---
 title: The Kids Are Getting Paid
 company: Roblox
+tags: ["Media & Gaming"]
 pubDate: 2026-10-31T12:05:00.000-07:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: Getting Paid to Lose
 company: Netflix
+tags: ["Media & Gaming"]
 pubDate: 2026-10-04T19:51:00.000-07:00
 draft: false
 ---

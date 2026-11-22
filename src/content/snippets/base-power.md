@@ -1,6 +1,7 @@
 ---
 title: A Power Plant in Your Backyard
 company: Base Power
+tags: ["Energy"]
 pubDate: 2026-10-28T17:56:00.000-07:00
 draft: false
 ---

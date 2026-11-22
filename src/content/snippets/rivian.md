@@ -1,6 +1,7 @@
 ---
 title: Volkswagen Is Paying for the Software
 company: Rivian
+tags: ["Consumer"]
 pubDate: 2026-11-17T09:57:00.000-08:00
 draft: false
 ---

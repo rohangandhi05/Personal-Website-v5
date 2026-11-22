@@ -1,6 +1,7 @@
 ---
 title: One Factory to Rule Them All
 company: Anduril
+tags: ["Defense"]
 pubDate: 2026-10-20T19:31:00.000-07:00
 draft: false
 ---

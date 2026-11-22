@@ -1,6 +1,7 @@
 ---
 title: The Bouncing QR Code
 company: Coinbase
+tags: ["Fintech"]
 pubDate: 2026-11-18T18:06:00.000-08:00
 draft: false
 ---

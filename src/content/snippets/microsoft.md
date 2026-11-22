@@ -1,6 +1,7 @@
 ---
 title: Candy Crush Is a Microsoft Product
 company: Microsoft
+tags: ["Big Tech"]
 pubDate: 2026-09-22T13:58:00.000-07:00
 draft: false
 ---

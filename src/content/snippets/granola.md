@@ -1,6 +1,7 @@
 ---
 title: No Bot Joined This Meeting
 company: Granola
+tags: ["AI"]
 pubDate: 2026-10-14T09:36:00.000-07:00
 draft: false
 ---

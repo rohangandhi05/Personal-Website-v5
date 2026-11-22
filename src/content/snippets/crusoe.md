@@ -1,6 +1,7 @@
 ---
 title: From Burning Gas to Burning GPUs
 company: Crusoe
+tags: ["Chips & Compute", "Energy"]
 pubDate: 2026-11-19T14:27:00.000-08:00
 draft: false
 ---

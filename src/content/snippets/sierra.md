@@ -1,6 +1,7 @@
 ---
 title: The Résumé of the Decade
 company: Sierra
+tags: ["AI"]
 pubDate: 2026-11-20T13:06:00.000-08:00
 draft: false
 ---

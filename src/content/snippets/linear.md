@@ -1,6 +1,7 @@
 ---
 title: The Anti-Jira
 company: Linear
+tags: ["Software"]
 pubDate: 2026-11-03T08:00:00.000-08:00
 draft: false
 ---

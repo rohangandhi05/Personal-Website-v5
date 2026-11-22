@@ -1,6 +1,7 @@
 ---
 title: Nine Years of Grinding, One Year of Rocket
 company: Replit
+tags: ["AI"]
 pubDate: 2026-10-16T10:55:00.000-07:00
 draft: false
 ---

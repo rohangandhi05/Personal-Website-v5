@@ -1,6 +1,7 @@
 ---
 title: The Band Is Free. The Membership Isn't.
 company: WHOOP
+tags: ["Health"]
 pubDate: 2026-10-28T20:31:00.000-07:00
 draft: false
 ---

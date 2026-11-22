@@ -1,6 +1,7 @@
 ---
 title: The Line for Turbines Goes to 2030
 company: GE Vernova
+tags: ["Energy", "Industrials"]
 pubDate: 2026-11-03T10:22:00.000-08:00
 draft: false
 ---

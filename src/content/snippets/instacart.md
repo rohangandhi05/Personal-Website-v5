@@ -1,6 +1,7 @@
 ---
 title: The Grocery Store's Ad Agency
 company: Instacart
+tags: ["Consumer"]
 pubDate: 2026-11-05T11:10:00.000-08:00
 draft: false
 ---

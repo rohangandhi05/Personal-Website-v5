@@ -1,6 +1,7 @@
 ---
 title: Blue Screen of Comeback
 company: CrowdStrike
+tags: ["Software"]
 pubDate: 2026-11-20T21:34:00.000-08:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: Previously, on Intel
 company: Intel
+tags: ["Chips & Compute"]
 pubDate: 2026-09-24T19:01:00.000-07:00
 draft: false
 ---

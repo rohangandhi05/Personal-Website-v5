@@ -1,6 +1,7 @@
 ---
 title: Beer, Hold the Hangover
 company: Athletic Brewing
+tags: ["Consumer"]
 pubDate: 2026-09-26T08:50:00.000-07:00
 draft: false
 ---

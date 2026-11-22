@@ -1,6 +1,7 @@
 ---
 title: Objection, Your Honor, the AI Already Wrote It
 company: Harvey
+tags: ["AI"]
 pubDate: 2026-11-12T08:40:00.000-08:00
 draft: false
 ---

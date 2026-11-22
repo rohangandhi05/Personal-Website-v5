@@ -1,6 +1,7 @@
 ---
 title: The Most Expensive Group Chat on Earth
 company: Bloomberg
+tags: ["Finance & VC", "Media & Gaming"]
 pubDate: 2026-11-22T08:40:00.000-08:00
 draft: false
 ---

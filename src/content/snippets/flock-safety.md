@@ -1,6 +1,7 @@
 ---
 title: The Cameras on Every Corner
 company: Flock Safety
+tags: ["Software"]
 pubDate: 2026-10-18T10:48:00.000-07:00
 draft: false
 ---

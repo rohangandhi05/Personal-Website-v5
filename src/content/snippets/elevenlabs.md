@@ -1,6 +1,7 @@
 ---
 title: Blame Polish Movie Dubbing
 company: ElevenLabs
+tags: ["AI"]
 pubDate: 2026-10-13T09:17:00.000-07:00
 draft: false
 ---

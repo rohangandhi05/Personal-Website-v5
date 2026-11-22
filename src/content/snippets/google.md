@@ -1,6 +1,7 @@
 ---
 title: "Main Quest: Ads"
 company: Google
+tags: ["Big Tech"]
 pubDate: 2026-10-26T12:34:00.000-07:00
 draft: false
 ---

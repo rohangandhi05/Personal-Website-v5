@@ -1,6 +1,7 @@
 ---
 title: The Pipes Behind Your Venmo
 company: Plaid
+tags: ["Fintech"]
 pubDate: 2026-11-03T07:10:00.000-08:00
 draft: false
 ---

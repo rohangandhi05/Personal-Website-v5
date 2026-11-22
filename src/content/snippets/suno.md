@@ -1,6 +1,7 @@
 ---
 title: Hit Songs, No Band Required
 company: Suno
+tags: ["AI"]
 pubDate: 2026-09-28T09:23:00.000-07:00
 draft: false
 ---

@@ -1,6 +1,7 @@
 ---
 title: The Summer Camp That Built Airbnb
 company: Y Combinator
+tags: ["Finance & VC"]
 pubDate: 2026-10-05T15:57:00.000-07:00
 draft: false
 ---

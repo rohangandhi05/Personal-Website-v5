@@ -22,6 +22,8 @@ const snippets = defineCollection({
 		title: z.string().max(120).optional(),
 		// Shown as a small label above the title, e.g. on company overviews
 		company: z.string().max(60).optional(),
+		// Sectors, used for the filter chips on /snippets
+		tags: z.array(z.string()).default([]),
 		pubDate: z
 			.string()
 			.or(z.date())

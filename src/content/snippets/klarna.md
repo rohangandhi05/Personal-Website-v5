@@ -1,6 +1,7 @@
 ---
 title: Pay Later, Rehire Humans Now
 company: Klarna
+tags: ["Fintech"]
 pubDate: 2026-10-03T12:25:00.000-07:00
 draft: false
 ---

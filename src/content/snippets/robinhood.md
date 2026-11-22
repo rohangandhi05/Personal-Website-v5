@@ -1,6 +1,7 @@
 ---
 title: Free Trades Aren't Free
 company: Robinhood
+tags: ["Fintech"]
 pubDate: 2026-11-12T20:41:00.000-08:00
 draft: false
 ---

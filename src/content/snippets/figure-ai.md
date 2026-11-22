@@ -1,6 +1,7 @@
 ---
 title: Now Hiring, No Face Required
 company: Figure AI
+tags: ["Robotics"]
 pubDate: 2026-11-01T16:35:00.000-08:00
 draft: false
 ---

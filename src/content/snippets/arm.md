@@ -1,6 +1,7 @@
 ---
 title: Costs an Arm and a Royalty
 company: Arm
+tags: ["Chips & Compute"]
 pubDate: 2026-09-30T21:29:00.000-07:00
 draft: false
 ---

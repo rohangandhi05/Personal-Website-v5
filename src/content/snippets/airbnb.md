@@ -1,6 +1,7 @@
 ---
 title: Cereal Entrepreneurs
 company: Airbnb
+tags: ["Consumer"]
 pubDate: 2026-11-02T21:21:00.000-08:00
 draft: false
 ---
