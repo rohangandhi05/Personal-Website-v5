@@ -1,13 +1,12 @@
 ---
 title: Feeling Behind Is My Pre-Workout
-description: Feeling behind and getting rejected get me training more reliably than anything else. I'm not sure that's healthy, but it's how I'm wired.
+description: what is pre-workout
 pubDate: 2026-11-22T01:10:00.000-07:00
-tags:
-  - Sports
+tags: []
 draft: true
 ---
 
-
+![](/public/assets/uploads/06ce7a6251cfa0c8f4b88e4a4675da03.jpg)
 
 The workouts I'm proudest of did not come from feeling good.
 
