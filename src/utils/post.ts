@@ -6,3 +6,9 @@ export const getPosts = async (max?: number) => {
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 		.slice(0, max)
 }
+
+export const getSnippets = async () => {
+	return (await getCollection('snippets'))
+		.filter((snippet) => !snippet.data.draft)
+		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+}

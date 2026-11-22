@@ -2,7 +2,13 @@
 import BaseHead from '@/components/BaseHead'
 import { siteConfig } from '@/site-config'
 
-const { title, description, image, articleDate } = Astro.props
+const {
+	title,
+	description,
+	image,
+	articleDate,
+	showFooter = true
+} = Astro.props
 const currentYear = new Date().getFullYear()
 ---
 
@@ -15,6 +21,7 @@ const currentYear = new Date().getFullYear()
 			ogImage={image}
 			articleDate={articleDate}
 		/>
+		<slot name='head' />
 
 		<!-- Set theme before paint to avoid flash -->
 		<script is:inline>
@@ -37,6 +44,7 @@ const currentYear = new Date().getFullYear()
 			<ul>
 				<li><a href='/'>Home</a></li>
 				<li><a href='/blog'>Blog</a></li>
+				<li><a href='/snippets'>Snippets</a></li>
 				<li><a href='/projects'>Projects</a></li>
 			</ul>
 		</nav>
@@ -45,9 +53,15 @@ const currentYear = new Date().getFullYear()
 			<slot />
 		</main>
 
-		<footer>
-			<p>&copy; {currentYear} {siteConfig.author}</p>
-		</footer>
+		{
+			showFooter && (
+				<footer>
+					<p>
+						&copy; {currentYear} {siteConfig.author}
+					</p>
+				</footer>
+			)
+		}
 
 		<button id='theme-toggle' aria-label='Toggle dark mode'></button>
 

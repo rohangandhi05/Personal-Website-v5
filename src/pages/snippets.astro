@@ -1,0 +1,284 @@
+---
+import { render } from 'astro:content'
+import BaseLayout from '@/layouts/BaseLayout'
+import { getSnippets } from '@/utils'
+
+// Wire-style dateline, e.g. "Nov 21, 2026 —", in local time
+const dateline = (date: Date) =>
+	date.toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'short',
+		day: 'numeric',
+		timeZone: 'America/Vancouver'
+	})
+
+const snippets = await Promise.all(
+	(await getSnippets()).map(async (snippet) => ({
+		...snippet,
+		Content: (await render(snippet)).Content
+	}))
+)
+---
+
+<BaseLayout
+	title='Snippets'
+	description='Short pieces of writing, shorter than a blog post.'
+	showFooter={false}
+>
+	<Fragment slot='head'>
+		<link
+			href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap'
+			rel='stylesheet'
+		/>
+	</Fragment>
+
+	<div class='masthead'>
+		<h1 class='page-title'>Snippets</h1>
+	</div>
+
+	{snippets.length === 0 && <p class='no-results'>Nothing here yet.</p>}
+
+	{
+		snippets.map(({ id, data, Content }) => (
+			<article class='snippet' id={id}>
+				{data.title && <h2>{data.title}</h2>}
+				<div class='post-content'>
+					<span class='dateline'>
+						<a href={`#${id}`} title='Link to this snippet'>
+							<time datetime={data.pubDate.toISOString()}>
+								{dateline(data.pubDate)}
+							</time>
+						</a>{' '}
+						—
+					</span>
+					<Content />
+				</div>
+			</article>
+		))
+	}
+
+	<div
+		class='ticker'
+		id='ticker'
+		role='region'
+		aria-label='Market ticker, quotes delayed'
+	>
+		<div class='ticker-viewport'>
+			<div class='ticker-track' id='ticker-track'></div>
+		</div>
+	</div>
+
+	<script is:inline>
+		;(async () => {
+			const ticker = document.getElementById('ticker')
+			const track = document.getElementById('ticker-track')
+			try {
+				const res = await fetch('/api/quotes')
+				const { quotes } = await res.json()
+				if (!res.ok || !quotes.length) throw new Error('no quotes')
+
+				const group = document.createElement('div')
+				group.className = 'ticker-group'
+				for (const q of quotes) {
+					const up = q.change >= 0
+					const item = document.createElement('span')
+					item.className = 'ticker-item'
+
+					const label = document.createElement('b')
+					label.textContent = q.label
+					const price = document.createElement('span')
+					price.textContent = q.price.toLocaleString('en-US', {
+						minimumFractionDigits: 2,
+						maximumFractionDigits: 2
+					})
+					const change = document.createElement('span')
+					change.className = up ? 'up' : 'down'
+					change.textContent = `${up ? '▲' : '▼'} ${Math.abs(q.change).toFixed(2)}%`
+
+					item.append(label, price, change)
+					group.append(item)
+				}
+
+				// Two identical groups so the loop scrolls seamlessly
+				const copy = group.cloneNode(true)
+				copy.setAttribute('aria-hidden', 'true')
+				track.replaceChildren(group, copy)
+				track.style.setProperty('--duration', `${quotes.length * 5}s`)
+				track.classList.add('is-running')
+			} catch {
+				ticker.remove()
+			}
+		})()
+	</script>
+</BaseLayout>
+
+<style>
+	/* ---------- Salmon paper tint, this page only ---------- */
+	:global(html:has(.masthead)) {
+		--bg-color: #fff1e5;
+		--border-color: #ecd8c4;
+	}
+
+	:global(html[data-theme='dark']:has(.masthead)) {
+		--bg-color: #1f1a17;
+		--border-color: #3b322b;
+	}
+
+	/* ---------- Masthead: double rule, like a broadsheet ---------- */
+	.masthead {
+		margin: 0 0 2.5rem;
+		padding: 0 0 0.6rem;
+		border-bottom: 3px double var(--heading-color);
+	}
+
+	.masthead .page-title {
+		margin: 0;
+		text-align: left;
+	}
+
+	/* ---------- Snippets ---------- */
+	.snippet {
+		scroll-margin-top: 2rem;
+	}
+
+	.snippet + .snippet {
+		margin-top: 2.25rem;
+		padding-top: 2.25rem;
+		border-top: 1px solid var(--border-color);
+	}
+
+	.snippet h2 {
+		margin: 0 0 0.5rem;
+		font-size: 1.4em;
+	}
+
+	.snippet .post-content {
+		/* Contains the floated dateline */
+		display: flow-root;
+		/* Lining, equal-width figures, like a financial table */
+		font-variant-numeric: lining-nums tabular-nums;
+	}
+
+	/* Dateline floats so the first line of text runs straight on from it */
+	.dateline {
+		float: left;
+		margin-right: 0.35em;
+		color: var(--link-hover-color);
+	}
+
+	.dateline a {
+		font-variant: small-caps;
+		text-transform: lowercase;
+		letter-spacing: 0.06em;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.dateline a:hover,
+	.snippet:target .dateline a {
+		color: var(--heading-color);
+	}
+
+	.snippet .dateline + :global(*) {
+		margin-top: 0;
+	}
+
+	/* ---------- Ticker, pinned to the bottom of the window ---------- */
+	.ticker {
+		--up: #1a7f37;
+		--down: #b42318;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 10;
+		display: flex;
+		align-items: center;
+		height: 2.5rem;
+		background: var(--bg-color);
+		border-top: 1px solid var(--border-color);
+		font-family: 'JetBrains Mono', ui-monospace, monospace;
+		font-size: 0.8rem;
+		font-variant-numeric: tabular-nums;
+	}
+
+	:global([data-theme='dark']) .ticker {
+		--up: #4caf6e;
+		--down: #e5534b;
+	}
+
+	/* Leave room for the ticker under the footer and theme button */
+	:global(body:has(#ticker)) {
+		padding-bottom: 2.5rem;
+	}
+
+	:global(body:has(#ticker) #theme-toggle) {
+		bottom: calc(30px + 2.5rem);
+	}
+
+	.ticker-viewport {
+		flex: 1;
+		overflow: hidden;
+		mask-image: linear-gradient(
+			to right,
+			transparent,
+			#000 3rem,
+			#000 calc(100% - 3rem),
+			transparent
+		);
+	}
+
+	.ticker-track {
+		display: flex;
+		width: max-content;
+	}
+
+	.ticker-track.is-running {
+		animation: ticker-scroll var(--duration, 90s) linear infinite;
+	}
+
+	.ticker:hover .ticker-track {
+		animation-play-state: paused;
+	}
+
+	.ticker-track :global(.ticker-group) {
+		display: flex;
+	}
+
+	.ticker-track :global(.ticker-item) {
+		display: inline-flex;
+		gap: 0.5rem;
+		padding: 0 1.4rem;
+		white-space: nowrap;
+		color: var(--link-color);
+	}
+
+	.ticker-track :global(.ticker-item b) {
+		font-weight: 500;
+		color: var(--heading-color);
+	}
+
+	.ticker-track :global(.up) {
+		color: var(--up);
+	}
+
+	.ticker-track :global(.down) {
+		color: var(--down);
+	}
+
+	@keyframes ticker-scroll {
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ticker-track.is-running {
+			animation: none;
+		}
+
+		.ticker-viewport {
+			overflow-x: auto;
+		}
+	}
+</style>

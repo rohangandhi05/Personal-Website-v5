@@ -54,3 +54,32 @@ collections:
         hint: >-
           Math (LaTeX/KaTeX): $...$ inline, $$...$$ block. Stay in Markdown
           mode when a post has equations.
+
+  - name: snippets
+    label: Snippets
+    label_singular: Snippet
+    folder: src/content/snippets
+    create: true
+    format: frontmatter
+    extension: md
+    # Titles are optional, so files are named by date
+    slug: '{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}'
+    preview_path: snippets/
+    sortable_fields: [pubDate]
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        required: false
+        hint: Optional. Leave blank to show only the date.
+      - label: Publish Date
+        name: pubDate
+        widget: datetime
+        format: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+        date_format: 'YYYY-MM-DD'
+        time_format: 'HH:mm'
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - label: Body
+        name: body
+        widget: markdown
+        modes: [raw, rich_text]
