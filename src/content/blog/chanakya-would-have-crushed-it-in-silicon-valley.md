@@ -1,13 +1,12 @@
 ---
 title: Chanakya Would Have Crushed It in Silicon Valley
-description: A 2,300-year-old Indian manual on statecraft explains the AI race better than most earnings calls. Treasuries, circles of enemies, spies and kingmaking, read through the Arthashastra.
+description: A 2,300-year-old Indian manual on statecraft explains the AI race better than most earnings calls.
 pubDate: 2026-11-22T00:40:00.000-07:00
-tags:
-  - Tech
+tags: []
 draft: true
 ---
 
-> **🖼️ Cover image:** A public-domain map or painting of the Maurya Empire from Wikimedia Commons (search "Maurya Empire map" or "Chanakya"), or a split frame: an old palm-leaf manuscript on one side, a server rack on the other.
+
 
 Peter Thiel wrote an essay in 2014 called "Competition Is for Losers," and Silicon Valley has been treating it like scripture ever since. Build a monopoly, own your corner, never fight a fair fight. Very edgy. Very contrarian.
 
@@ -29,11 +28,7 @@ Now look at what the AI kings are doing. Alphabet, Amazon, Microsoft and Meta ar
 
 Chanakya would approve of the instinct. He'd also check the books. On November 20, the S&P 500 fell 3.7% and the Nasdaq wiped out its entire year, as investors started asking whether all that spending ever comes back. As Baird's Michael Antonelli [put it](https://www.nbcbayarea.com/news/national-international/november-20-stock-market-updates/4179477/), "The whole notion that AI can continue to spend unlimited amounts of money and support the stock market, I think the notion of that is ending as we speak." A treasury that funds an army is strategy. A treasury that funds an army that hasn't won anything yet is just a very expensive parade.
 
-> **✍️ Your take:** Is the AI capex race a Chanakya move (build the army first, the empire follows) or a king emptying the treasury on a war he can't finish?
->
-> _Starter take:_ Chanakya never said spend everything. He said the treasury comes first. The winners will be the ones who still have money left when the music stops, not the ones who built the biggest fort.
-
-Once you have an army, you need to know who to point it at. This is where the book gets genuinely clever.
+Chanakya never said spend everything. He said the treasury comes first. The winners will be the ones who still have money left when the music stops, not the ones who built the biggest fort. Once you have an army, you need to know who to point it at. This is where the book gets genuinely clever.
 
 > "The king who is situated anywhere immediately on the circumference of the conqueror's territory is termed the enemy."
 >
@@ -57,11 +52,7 @@ To be fair to Jensen, Al Jazeera's [reporting](https://www.aljazeera.com/news/20
 
 Lloyd Blankfein summed it up on X: "Sad about Jensen. Shakespearean." Then he quoted de Gaulle: "The graveyards are filled with indispensable men."
 
-> **✍️ Your take:** Should the CEO of a company this strategically important be held to a statesman's standard, private life included?
->
-> _Starter take:_ Yes, and Chanakya would say it isn't even about morality. When your chips are a matter of national security, your personal life is a matter of national security too. That's the price of the crown.
-
-Which leaves the hardest question in any kingdom: what happens when the king is gone?
+Yes, and Chanakya would say it isn't even about morality. When your chips are a matter of national security, your personal life is a matter of national security too. That's the price of the crown. Which leaves the hardest question in any kingdom: what happens when the king is gone?
 
 > "Sovereignty (rājatva) is possible only with assistance. A single wheel can never move. Hence he shall employ ministers and hear their opinion."
 
@@ -71,11 +62,7 @@ Nvidia is finding out live. CFO Colette Kress is interim CEO, the board is runni
 
 The honest counterpoint is that the single-wheel model is also why these companies win. A committee doesn't bet a graphics company on CUDA. A founder does. And Chanakya himself was a kingmaker, not a king; the system he designed still put Chandragupta at the centre. The trick is a strong king with ministers who could actually run the place if he vanished tomorrow. Most of Silicon Valley has the first part down and is hoping it never needs the second.
 
-> **✍️ Your take:** Founder-king or strong ministers: which kind of company would you rather bet your career on?
->
-> _Starter take:_ Founder-king for the first ten years, ministers for the next fifty. The best founders build the second wheel before anyone asks them to.
-
-It'd be easy to read all this and decide Chanakya was just Machiavelli with better weather. He wasn't. Here's the line people tend to skip:
+Founder-king for the first ten years, ministers for the next fifty. The best founders build the second wheel before anyone asks them to. It'd be easy to read all this and decide Chanakya was just Machiavelli with better weather. He wasn't. Here's the line people tend to skip:
 
 > "In the happiness of his subjects lies his happiness; in their welfare his welfare; whatever pleases himself he shall not consider as good, but whatever pleases his subjects he shall consider as good."
 
