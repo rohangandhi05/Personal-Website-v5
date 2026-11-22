@@ -34,7 +34,20 @@ const snippets = await Promise.all(
 
 	<div class='masthead'>
 		<h1 class='page-title'>Snippets</h1>
+		<label class='search' id='search' hidden>
+			<span class='visually-hidden'>Search snippets</span>
+			<input
+				id='snippet-search'
+				type='search'
+				placeholder='Search snippets'
+				autocomplete='off'
+				spellcheck='false'
+			/>
+			<kbd aria-hidden='true'>/</kbd>
+		</label>
 	</div>
+
+	<p class='search-status' id='search-status' aria-live='polite' hidden></p>
 
 	{snippets.length === 0 && <p class='no-results'>Nothing here yet.</p>}
 
@@ -120,10 +133,105 @@ const snippets = await Promise.all(
 			const openTarget = () => {
 				const target =
 					location.hash && document.getElementById(location.hash.slice(1))
-				if (target?.classList.contains('is-collapsed')) setOpen(target, true)
+				if (target && target.classList.contains('is-collapsed'))
+					setOpen(target, true)
 			}
 			openTarget()
 			window.addEventListener('hashchange', openTarget)
+
+			// Search every snippet's company, headline and text
+			const searchBox = document.getElementById('search')
+			const input = document.getElementById('snippet-search')
+			const status = document.getElementById('search-status')
+			const snippets = [...document.querySelectorAll('.snippet')]
+			const searchable = (snippet) =>
+				snippet.querySelectorAll('.kicker, h2, .post-content')
+
+			const clearMarks = (snippet) => {
+				for (const mark of snippet.querySelectorAll('mark.hit'))
+					mark.replaceWith(mark.textContent)
+				snippet.normalize()
+			}
+
+			const markMatches = (root, query) => {
+				const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
+				const nodes = []
+				while (walker.nextNode()) nodes.push(walker.currentNode)
+				for (const node of nodes) {
+					const text = node.nodeValue
+					const lower = text.toLowerCase()
+					let i = lower.indexOf(query)
+					if (i === -1) continue
+					const frag = document.createDocumentFragment()
+					let last = 0
+					while (i !== -1) {
+						frag.append(text.slice(last, i))
+						const mark = document.createElement('mark')
+						mark.className = 'hit'
+						mark.textContent = text.slice(i, i + query.length)
+						frag.append(mark)
+						last = i + query.length
+						i = lower.indexOf(query, last)
+					}
+					frag.append(text.slice(last))
+					node.replaceWith(frag)
+				}
+			}
+
+			const search = () => {
+				const raw = input.value.trim()
+				const query = raw.toLowerCase()
+				let shown = 0
+				for (const snippet of snippets) {
+					clearMarks(snippet)
+					const parts = searchable(snippet)
+					const match =
+						!query ||
+						[...parts].some((el) =>
+							el.textContent.toLowerCase().includes(query)
+						)
+					snippet.classList.toggle('is-hidden', !match)
+					if (match) shown++
+
+					if (query && match) {
+						parts.forEach((el) => markMatches(el, query))
+						// Open collapsed matches so the hits are visible
+						if (snippet.classList.contains('is-collapsed')) {
+							snippet.dataset.autoOpen = ''
+							setOpen(snippet, true)
+						}
+					} else if (!query && 'autoOpen' in snippet.dataset) {
+						delete snippet.dataset.autoOpen
+						setOpen(snippet, false)
+					}
+				}
+				status.hidden = !query
+				status.textContent =
+					shown === 0
+						? `No snippets mention “${raw}”`
+						: `${shown} ${shown === 1 ? 'snippet mentions' : 'snippets mention'} “${raw}”`
+			}
+
+			let timer
+			input.addEventListener('input', () => {
+				clearTimeout(timer)
+				timer = setTimeout(search, 120)
+			})
+			input.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape') {
+					input.value = ''
+					search()
+					input.blur()
+				}
+			})
+			// Press / anywhere to jump to search
+			document.addEventListener('keydown', (e) => {
+				if (e.key === '/' && document.activeElement !== input) {
+					e.preventDefault()
+					input.focus()
+				}
+			})
+			searchBox.hidden = false
 		})()
 		;(async () => {
 			const ticker = document.getElementById('ticker')
@@ -182,6 +290,11 @@ const snippets = await Promise.all(
 
 	/* ---------- Masthead: double rule, like a broadsheet ---------- */
 	.masthead {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 0.75rem 1.5rem;
 		margin: 0 0 2.5rem;
 		padding: 0 0 0.6rem;
 		border-bottom: 3px double var(--heading-color);
@@ -192,12 +305,109 @@ const snippets = await Promise.all(
 		text-align: left;
 	}
 
+	/* ---------- Search ---------- */
+	.search {
+		position: relative;
+		display: flex;
+		align-items: center;
+		margin-bottom: 0.4rem;
+	}
+
+	.search[hidden] {
+		display: none;
+	}
+
+	.search input {
+		width: 15rem;
+		padding: 0.3rem 1.8rem 0.3rem 0;
+		border: none;
+		border-bottom: 1px solid var(--border-color);
+		border-radius: 0;
+		background: transparent;
+		font-family: 'EB Garamond', serif;
+		font-size: 1rem;
+		color: var(--heading-color);
+		outline: none;
+		appearance: none;
+		transition: border-color 0.2s ease;
+	}
+
+	.search input::placeholder {
+		font-style: italic;
+		color: var(--link-hover-color);
+	}
+
+	.search input:focus {
+		border-bottom-color: var(--heading-color);
+	}
+
+	.search input::-webkit-search-cancel-button {
+		display: none;
+	}
+
+	.search kbd {
+		position: absolute;
+		right: 0;
+		padding: 0 0.35em;
+		border: 1px solid var(--border-color);
+		border-radius: 3px;
+		font-family: 'JetBrains Mono', ui-monospace, monospace;
+		font-size: 0.7rem;
+		color: var(--link-hover-color);
+		pointer-events: none;
+	}
+
+	.search input:focus + kbd,
+	.search input:not(:placeholder-shown) + kbd {
+		display: none;
+	}
+
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+	}
+
+	.search-status {
+		margin: -1.5rem 0 1.75rem;
+		font-variant: small-caps;
+		text-transform: lowercase;
+		letter-spacing: 0.06em;
+		color: var(--link-hover-color);
+	}
+
+	.snippet.is-hidden {
+		display: none;
+	}
+
+	.snippet :global(mark.hit) {
+		padding: 0 0.05em;
+		border-radius: 2px;
+		background: #f6cfa3;
+		color: inherit;
+	}
+
+	:global([data-theme='dark']) .snippet :global(mark.hit) {
+		background: #6b4a2c;
+	}
+
+	@media (max-width: 600px) {
+		.search,
+		.search input {
+			width: 100%;
+		}
+	}
+
 	/* ---------- Snippets ---------- */
 	.snippet {
 		scroll-margin-top: 2rem;
 	}
 
-	.snippet + .snippet {
+	/* Rule between visible snippets, so filtering doesn't leave a stray line on top */
+	.snippet:not(.is-hidden) ~ .snippet:not(.is-hidden) {
 		margin-top: 1.5rem;
 		padding-top: 1.5rem;
 		border-top: 1px solid var(--border-color);
