@@ -2,22 +2,22 @@
 const SYMBOLS = [
 	['^IXIC', 'NASDAQ'],
 	['^GSPC', 'S&P 500'],
-	['NVDA'],
-	['AAPL'],
-	['MSFT'],
-	['GOOGL'],
-	['AMZN'],
-	['META'],
-	['TSLA'],
-	['AVGO'],
-	['TSM'],
-	['AMD'],
-	['ASML'],
-	['PLTR'],
-	['NFLX'],
-	['ORCL'],
-	['BTC-USD', 'BTC'],
-	['ETH-USD', 'ETH']
+	['NVDA', 'NVIDIA'],
+	['AAPL', 'Apple'],
+	['MSFT', 'Microsoft'],
+	['GOOGL', 'Google'],
+	['AMZN', 'Amazon'],
+	['META', 'Meta'],
+	['TSLA', 'Tesla'],
+	['AVGO', 'Broadcom'],
+	['TSM', 'TSMC'],
+	['AMD', 'AMD'],
+	['ASML', 'ASML'],
+	['PLTR', 'Palantir'],
+	['NFLX', 'Netflix'],
+	['ORCL', 'Oracle'],
+	['BTC-USD', 'Bitcoin'],
+	['ETH-USD', 'Ethereum']
 ]
 
 async function fetchQuote([symbol, label = symbol]) {
