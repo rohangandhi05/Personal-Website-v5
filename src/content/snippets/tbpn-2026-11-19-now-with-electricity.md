@@ -8,5 +8,3 @@ draft: true
 In the 1800s, companies bragged that they used electricity. In 1999, everyone added .com to their name. Take-Two CEO Strauss Zelnick says AI is next: "We don't walk into an office today and look around and say, wow, it's amazing, you have electric lights."
 
 Give it ten years and "AI-powered" will sound like "now with electricity!" on a toaster.
-
-From [TBPN, Nov 19](https://www.youtube.com/watch?v=-iCfFQQBMzI&t=2229s).
