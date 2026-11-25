@@ -5,6 +5,6 @@ pubDate: 2026-11-24T22:13:00.000-07:00
 draft: true
 ---
 
-Most conferences happen in a hotel ballroom with sad coffee. TomorrowX packed 5,000 people into a basketball arena in Austin to watch the CEOs of Goldman Sachs and Coinbase, plus Travis Kalanick, talk AI.
+Most conferences happen in a hotel ballroom. TomorrowX packed 5,000 people into a basketball arena in Austin for two days of AI, chips and crypto, with heavyweights from Goldman Sachs, Coinbase, Blackstone and Micron. Then it turned into something else: a two-day "bring back Jensen" rally.
 
-When his partners pitched it in January, organizer Ron Biscardi warned them: "Guys, this is an 18-month kind of game." They pulled it off in ten. Fyre Festival could never.
+Jensen Huang had resigned from Nvidia the week before. On stage, Goldman's David Solomon reacted to Jensen hinting at a comeback, co-organizer Gavin Baker called him irreplaceable, and Travis Kalanick explained what he'd do in Jensen's shoes. Six days later, Jensen was back as CEO. Coincidence? Probably. But most conferences just give you a tote bag.
