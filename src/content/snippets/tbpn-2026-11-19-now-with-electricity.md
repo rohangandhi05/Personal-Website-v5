@@ -1,6 +1,5 @@
 ---
 title: Now With Electricity!
-company: Take-Two
 tags: ["AI", "Media & Gaming"]
 pubDate: 2026-11-24T22:15:00.000-07:00
 draft: true

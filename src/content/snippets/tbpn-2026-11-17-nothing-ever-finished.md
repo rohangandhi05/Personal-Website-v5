@@ -1,6 +1,5 @@
 ---
 title: Nothing Ships Without a Stage
-company: Cerebras
 tags: ["AI", "Chips & Compute"]
 pubDate: 2026-11-24T22:12:00.000-07:00
 draft: true

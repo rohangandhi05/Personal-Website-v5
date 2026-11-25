@@ -1,6 +1,5 @@
 ---
 title: Death to the Pie Chart
-company: Take-Two
 tags: ["AI", "Media & Gaming"]
 pubDate: 2026-11-24T22:14:00.000-07:00
 draft: true

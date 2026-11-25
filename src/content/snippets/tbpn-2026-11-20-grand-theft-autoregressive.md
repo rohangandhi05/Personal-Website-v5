@@ -1,6 +1,5 @@
 ---
 title: Grand Theft Autoregressive
-company: Anthropic
 tags: ["AI", "Media & Gaming"]
 pubDate: 2026-11-24T22:16:00.000-07:00
 draft: true

@@ -1,6 +1,5 @@
 ---
 title: Proof Positive, Stock Negative
-company: Anthropic
 tags: ["AI", "Finance & VC"]
 pubDate: 2026-11-24T22:17:00.000-07:00
 draft: true

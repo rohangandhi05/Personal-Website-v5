@@ -1,6 +1,5 @@
 ---
 title: Nvidia in Second Place?
-company: Cerebras
 tags: ["Chips & Compute", "AI"]
 pubDate: 2026-11-24T22:10:00.000-07:00
 draft: true

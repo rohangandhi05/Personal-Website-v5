@@ -1,6 +1,5 @@
 ---
 title: From Hotel Ballroom to Basketball Arena
-company: TomorrowX
 tags: ["AI", "Finance & VC"]
 pubDate: 2026-11-24T22:13:00.000-07:00
 draft: true
