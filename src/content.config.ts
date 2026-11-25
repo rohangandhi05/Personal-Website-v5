@@ -24,6 +24,9 @@ const snippets = defineCollection({
 		company: z.string().max(60).optional(),
 		// Sectors, used for the filter chips on /snippets
 		tags: z.array(z.string()).default([]),
+		// Optional picture shown under the text, a path in public/ like /assets/uploads/x.jpg
+		image: z.string().optional(),
+		imageAlt: z.string().max(200).optional(),
 		pubDate: z
 			.string()
 			.or(z.date())

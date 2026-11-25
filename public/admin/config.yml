@@ -86,6 +86,16 @@ collections:
           Sectors for the filter chips, e.g. AI, Big Tech, Chips & Compute,
           Software, Fintech, Finance & VC, Consumer, Media & Gaming, Health,
           Robotics, Defense, Space & Aviation, Energy, Industrials.
+      - label: Image
+        name: image
+        widget: image
+        required: false
+        hint: Optional. One picture, shown under the text. Use one you have the right to post.
+      - label: Image Description
+        name: imageAlt
+        widget: string
+        required: false
+        hint: What the picture shows, for screen readers, e.g. "Andrew Feldman holding the Cerebras chip".
       - label: Publish Date
         name: pubDate
         widget: datetime
