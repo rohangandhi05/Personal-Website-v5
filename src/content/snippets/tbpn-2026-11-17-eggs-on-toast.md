@@ -16,7 +16,7 @@ The hosts pitched the one-model dream as "the 10-in-one shampoo that you can bru
 
 His bet is both, with a router in the middle. Easy requests go to a small, fast model. Hard ones go to the frontier model. You don't fire up GPT-level genius to ask what time it is.
 
-That's also the Cerebras pitch. "We specialize in fast inference," he said. In cybersecurity, where "a lot of damage can be done in minutes or even seconds," fast isn't a feature. It's the product.
+The hosts' version of the end state: some on-device inference, some wafer-scale, some big GPU racks, all working together. "Use every bit of silicon, use every power source combined." Feldman: "100% agree."
 
 The future of AI looks less like a tasting menu and more like a diner. Something on the menu for everyone, and it comes out quick.
 
